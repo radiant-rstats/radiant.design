@@ -7,46 +7,19 @@
 #' @param trials Number of trial to create. If NA then all feasible designs will be considered until a design with perfect D-efficiency is found
 #' @param seed Random seed to use as the starting point
 #'
-#' @return A list with all variables defined in the function as an object of class conjoint_profiles
+#' @return A list with all variables defined in the function as an object of class doe
 #'
 #' @examples
 #' "price; $10; $13; $16\nfood; popcorn; gourmet; no food" %>% doe
+#' "free_nights; 1; 2; 3\nfree_chips; $100; $50; 0\nfree_shows; yes; no\nexp_date; 12 months; 3 months; 6 months\nphone_follow; no; yes\nemail_follow; no; yes" %>% doe %>% summary
 #'
-#' @seealso \code{\link{summary.conjoint_profiles}} to summarize results
+#' @seealso \code{\link{summary.doe}} to summarize results
 #'
 #' @importFrom AlgDesign optFederov
 #'
 #' @export
 doe <- function(factors, int = "", trials = NA, seed = NA) {
 
-# library(magrittr)
-# factors <- "Annual fee; $0; $20
-
-# factors <- "Annual   fee;  $0 ;   $20 ;
-
-
-
-# Card_type ; MC ; Visa  ; ;
-
-
-
-# "
-    # gsub("[\n]{2,}","\n",factors) %>%
-    # gsub("/","",.) %>%
-    # gsub("(([ ]+;)|(;[ ]+))",";",.) %>%
-    # gsub(";{2,}",";",.) %>%
-    # gsub("[;]+[ ]{0,}\n","\n",.) %>%
-    # gsub("[ ]*\n$","",.) %>%
-    # gsub("[ ]+","_",.) %>%
-    # gsub(";_+","; ",.) %>%
-    # gsub("_+\n","\n",.) %>%
-
-# factors <- "Annual fee;  $0;  $20
-
-#  Card type ; MC; Visa
-
-
-# "
   df_list <-
     gsub("[ ]{2,}"," ",factors) %>%
     gsub("/","",.) %>%
@@ -75,7 +48,7 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
     nInt <- length(int)
   }
 
-  part_frac <- function(df, model = ~ ., int = 0, trials = NA, seed = 172110) {
+  part_fac <- function(df, model = ~ ., int = 0, trials = NA, seed = 172110) {
 
 	  full <- expand.grid(df)
 
@@ -132,7 +105,7 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
 	  }
 	}
 
-  part_frac(df_list, model = as.formula(model), int = nInt, trials = trials, seed = seed) %>%
+  part_fac(df_list, model = as.formula(model), int = nInt, trials = trials, seed = seed) %>%
     set_class(c("doe",class(.)))
 }
 
@@ -140,7 +113,7 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
 #'
 #' @details See \url{http://vnijs.github.io/radiant/analytics/doe.html} for an example in Radiant
 #'
-#' @param object Return value from \code{\link{conjoint_profiles}}
+#' @param object Return value from \code{\link{doe}}
 #' @param eff If TRUE print efficiency output
 #' @param part If TRUE print partial factorial
 #' @param full If TRUE print full factorial

@@ -32,10 +32,6 @@ sample_size <- function(type = "mean",
                         pop_size = 1000000) {
 
 	if (is.na(conf_lev) || is.null(conf_lev) || conf_lev < 0 || conf_lev > 1)
-	# 	conf_lev <- .95
-
-	# zval <- qnorm(conf_lev + (1 - conf_lev)/2, 0, 1)
-
 	if (pop_correction == "yes" && is_not(pop_size)) pop_size <- 1000000
 
 	if (is_not(conf_lev) || conf_lev < 0)
@@ -89,7 +85,6 @@ summary.sample_size <- function(object, ...) {
 		cat("Sample proportion    :", object$p_prop, "\n")
 	}
 
-	# cat("Confidence level     :", object$zval, "\n")
 	cat("Confidence level     :", object$conf_lev, "\n")
 	cat("Incidence rate       :", object$incidence, "\n")
 	cat("Response rate        :", object$response, "\n")
@@ -99,16 +94,10 @@ summary.sample_size <- function(object, ...) {
 	} else {
 		cat("Population correction: Yes\n")
 		cat("Population size      :", nrprint(object$pop_size, dec = 0), "\n")
-				# cat("Population size      :", format(object$pop_size, big.mark = ",",
-		    																 # scientific = FALSE), "\n")
 	}
 
 	cat("\nRequired sample size     :", nrprint(object$n, dec = 0))
-	# cat("\nRequired sample size     :", format(object$n, big.mark = ",",
-	    																			 # scientific = FALSE))
 	cat("\nRequired contact attempts:", nrprint(ceiling(object$n / object$incidence / object$response), dec = 0))
-	# cat("\nRequired contact attempts:", format(ceiling(object$n / object$incidence / object$response),
-	    																			 # big.mark = ",", scientific = FALSE))
 	cat("\n\nChoose a z.value:\n")
 
   for (z in c(.80, .85, .90, .95, .99))

@@ -2,13 +2,18 @@ Package: radiant.design
 Type: Package
 Title: Design menu for Radiant. Builds on the radiant.data package
 Version: 0.1.0
-Date: 2016-5-13
+Date: 2016-5-20
 Authors@R: person("Vincent", "Nijs", , "radiant@rady.ucsd.edu", c("aut", "cre"))
-Description: Design menu for Radiant
+Description: Design menu for Radiant.
 Depends:
     R (>= 3.2.0),
-    radiant.data (>= 0.5),
-    shiny (>= 0.13.2)
+    radiant.data (>= 0.5)
+Imports:
+    dplyr (>= 0.4.3),
+    broom (>= 0.4.0),
+    shiny (>= 0.13.2.9003),
+    AlgDesign (>= 1.1.7.3),
+    methods
 URL: https://github.com/radiant-rstats/radiant.design, http://vnijs.github.io/radiant/
 BugReports: https://github.com/radiant-rstats/radiant.design/issues
 License: AGPL-3 | file LICENSE
