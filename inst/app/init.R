@@ -2,7 +2,7 @@
 source(file.path(getOption("radiant.path.data"),"app/init.R"), encoding = getOption("radiant.encoding"), local = TRUE)
 source(file.path(getOption("radiant.path.data"),"app/radiant.R"), encoding = getOption("radiant.encoding"), local = TRUE)
 
-help_design <- c("Design of Experiments (DOE)" = "doe.md", "Random sampling" = "sampling.md", "Sample size (single)" = "sample_size.Rmd",
+help_design <- c("Design of Experiments" = "doe.md", "Random sampling" = "sampling.md", "Sample size (single)" = "sample_size.Rmd",
                  "Sample size (compare)" = "sample_size_comp.Rmd")
 output$help_design <- reactive(append_help("help_design", "tools/help/", Rmd = TRUE))
 

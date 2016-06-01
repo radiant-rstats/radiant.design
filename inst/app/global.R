@@ -16,6 +16,6 @@ r_url_list <- getOption("radiant.url.list")
 r_url_list[["Random sampling"]] <- "design/sampling/"
 r_url_list[["Sample size (single)"]] <- "design/sample-size/"
 r_url_list[["Sample size (compare)"]] <- "design/sample-size-comp/"
-r_url_list[["Design of Experiments (DOE)"]] <- "design/doe/"
+r_url_list[["Design of Experiments"]] <- "design/doe/"
 options(radiant.url.list = r_url_list); rm(r_url_list)
 options(radiant.url.patterns = make_url_patterns())

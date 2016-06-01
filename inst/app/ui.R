@@ -1,7 +1,8 @@
 design_ui <-
 	tagList(
 	  navbarMenu("Design",
-	    tabPanel("Design of Experiments (DOE)", uiOutput("doe")),
+	    "DOE",
+	    tabPanel("Design of Experiments", uiOutput("doe")),
 	    "----", "Sample",
 	    tabPanel("Random sampling", uiOutput("sampling")),
 	    tabPanel("Sample size (single)", uiOutput("sample_size")),
