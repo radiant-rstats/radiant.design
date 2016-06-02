@@ -11,7 +11,8 @@ shinyServer(function(input, output, session) {
       sidebarPanel(
         help_data_panel,
         help_design_panel,
-        uiOutput("help_text")
+        uiOutput("help_text"),
+        width = 3
       ),
       mainPanel(
         HTML(paste0("<h2>Select help files to show and search</h2><hr>")),
