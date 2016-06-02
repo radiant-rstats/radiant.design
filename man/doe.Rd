@@ -26,7 +26,6 @@ See \url{http://vnijs.github.io/radiant/analytics/doe.html} for an example in Ra
 }
 \examples{
 "price; $10; $13; $16\\nfood; popcorn; gourmet; no food" \%>\% doe
-"free_nights; 1; 2; 3\\nfree_chips; $100; $50; 0\\nfree_shows; yes; no\\nexp_date; 12 months; 3 months; 6 months\\nphone_follow; no; yes\\nemail_follow; no; yes" \%>\% doe \%>\% summary
 
 }
 \seealso{

@@ -10,6 +10,7 @@ globalVariables(c(".","rnd_number"))
 #' @importFrom broom tidy
 #' @importFrom methods is
 #' @importFrom stats as.formula cor na.omit power.prop.test power.t.test qnorm runif
+#' @importFrom import from
 NULL
 
 #' 100 random names

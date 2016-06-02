@@ -1,7 +1,8 @@
 ## loading required packages
-tmp <-c("radiant.data", "AlgDesign")
-tmp <- sapply(tmp, library, character.only = TRUE)
-rm(tmp)
+library("radiant.data")
+
+# import functions
+import::from("AlgDesign","optFederov")
 
 # sourcing from radiant.data
 options(radiant.path.data = system.file(package = "radiant.data"))

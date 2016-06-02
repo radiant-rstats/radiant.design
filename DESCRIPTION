@@ -13,6 +13,7 @@ Imports:
     broom (>= 0.4.0),
     shiny (>= 0.13.2.9003),
     AlgDesign (>= 1.1.7.3),
+    import (>= 1.1.0),
     methods
 URL: https://github.com/radiant-rstats/radiant.design, http://vnijs.github.io/radiant/
 BugReports: https://github.com/radiant-rstats/radiant.design/issues
