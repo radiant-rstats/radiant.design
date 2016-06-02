@@ -1,13 +1,27 @@
 shinyServer(function(input, output, session) {
 
   ## source shared functions
-  source("init.R", encoding = getOption("radiant.encoding"), local = TRUE)
+  source(file.path(getOption("radiant.path.data"),"app/init.R"), encoding = getOption("radiant.encoding"), local = TRUE)
+  source(file.path(getOption("radiant.path.data"),"app/radiant.R"), encoding = getOption("radiant.encoding"), local = TRUE)
+  source("help.R", encoding = getOption("radiant.encoding"), local = TRUE)
 
-  ## generate url patterns
-  # r_url_patterns <- make_url_patterns()
+  ## help ui
+  output$help_design_ui <- renderUI({
+    sidebarLayout(
+      sidebarPanel(
+        help_data_panel,
+        help_design_panel,
+        uiOutput("help_text")
+      ),
+      mainPanel(
+        HTML(paste0("<h2>Select help files to show and search</h2><hr>")),
+        htmlOutput("help_data"),
+        htmlOutput("help_design")
+      )
+    )
+  })
 
   ## packages to use for example data
-  # r_example_data = c("radiant.data","radiant.design")
   options(radiant.example.data = c("radiant.data","radiant.design"))
 
   ## source data & app tools from radiant.data
