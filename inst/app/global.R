@@ -1,5 +1,5 @@
 ## loading required packages
-library("radiant.data")
+# library(radiant.data)
 
 # import functions
 import::from("AlgDesign","optFederov")
