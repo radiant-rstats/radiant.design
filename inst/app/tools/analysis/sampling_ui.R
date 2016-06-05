@@ -43,7 +43,7 @@ output$sampling <- renderUI({
        tabPanel("Summary", verbatimTextOutput("summary_sampling"))
     )
 
-    stat_tab_panel(menu = "Design",
+    stat_tab_panel(menu = "Design > Sample",
                   tool = "Random sampling",
                   tool_ui = "ui_sampling",
                   output_panels = smp_output_panels)

@@ -61,7 +61,7 @@ output$sample_size <- renderUI({
        tabPanel("Summary", verbatimTextOutput("summary_sample_size"))
     )
 
-    stat_tab_panel(menu = "Sample",
+    stat_tab_panel(menu = "Design > Sample",
                   tool = "Sample size (single)",
                   data = NULL,
                   tool_ui = "ui_sample_size",

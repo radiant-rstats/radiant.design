@@ -127,8 +127,8 @@ output$doe <- renderUI({
       )
     )
 
-    stat_tab_panel(menu = "Model",
-                  tool = "DOE",
+    stat_tab_panel(menu = "Design > DOE",
+                  tool = "Design of Experiments",
                   data = NULL,
                   tool_ui = "ui_doe",
                   output_panels = doe_output_panels)
