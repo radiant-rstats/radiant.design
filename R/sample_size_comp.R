@@ -83,9 +83,9 @@ sample_size_comp <- function(type,
     n1 <- ceiling(ratio * n2)
 	}
 
-	res$n <- nrprint(ceiling(res$n), dec = 0)
-	res$n1 <- nrprint(n1, dec = 0)
-	res$n2 <- nrprint(n2, dec = 0)
+	res$n <- formatnr(ceiling(res$n), dec = 0)
+	res$n1 <- formatnr(n1, dec = 0)
+	res$n2 <- formatnr(n2, dec = 0)
 
   environment() %>% as.list %>% set_class(c("sample_size_comp",class(.)))
 }

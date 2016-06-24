@@ -142,13 +142,13 @@ summary.doe <- function(object, eff = TRUE, part = TRUE, full = TRUE, ...) {
 
   if (eff) {
     cat("\nDesign efficiency:\n")
-    print(dfprint(object$eff, dec = 3), row.names = FALSE)
+    print(formatdf(object$eff, dec = 3), row.names = FALSE)
   }
 
   if (part) {
     cat("\nPartial factorial design correlations:\n")
     nrdec <- ifelse (object$detcm == 1, 0, 3)
-    print(dfprint(data.frame(object$cor_mat), dec = nrdec) , row.names = FALSE)
+    print(formatdf(data.frame(object$cor_mat), dec = nrdec) , row.names = FALSE)
 
     cat("\nPartial factorial design:\n")
     print(object$part)

@@ -93,11 +93,11 @@ summary.sample_size <- function(object, ...) {
 		cat("Population correction: None\n")
 	} else {
 		cat("Population correction: Yes\n")
-		cat("Population size      :", nrprint(object$pop_size, dec = 0), "\n")
+		cat("Population size      :", formatnr(object$pop_size, dec = 0), "\n")
 	}
 
-	cat("\nRequired sample size     :", nrprint(object$n, dec = 0))
-	cat("\nRequired contact attempts:", nrprint(ceiling(object$n / object$incidence / object$response), dec = 0))
+	cat("\nRequired sample size     :", formatnr(object$n, dec = 0))
+	cat("\nRequired contact attempts:", formatnr(ceiling(object$n / object$incidence / object$response), dec = 0))
 	cat("\n\nChoose a z.value:\n")
 
   for (z in c(.80, .85, .90, .95, .99))
