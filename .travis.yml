@@ -1,0 +1,9 @@
+language: r
+warnings_are_errors: false
+sudo: required
+
+r_github_packages:
+  - jimhester/covr
+  - rstudio/DT
+  - rstudio/shiny
+  - radiant-rstats/radiant.data
