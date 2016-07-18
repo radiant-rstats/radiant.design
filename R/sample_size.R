@@ -40,10 +40,10 @@ sample_size <- function(type = "mean",
 	zval <- conf_lev
 
 	if (type == 'mean') {
-		if (is_not(err_mean)) return("Please select an acceptable error greater than 0" %>% set_class(c("sample_size",class(.))))
+		if (is_not(err_mean)) return("Please select an acceptable error greater than 0" %>% add_class("sample_size"))
 		n <- (zval^2 * sd_mean^2) / err_mean^2
 	} else {
-		if (is_not(err_prop)) return("Please select an acceptable error greater than 0" %>% set_class(c("sample_size",class(.))))
+		if (is_not(err_prop)) return("Please select an acceptable error greater than 0" %>% add_class("sample_size"))
 		n <- (zval^2 * p_prop * (1 - p_prop)) / err_prop^2
 	}
 
@@ -52,7 +52,7 @@ sample_size <- function(type = "mean",
 
 	n <- ceiling(n)
 
-  environment() %>% as.list %>% set_class(c("sample_size",class(.)))
+  as.list(environment()) %>% add_class("sample_size")
 }
 
 #' Summary method for the sample_size function

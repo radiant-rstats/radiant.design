@@ -20,13 +20,15 @@ sampling <- function(dataset, var, sample_size,
   dat <- getdata(dataset, var, filt = data_filter)
   if (!is_string(dataset)) dataset <- "-----"
 
+  if (is_not(sample_size)) return(add_class("Please select a sample size of 1 or greater", "sampling"))
+
 	## example list of names obtained from http://listofrandomnames.com
   dat$rnd_number <- runif(nrow(dat), min = 0, max = 1) %>% round(3)
-  dat %>%
+  seldat <- dat %>%
     arrange(desc(rnd_number)) %>%
-    slice(1:sample_size) -> seldat
+    slice(1:sample_size)
 
-  environment() %>% as.list %>% set_class(c("sampling",class(.)))
+  as.list(environment()) %>% add_class("sampling")
 }
 
 #' Summary method for the sampling function
@@ -45,9 +47,7 @@ sampling <- function(dataset, var, sample_size,
 #' @seealso \code{\link{sampling}} to generate the results
 #'
 #' @export
-summary.sampling <- function(object,
-                             print_sf = TRUE,
-                             ...) {
+summary.sampling <- function(object, print_sf = TRUE, ...) {
 
   cat("Sampling (simple random)\n")
   cat("Data       :", object$dataset, "\n")

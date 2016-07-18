@@ -41,7 +41,7 @@ sample_size_comp <- function(type,
 
     nr_null <- is.null(n)+is.null(power)+is.null(delta)+is.null(sd)+is.null(conf_lev)
     if (nr_null == 0 || nr_null > 1)
-    	return("Exactly one of 'Sample size', 'Delta', 'Std. deviation',\n'Confidence level', and 'Power' must be blank or NULL" %>% set_class(c("sample_size_comp",class(.))))
+    	return("Exactly one of 'Sample size', 'Delta', 'Std. deviation',\n'Confidence level', and 'Power' must be blank or NULL" %>% add_class("sample_size_comp"))
 
     res <-
       power.t.test(n = n, delta = delta, sd = sd, sig.level = sig.level, power = power, alternative = alternative) %>%
@@ -62,12 +62,12 @@ sample_size_comp <- function(type,
 
     if (!is.null(p1) && !is.null(p2)) {
     	if (p1 == p2)
-    	  return("Proportion 1 and 2 should not be set equal. Please change the proportion values" %>% set_class(c("sample_size_comp",class(.))))
+    	  return("Proportion 1 and 2 should not be set equal. Please change the proportion values" %>% add_class("sample_size_comp"))
     }
 
     nr_null <- is.null(n)+is.null(power)+is.null(p1)+is.null(p2)+is.null(conf_lev)
     if (nr_null == 0 || nr_null > 1)
-    	return("Exactly one of 'Sample size', 'Proportion 1', 'Proportion 2',\n'Confidence level', and 'Power' must be blank or NULL" %>% set_class(c("sample_size_comp",class(.))))
+    	return("Exactly one of 'Sample size', 'Proportion 1', 'Proportion 2',\n'Confidence level', and 'Power' must be blank or NULL" %>% add_class("sample_size_comp"))
 
     res <-
       power.prop.test(n = n, p1 = p1, p2 = p2, sig.level = sig.level, power = power, alternative = alternative) %>%
@@ -87,7 +87,7 @@ sample_size_comp <- function(type,
 	res$n1 <- formatnr(n1, dec = 0)
 	res$n2 <- formatnr(n2, dec = 0)
 
-  environment() %>% as.list %>% set_class(c("sample_size_comp",class(.)))
+  as.list(environment()) %>% add_class("sample_size_comp")
 }
 
 #' Summary method for the sample_size_comp function

@@ -105,7 +105,7 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
 	}
 
   part_fac(df_list, model = as.formula(model), int = nInt, trials = trials, seed = seed) %>%
-    set_class(c("doe",class(.)))
+    add_class("doe")
 }
 
 #' Summary method for doe function
