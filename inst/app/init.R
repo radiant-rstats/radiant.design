@@ -7,7 +7,7 @@ r_url_list[["Design of Experiments"]] <- "design/doe/"
 options(radiant.url.list = r_url_list); rm(r_url_list)
 
 ## design menu
-design_ui <-
+options(radiant.design_ui =
 	tagList(
 	  navbarMenu("Design",
 	    "DOE",
@@ -18,4 +18,4 @@ design_ui <-
 	    tabPanel("Sample size (compare)", uiOutput("sample_size_comp"))
 	  )
 	)
-
+)
