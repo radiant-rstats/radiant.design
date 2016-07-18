@@ -40,7 +40,9 @@ output$sampling <- renderUI({
 
     ## one output with components stacked
     smp_output_panels <- tagList(
-       tabPanel("Summary", verbatimTextOutput("summary_sampling"))
+       tabPanel("Summary",
+         downloadLink("dl_sample", "", class = "fa fa-download alignright"), br(),
+         verbatimTextOutput("summary_sampling"))
     )
 
     stat_tab_panel(menu = "Design > Sample",
@@ -70,3 +72,17 @@ observeEvent(input$sampling_report, {
   update_report(inp_main = clean_args(smp_inputs(), smp_args),
                 fun_name = "sampling", outputs = "summary", figs = FALSE)
 })
+
+output$dl_sample <- downloadHandler(
+  filename = function() { "sample.csv" },
+  content = function(file) {
+    resp <- .sampling()
+    if ("seldat" %in% names(resp)) {
+      write.csv(resp$seldat, file = file, row.names = FALSE)
+    } else {
+      cat("No valid sample available", file = file)
+    }
+  }
+)
+
+
