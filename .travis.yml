@@ -5,5 +5,6 @@ sudo: required
 r_github_packages:
   - jimhester/covr
   - rstudio/DT
+  - kevinushey/sourcetools
   - rstudio/shiny
   - radiant-rstats/radiant.data
