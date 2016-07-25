@@ -10,6 +10,6 @@ help_design_panel <- tagList(
     HTML("<label>Design menu: <i id='help_design_all' title='Check all' href='#' class='action-button glyphicon glyphicon-ok'></i>
     <i id='help_design_none' title='Uncheck all' href='#' class='action-button glyphicon glyphicon-remove'></i></label>"),
     checkboxGroupInput("help_design", NULL, help_design,
-       selected = state_init("help_design"), inline = TRUE)
+       selected = state_group("help_design"), inline = TRUE)
   )
 )
