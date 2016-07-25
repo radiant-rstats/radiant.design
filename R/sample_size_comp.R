@@ -1,6 +1,6 @@
 #' Sample size calculation for comparisons
 #'
-#' @details See \url{http://vnijs.github.io/radiant/quant/sample_size_comp.html} for an example in Radiant
+#' @details See \url{https://radiant-rstats.github.io/docs/basics/sample_size_comp.html} for an example in Radiant
 #'
 #' @param type Choose "mean" or "proportion"
 #' @param n Sample size
@@ -92,7 +92,7 @@ sample_size_comp <- function(type,
 
 #' Summary method for the sample_size_comp function
 #'
-#' @details See \url{http://vnijs.github.io/radiant/quant/sample_size_comp} for an example in Radiant
+#' @details See \url{https://radiant-rstats.github.io/docs/basics/sample_size_comp} for an example in Radiant
 #'
 #' @param object Return value from \code{\link{sample_size_comp}}
 #' @param ... further arguments passed to or from other methods

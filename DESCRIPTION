@@ -14,7 +14,7 @@ Imports:
     AlgDesign (>= 1.1.7.3),
     import (>= 1.1.0),
     methods
-URL: https://github.com/radiant-rstats/radiant.design, http://vnijs.github.io/radiant/
+URL: https://github.com/radiant-rstats/radiant.design, https://radiant-rstats.github.io/docs
 BugReports: https://github.com/radiant-rstats/radiant.design/issues
 License: AGPL-3 | file LICENSE
 LazyData: true

@@ -21,7 +21,7 @@
 Summary method for doe function
 }
 \details{
-See \url{http://vnijs.github.io/radiant/analytics/doe.html} for an example in Radiant
+See \url{https://radiant-rstats.github.io/docs/design/doe.html} for an example in Radiant
 }
 \examples{
 "price; $10; $13; $16\\nfood; popcorn; gourmet; no food" \%>\% doe \%>\% summary

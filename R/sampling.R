@@ -1,6 +1,6 @@
 #' Simple random sampling
 #'
-#' @details See \url{http://vnijs.github.io/radiant/quant/sampling.html} for an example in Radiant
+#' @details See \url{https://radiant-rstats.github.io/docs/basics/sampling.html} for an example in Radiant
 #'
 #' @param dataset Dataset name (string). This can be a dataframe in the global environment or an element in an r_data list from Radiant
 #' @param var The variable to sample from
@@ -33,7 +33,7 @@ sampling <- function(dataset, var, sample_size,
 
 #' Summary method for the sampling function
 #'
-#' @details See \url{http://vnijs.github.io/radiant/quant/sampling} for an example in Radiant
+#' @details See \url{https://radiant-rstats.github.io/docs/basics/sampling} for an example in Radiant
 #'
 #' @param object Return value from \code{\link{sampling}}
 #' @param print_sf Print full sampling frame. Default is TRUE

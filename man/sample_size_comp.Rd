@@ -36,7 +36,7 @@ A list of variables defined in sample_size_comp as an object of class sample_siz
 Sample size calculation for comparisons
 }
 \details{
-See \url{http://vnijs.github.io/radiant/quant/sample_size_comp.html} for an example in Radiant
+See \url{https://radiant-rstats.github.io/docs/basics/sample_size_comp.html} for an example in Radiant
 }
 \seealso{
 \code{\link{summary.sample_size_comp}} to summarize results

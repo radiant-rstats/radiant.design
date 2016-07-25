@@ -1,6 +1,6 @@
 #' Create (partial) factorial design
 #'
-#' @details See \url{http://vnijs.github.io/radiant/analytics/doe.html} for an example in Radiant
+#' @details See \url{https://radiant-rstats.github.io/docs/design/doe.html} for an example in Radiant
 #'
 #' @param factors Categorical variables used as input for design
 #' @param int Vector of interaction terms to consider when generating design
@@ -73,7 +73,6 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
 	      check.names = FALSE
 	    )
 
-
 	  for (i in min_trials:max_trials) {
 	    if (!is.null(seed) && !is.na(seed)) set.seed(seed) # needs to be in the loop
 	    design <- try(AlgDesign::optFederov(model, data = full, nRepeats = 50,
@@ -110,7 +109,7 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
 
 #' Summary method for doe function
 #'
-#' @details See \url{http://vnijs.github.io/radiant/analytics/doe.html} for an example in Radiant
+#' @details See \url{https://radiant-rstats.github.io/docs/design/doe.html} for an example in Radiant
 #'
 #' @param object Return value from \code{\link{doe}}
 #' @param eff If TRUE print efficiency output

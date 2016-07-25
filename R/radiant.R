@@ -1,6 +1,6 @@
 #' Launch Radiant in the default browser
 #'
-#' @details See \url{http://vnijs.github.io/radiant} for documentation and tutorials
+#' @details See \url{https://radiant-rstats.github.io/docs} for documentation and tutorials
 #'
 #' @export
 radiant.design <- function() {
