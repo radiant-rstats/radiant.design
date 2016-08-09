@@ -15,6 +15,8 @@
 #' @seealso \code{\link{summary.doe}} to summarize results
 #'
 #' @importFrom AlgDesign optFederov
+#' @importFrom mvtnorm pmvnorm
+#' @importFrom polycor hetcor
 #'
 #' @export
 doe <- function(factors, int = "", trials = NA, seed = NA) {
@@ -68,7 +70,7 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
 	    data.frame(
 	      Trials = min_trials:max_trials,
 	      "D-efficiency" = NA,
-	      "Determinant" = NA,
+	      # "Determinant" = NA,
 	      "Balanced" = NA,
 	      check.names = FALSE
 	    )
@@ -80,15 +82,18 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
                     approximate = FALSE), silent = TRUE)
 
 	    if (is(design, 'try-error')) next
-	    cor_mat <- cor(data.matrix(design$design))
-	    detcm <- det(cor_mat)
+	    # cor_mat <- cor(data.matrix(design$design))
+	    # detcm <- det(cor_mat)
 	    ind <- which(eff$Trials %in% i)
 	    eff[ind,"D-efficiency"] <- design$Dea
-	    eff[ind,"Determinant"] <- round(detcm,3)
+	    # eff[ind,"Determinant"] <- round(detcm,3)
 	    eff[ind,"Balanced"] <-  all(i %% levs == 0)
 
 	    if (design$Dea == 1) break
 	  }
+
+    cor_mat <- sshhr(polycor::hetcor(design$design, std.err = FALSE)$correlations)
+    detcm <- det(cor_mat)
 
 	  if (exists("cor_mat")) {
 	    list(df = df, cor_mat = cor_mat, detcm = detcm, Dea = design$Dea,
@@ -147,7 +152,8 @@ summary.doe <- function(object, eff = TRUE, part = TRUE, full = TRUE, ...) {
   if (part) {
     cat("\nPartial factorial design correlations:\n")
     nrdec <- ifelse (object$detcm == 1, 0, 3)
-    print(formatdf(data.frame(object$cor_mat), dec = nrdec) , row.names = FALSE)
+    # print(formatdf(data.frame(object$cor_mat), dec = nrdec) , row.names = FALSE)
+    print(round(object$cor_mat, nrdec) , row.names = FALSE)
 
     cat("\nPartial factorial design:\n")
     print(object$part)

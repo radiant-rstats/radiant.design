@@ -1,3 +1,5 @@
+import_fs("radiant.design", libs = "mvtnorm", incl = "pmvnorm")
+
 ## urls for menu
 r_url_list <- getOption("radiant.url.list")
 r_url_list[["Random sampling"]] <- "design/sampling/"
