@@ -141,7 +141,7 @@ output$doe <- renderUI({
   if (length(input$doe_int) > 0)
     int <- input$doe_int
 
-  withProgress(message = 'Generating design', value = 0, {
+  withProgress(message = 'Generating design', value = 1, {
     do.call(doe, doe_inputs())
   })
 })
