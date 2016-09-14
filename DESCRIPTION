@@ -2,7 +2,7 @@ Package: radiant.design
 Type: Package
 Title: Design Menu for Radiant: Business Analytics using R and Shiny
 Version: 0.6.0
-Date: 2016-9-12
+Date: 2016-9-14
 Authors@R: person("Vincent", "Nijs", , "radiant@rady.ucsd.edu", c("aut", "cre"))
 Description: The Radiant design menu includes interfaces for design of experiments, sampling, and sample size calculation. The application extends the functionality in radiant.data.
 Depends:
