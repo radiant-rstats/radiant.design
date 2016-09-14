@@ -1,11 +1,8 @@
 language: r
 cache: packages
-warnings_are_errors: false
+warnings_are_errors: true
 sudo: required
 
 r_github_packages:
   - jimhester/covr
-  - rstudio/DT
   - kevinushey/sourcetools
-  - rstudio/shiny
-  - radiant-rstats/radiant.data
