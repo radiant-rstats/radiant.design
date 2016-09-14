@@ -15,7 +15,7 @@
 Summary method for the sample_size_comp function
 }
 \details{
-See \url{https://radiant-rstats.github.io/docs/basics/sample_size_comp} for an example in Radiant
+See \url{https://radiant-rstats.github.io/docs/design/sample_size_comp.html} for an example in Radiant
 }
 \seealso{
 \code{\link{sample_size_comp}} to generate the results

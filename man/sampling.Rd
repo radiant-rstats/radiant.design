@@ -22,7 +22,7 @@ A list of variables defined in sampling as an object of class sampling
 Simple random sampling
 }
 \details{
-See \url{https://radiant-rstats.github.io/docs/basics/sampling.html} for an example in Radiant
+See \url{https://radiant-rstats.github.io/docs/design/sampling.html} for an example in Radiant
 }
 \examples{
 result <- sampling("rndnames","Names",10)

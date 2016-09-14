@@ -17,7 +17,7 @@
 Summary method for the sampling function
 }
 \details{
-See \url{https://radiant-rstats.github.io/docs/basics/sampling} for an example in Radiant
+See \url{https://radiant-rstats.github.io/docs/design/sampling.html} for an example in Radiant
 }
 \examples{
 set.seed(1234)

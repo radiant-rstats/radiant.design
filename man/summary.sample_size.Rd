@@ -15,7 +15,7 @@
 Summary method for the sample_size function
 }
 \details{
-See \url{https://radiant-rstats.github.io/docs/basics/sample_size} for an example in Radiant
+See \url{https://radiant-rstats.github.io/docs/design/sample_size.html} for an example in Radiant
 }
 \examples{
 result <- sample_size(type = "mean", err_mean = 2, sd_mean = 10)
