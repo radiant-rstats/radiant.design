@@ -76,7 +76,7 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
 	    )
 
 	  for (i in min_trials:max_trials) {
-	    if (!is.null(seed) && !is.na(seed)) set.seed(seed) # needs to be in the loop
+      seed %>% gsub("[^0-9]","",.) %>% { if (!is_empty(.)) set.seed(seed) }
 	    design <- try(AlgDesign::optFederov(model, data = full, nRepeats = 50,
                     nTrials = i, maxIteration=1000,
                     approximate = FALSE), silent = TRUE)

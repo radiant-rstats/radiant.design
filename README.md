@@ -2,9 +2,10 @@
 
 <!-- [![Build Status](https://travis-ci.org/radiant-rstats/radiant.design.png?branch=master)](https://travis-ci.org/radiant-rstats/radiant.design) -->
 <!-- [![Coverage Status](https://img.shields.io/coveralls/vnijs/radiant.svg)](https://coveralls.io/r/vnijs/radiant?branch=master) -->
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/radiant.design)](https://CRAN.R-project.org/package=radiant.design)
 
 
-Radiant is an open-source platform-independent browser-based interface for business analytics in [R](https://www.r-project.org/). The application is based on the [Shiny](https://www.rstudio.com/shiny/) package and can be run locally or on a server. Radiant was developed by <a href="http://rady.ucsd.edu/faculty/directory/nijs/" target="\_blank">Vincent Nijs</a>. Please use the issue tracker on GitHub to suggest enhancements or report problems: https://github.com/radiant-rstats/radiant/issues. For other questions and comments please use radiant@rady.ucsd.edu.
+Radiant is an open-source platform-independent browser-based interface for business analytics in [R](https://www.r-project.org/). The application is based on the [Shiny](https://www.rstudio.com/shiny/) package and can be run locally or on a server. Radiant was developed by <a href="http://rady.ucsd.edu/faculty/directory/nijs/" target="\_blank">Vincent Nijs</a>. Please use the issue tracker on GitHub to suggest enhancements or report problems: https://github.com/radiant-rstats/radiant.design/issues. For other questions and comments please use radiant@rady.ucsd.edu.
 
 ## Key features
 
@@ -130,7 +131,9 @@ These tools are used in the _Business Analytics_, _Quantitative Analysis_, _Rese
 
 Radiant would not be possible without [R](https://cran.r-project.org/) and [Shiny](http://shiny.rstudio.com/). I would like to thank [Joe Cheng](https://github.com/jcheng5), [Winston Chang](https://github.com/wch), and [Yihui Xie](https://github.com/yihui) for answering questions, providing suggestions, and creating amazing tools for the R community. Other key components used in Radiant are ggplot2, dplyr, tidyr, magrittr, broom, shinyAce, rmardown, and DT. For an overview of other packages that Radiant relies on please see the <a href="https://radiant-rstats.github.io/docs/about.html" target="_blank">about</a> page.
 
+
 ## License
+
 
 Radiant is licensed under the <a href="https://tldrlegal.com/license/gnu-affero-general-public-license-v3-(agpl-3.0)" target="\_blank">AGPLv3</a>. The documentation and videos on this site as well as the Radiant help files are licensed under the creative commons attribution, non-commercial, share-alike license <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC-NC-SA</a>.
 

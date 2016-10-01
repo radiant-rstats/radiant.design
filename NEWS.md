@@ -3,5 +3,6 @@
 ## NEW FEATURES
 
 ## BUG FIXES
+- fix for random seed when input is NA
 
 
