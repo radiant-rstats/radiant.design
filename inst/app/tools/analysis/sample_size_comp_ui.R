@@ -74,6 +74,15 @@ output$sample_size_comp <- renderUI({
 })
 
 observeEvent(input$sample_size_comp_report, {
-  update_report(inp_main = clean_args(ssc_inputs(), ssc_args),
+
+  ssc <- ssc_inputs()
+  if (input$ssc_type == "mean") {
+    ssc$p1 <- ssc$p2 <- NULL
+  } else {
+    ssc$delta <- ssc$sd <- NULL
+  }
+
+  inp_main <- clean_args(ssc, ssc_args)
+  update_report(inp_main = inp_main,
                 fun_name = "sample_size_comp", outputs = "summary", figs = FALSE)
 })

@@ -78,6 +78,15 @@ output$sample_size <- renderUI({
 })
 
 observeEvent(input$sample_size_report, {
-  update_report(inp_main = clean_args(ss_inputs(), ss_args),
+
+  ss <- ss_inputs()
+  if (input$ss_type == "mean") {
+    ss$err_prop <- ss$p_prop <- NULL
+  } else {
+    ss$err_mean <- ss$sd_mean <- NULL
+  }
+
+  inp_main <- clean_args(ss, ss_args)
+  update_report(inp_main = inp_main,
                 fun_name = "sample_size", outputs = "summary", figs = FALSE)
 })
