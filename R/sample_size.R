@@ -20,7 +20,7 @@
 #'
 #' @seealso \code{\link{summary.sample_size}} to summarize results
 #' @export
-sample_size <- function(type = "mean",
+sample_size <- function(type,
                         err_mean = 2,
                         sd_mean = 10,
                         err_prop = .1,
@@ -31,15 +31,13 @@ sample_size <- function(type = "mean",
                         pop_correction = "no",
                         pop_size = 1000000) {
 
-	if (is.na(conf_lev) || is.null(conf_lev) || conf_lev < 0 || conf_lev > 1)
 	if (pop_correction == "yes" && is_not(pop_size)) pop_size <- 1000000
 
-	if (is_not(conf_lev) || conf_lev < 0)
-		conf_lev <- 1.96
+	if (is_not(conf_lev) || conf_lev < 0) conf_lev <- 1.96
 
 	zval <- conf_lev
 
-	if (type == 'mean') {
+	if (type == "mean") {
 		if (is_not(err_mean)) return("Please select an acceptable error greater than 0" %>% add_class("sample_size"))
 		n <- (zval^2 * sd_mean^2) / err_mean^2
 	} else {
@@ -47,8 +45,7 @@ sample_size <- function(type = "mean",
 		n <- (zval^2 * p_prop * (1 - p_prop)) / err_prop^2
 	}
 
-	if (pop_correction == 'yes')
-		n <- n * pop_size / ((n - 1) + pop_size)
+	if (pop_correction == 'yes') n <- n * pop_size / ((n - 1) + pop_size)
 
 	n <- ceiling(n)
 
