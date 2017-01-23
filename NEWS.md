@@ -1,4 +1,7 @@
-# CHANGES IN radiant.design VERSION 0.6.1 (unreleased)
+# CHANGES IN radiant.design VERSION 0.7 (unreleased)
+
+## Feature
+- option to set random seed in Design > Sampling
 
 ## BUG FIXES
 - Fix for random seed when input is NA

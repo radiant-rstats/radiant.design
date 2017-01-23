@@ -4,12 +4,12 @@
 \alias{summary.sampling}
 \title{Summary method for the sampling function}
 \usage{
-\method{summary}{sampling}(object, print_sf = TRUE, ...)
+\method{summary}{sampling}(object, prn = TRUE, ...)
 }
 \arguments{
 \item{object}{Return value from \code{\link{sampling}}}
 
-\item{print_sf}{Print full sampling frame. Default is TRUE}
+\item{prn}{Print full sampling frame. Default is TRUE}
 
 \item{...}{further arguments passed to or from other methods}
 }

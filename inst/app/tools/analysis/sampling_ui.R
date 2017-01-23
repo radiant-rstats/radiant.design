@@ -27,8 +27,13 @@ output$ui_sampling <- renderUI({
   tagList(
   	wellPanel(
 	 	 	uiOutput("ui_smp_var"),
-	  	numericInput("smp_sample_size", "Sample size:", min = 1,
+      tags$table(
+        tags$td(numericInput("smp_sample_size", "Sample size:", min = 1,
                    value = state_init("smp_sample_size",1))),
+        tags$td(numericInput("smp_seed", label = "Rnd. seed:", min = 0,
+                   value = state_init("doe_seed", init = NA)))
+      )
+    ),
     help_and_report(modal_title = 'Sampling', fun_name = 'sampling',
                     help_file = inclMD(file.path(getOption("radiant.path.design"),"app/tools/help/sampling.md")))
  	)
