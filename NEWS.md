@@ -1,4 +1,4 @@
-# CHANGES IN radiant.design VERSION 0.7 (unreleased)
+# CHANGES IN radiant.design VERSION 0.7.1
 
 ## Feature
 - option to set random seed in Design > Sampling
