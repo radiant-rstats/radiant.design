@@ -6,5 +6,3 @@
 ## BUG FIXES
 - Fix for random seed when input is NA
 - Cleanup report arguments for sample size calculations
-
-
