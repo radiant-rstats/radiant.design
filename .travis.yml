@@ -10,4 +10,3 @@ repos:
 
 r_github_packages:
   - radiant-rstats/radiant.data
-  - kevinushey/sourcetools
