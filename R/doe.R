@@ -17,6 +17,7 @@
 #' @importFrom AlgDesign optFederov
 #' @importFrom mvtnorm pmvnorm
 #' @importFrom polycor hetcor
+#' @importFrom dplyr right_join
 #'
 #' @export
 doe <- function(factors, int = "", trials = NA, seed = NA) {
@@ -36,6 +37,8 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
     .[[1]] %>% strsplit(";")
 
   df_names <- c()
+  if (length(df_list) < 2) return("DOE requires at least two factors" %>% add_class("doe"))
+
   for (i in seq_len(length(df_list))) {
     dt <- df_list[[i]] %>% gsub("^\\s+|\\s+$", "", .)
     df_names <- c(df_names, dt[1])
@@ -64,13 +67,15 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
 	  min_trials <- nr_levels - length(df) + 1
 	  max_trials <- nrow(full)
 
-	  if (!is.null(trials) && !is.na(trials)) max_trials <- min_trials <- trials
+    ## make sure the number of trials set by the user is within an appropriate range
+    if (!is_empty(trials)) 
+      max_trials <- min_trials <- max(min(trials, max_trials), min_trials)
 
+    ## define a data.frame that will store design spec
 	  eff <-
 	    data.frame(
 	      Trials = min_trials:max_trials,
 	      "D-efficiency" = NA,
-	      # "Determinant" = NA,
 	      "Balanced" = NA,
 	      check.names = FALSE
 	    )
@@ -82,23 +87,27 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
                     approximate = FALSE), silent = TRUE)
 
 	    if (is(design, 'try-error')) next
-	    # cor_mat <- cor(data.matrix(design$design))
-	    # detcm <- det(cor_mat)
 	    ind <- which(eff$Trials %in% i)
 	    eff[ind,"D-efficiency"] <- design$Dea
-	    # eff[ind,"Determinant"] <- round(detcm,3)
 	    eff[ind,"Balanced"] <-  all(i %% levs == 0)
 
 	    if (design$Dea == 1) break
 	  }
 
     cor_mat <- sshhr(polycor::hetcor(design$design, std.err = FALSE)$correlations)
-    detcm <- det(cor_mat)
 
 	  if (exists("cor_mat")) {
+       detcm <- det(cor_mat)
+
+      full <- arrange_(full, .dots = names(df)) %>% 
+        data.frame(trial = 1:nrow(full), .)
+
+      part <- arrange_(design$design, .dots = names(df)) %>%
+        {suppressMessages(dplyr::right_join(full, .))}
+
 	    list(df = df, cor_mat = cor_mat, detcm = detcm, Dea = design$Dea,
-	         part = arrange_(design$design, .dots = names(df)),
-	         full = arrange_(full, .dots = names(df)),
+           part = part,
+	         full = full,
 	         eff = na.omit(eff),
 	         seed = seed)
 	  } else if (!is.na(trials)) {
@@ -152,15 +161,14 @@ summary.doe <- function(object, eff = TRUE, part = TRUE, full = TRUE, ...) {
   if (part) {
     cat("\nPartial factorial design correlations:\n")
     nrdec <- ifelse (object$detcm == 1, 0, 3)
-    # print(formatdf(data.frame(object$cor_mat), dec = nrdec) , row.names = FALSE)
     print(round(object$cor_mat, nrdec) , row.names = FALSE)
 
     cat("\nPartial factorial design:\n")
-    print(object$part)
+    print(object$part, row.names = FALSE)
   }
 
   if (full) {
     cat("\nFull factorial design:\n")
-    print(object$full)
+    print(object$full, row.names = FALSE)
   }
 }

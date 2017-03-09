@@ -93,16 +93,16 @@ observeEvent(input$doe_add, {
   }
   dup <- paste(dup, collapse = "; ")
 
-  if (is_empty(input[["doe_factors"]]))
+  if (is_empty(input$doe_factors))
     val <- dup
   else
-    val <- paste0(dup, "\n", input[["doe_factors"]])
+    val <- paste0(input$doe_factors, "\n", dup)
 
   updateTextInput(session = session, "doe_factors", value = val)
 })
 
 observeEvent(input$doe_del, {
-  input[["doe_factors"]] %>% strsplit("\n") %>% unlist %>% .[-1] %>% paste0(collapse = "\n") %>%
+  input$doe_factors %>% strsplit("\n") %>% unlist %>% head(., -1) %>% paste0(collapse = "\n") %>%
     updateTextInput(session = session, "doe_factors", value = .)
 })
 
@@ -150,25 +150,25 @@ output$doe <- renderUI({
 })
 
 output$doe_download_part <- downloadHandler(
-  filename = function() { 'part_factorial.csv' },
+  filename = function() { "part_factorial.csv" },
   content = function(file) {
     .doe() %>%
     { if (class(.)[1] == "character") . else .$part } %>%
-    write.csv(file)
+    write.csv(file, row.names = FALSE)
   }
 )
 
 output$doe_download_full <- downloadHandler(
-  filename = function() { 'full_factorial.csv' },
+  filename = function() { "full_factorial.csv" },
   content = function(file) {
     .doe() %>%
     { if (class(.)[1] == "character") . else .$full } %>%
-    write.csv(file)
+    write.csv(file, row.names = FALSE)
   }
 )
 
 output$doe_download <- downloadHandler(
-  filename = function() { 'design_factors.txt' },
+  filename = function() { "design_factors.txt" },
   content = function(file) {
     cat(paste0(input$doe_factors,"\n"), file  = file)
   }
