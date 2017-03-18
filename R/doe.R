@@ -86,7 +86,7 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
                     nTrials = i, maxIteration=1000,
                     approximate = FALSE), silent = TRUE)
 
-	    if (is(design, 'try-error')) next
+	    if (is(design, "try-error")) next
 	    ind <- which(eff$Trials %in% i)
 	    eff[ind,"D-efficiency"] <- design$Dea
 	    eff[ind,"Balanced"] <-  all(i %% levs == 0)
@@ -94,7 +94,8 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
 	    if (design$Dea == 1) break
 	  }
 
-    cor_mat <- sshhr(polycor::hetcor(design$design, std.err = FALSE)$correlations)
+    if (!is(design, "try-error")) 
+      cor_mat <- sshhr(polycor::hetcor(design$design, std.err = FALSE)$correlations)
 
 	  if (exists("cor_mat")) {
        detcm <- det(cor_mat)
