@@ -20,7 +20,7 @@ sampling <- function(dataset, var, sample_size,
                      data_filter = "") {
 
   dat <- getdata(dataset, var, filt = data_filter)
-  if (!is_string(dataset)) dataset <- "-----"
+  if (!is_string(dataset)) dataset <- deparse(substitute(dataset)) %>% set_attr("df", TRUE)
 
   if (is_not(sample_size)) return(add_class("Please select a sample size of 1 or greater", "sampling"))
 

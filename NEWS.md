@@ -1,8 +1,9 @@
-# CHANGES IN radiant.design VERSION 0.7.2
+# CHANGES IN radiant.design VERSION 0.7.5
 
 ## Feature
 - option to set random seed in Design > Sampling
 - UI updates for DOE
+- Show df name in output
 
 ## BUG FIXES
 - Fix for random seed when input is NA
