@@ -12,6 +12,9 @@ options(radiant.url.list = r_url_list); rm(r_url_list)
 options(radiant.design_ui =
 	tagList(
 	  navbarMenu("Design",
+      tags$head(
+        tags$script(src = "www_design/js/run_return.js")
+      ),
 	    "DOE",
 	    tabPanel("Design of Experiments", uiOutput("doe")),
 	    "----", "Sample",

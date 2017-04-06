@@ -8,6 +8,9 @@ ifelse (grepl("radiant.design", getwd()) && file.exists("../../inst") , "..", sy
 ## setting path for figures in help files
 addResourcePath("figures_design", "tools/help/figures/")
 
+## setting path for www resources 
+addResourcePath("www_design", file.path(getOption("radiant.path.design"), "app/www/"))
+
 ## loading urls and ui
 source("init.R", encoding = getOption("radiant.encoding"), local = TRUE)
 options(radiant.url.patterns = make_url_patterns())
