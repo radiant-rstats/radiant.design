@@ -5,6 +5,7 @@
 - UI updates for DOE
 - Show df name in output
 - Use ALT-enter as a short-cut to report
+- Documentation added on how to customize plots
 
 ## BUG FIXES
 - Fix for random seed when input is NA
