@@ -41,4 +41,3 @@ See \url{https://radiant-rstats.github.io/docs/design/sample_size_comp.html} for
 \seealso{
 \code{\link{summary.sample_size_comp}} to summarize results
 }
-

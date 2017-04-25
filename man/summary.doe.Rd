@@ -30,4 +30,3 @@ See \url{https://radiant-rstats.github.io/docs/design/doe.html} for an example i
 \seealso{
 \code{\link{doe}} to calculate results
 }
-

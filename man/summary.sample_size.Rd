@@ -25,4 +25,3 @@ summary(result)
 \seealso{
 \code{\link{sample_size}} to generate the results
 }
-

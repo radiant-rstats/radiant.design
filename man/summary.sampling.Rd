@@ -28,4 +28,3 @@ summary(result)
 \seealso{
 \code{\link{sampling}} to generate the results
 }
-

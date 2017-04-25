@@ -45,4 +45,3 @@ result <- sample_size(type = "mean", err_mean = 2, sd_mean = 10)
 \seealso{
 \code{\link{summary.sample_size}} to summarize results
 }
-

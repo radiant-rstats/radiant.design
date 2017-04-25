@@ -33,4 +33,3 @@ result <- sampling("rndnames","Names",10)
 \seealso{
 \code{\link{summary.sampling}} to summarize results
 }
-
