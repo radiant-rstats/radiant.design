@@ -1,3 +1,9 @@
+# CHANGES IN radiant.design 0.8.1
+
+- Code cleanup
+- Documentation updates
+- Fix for incomplete final line warning in sampling.md
+
 # CHANGES IN radiant.design 0.8.0
 
 ## Feature

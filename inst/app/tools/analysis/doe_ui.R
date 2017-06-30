@@ -28,10 +28,8 @@ output$ui_doe_int <- renderUI({
     sapply(function(x) x[1]) %>%
     unique
 
-  if (length(vars) < 2)
-    choices <- c()
-  else
-    choices <- iterms(vars, 2)
+  req(length(vars) > 1)
+  choices <- iterms(vars, 2)
 
   selectInput("doe_int", label = "Interactions:", choices = choices,
     selected = state_init("doe_int"),
@@ -106,7 +104,7 @@ observeEvent(input$doe_del, {
     updateTextInput(session = session, "doe_factors", value = .)
 })
 
-doe_maker <- function(id = "factors", rows = "5", pre = "doe_") {
+doe_maker <- function(id = "factors", rows = 5, pre = "doe_") {
   id <- paste0(pre, id)
   tags$textarea(state_init(id), id = id, type = "text", rows = rows, class = "form-control")
 }
@@ -120,7 +118,7 @@ output$doe <- renderUI({
     doe_output_panels <- tagList(
       tabPanel("Summary",
         HTML("<label>Design factors:</label>"),
-        doe_maker("factors", rows = "5"),
+        doe_maker("factors", rows = 5),
         HTML("<br><label>Generated experimental design:</label>"),
         verbatimTextOutput("summary_doe")
       )
