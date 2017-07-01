@@ -10,17 +10,17 @@ options(radiant.url.list = r_url_list); rm(r_url_list)
 
 ## design menu
 options(radiant.design_ui =
-	tagList(
-	  navbarMenu("Design",
+  tagList(
+    navbarMenu("Design",
       tags$head(
         tags$script(src = "www_design/js/run_return.js")
       ),
-	    "DOE",
-	    tabPanel("Design of Experiments", uiOutput("doe")),
-	    "----", "Sample",
-	    tabPanel("Random sampling", uiOutput("sampling")),
-	    tabPanel("Sample size (single)", uiOutput("sample_size")),
-	    tabPanel("Sample size (compare)", uiOutput("sample_size_comp"))
-	  )
-	)
+      "DOE",
+      tabPanel("Design of Experiments", uiOutput("doe")),
+      "----", "Sample",
+      tabPanel("Random sampling", uiOutput("sampling")),
+      tabPanel("Sample size (single)", uiOutput("sample_size")),
+      tabPanel("Sample size (compare)", uiOutput("sample_size_comp"))
+    )
+  )
 )

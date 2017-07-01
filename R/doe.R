@@ -54,50 +54,50 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
 
   part_fac <- function(df, model = ~ ., int = 0, trials = NA, seed = 172110) {
 
-	  full <- expand.grid(df)
+    full <- expand.grid(df)
 
-	  ###############################################
-	  # eliminate combinations from full
-	  # by removing then from the variable _experiment_
-	  # http://stackoverflow.com/questions/18459311/creating-a-fractional-factorial-design-in-r-without-prohibited-pairs?rq=1
-	  ###############################################
+    ###############################################
+    # eliminate combinations from full
+    # by removing then from the variable _experiment_
+    # http://stackoverflow.com/questions/18459311/creating-a-fractional-factorial-design-in-r-without-prohibited-pairs?rq=1
+    ###############################################
 
-	  levs <- sapply(df, length)
-	  nr_levels <- sum(levs)
-	  min_trials <- nr_levels - length(df) + 1
-	  max_trials <- nrow(full)
+    levs <- sapply(df, length)
+    nr_levels <- sum(levs)
+    min_trials <- nr_levels - length(df) + 1
+    max_trials <- nrow(full)
 
     ## make sure the number of trials set by the user is within an appropriate range
     if (!is_empty(trials)) 
       max_trials <- min_trials <- max(min(trials, max_trials), min_trials)
 
     ## define a data.frame that will store design spec
-	  eff <-
-	    data.frame(
-	      Trials = min_trials:max_trials,
-	      "D-efficiency" = NA,
-	      "Balanced" = NA,
-	      check.names = FALSE
-	    )
+    eff <-
+      data.frame(
+        Trials = min_trials:max_trials,
+        "D-efficiency" = NA,
+        "Balanced" = NA,
+        check.names = FALSE
+      )
 
-	  for (i in min_trials:max_trials) {
+    for (i in min_trials:max_trials) {
       seed %>% gsub("[^0-9]","",.) %>% { if (!is_empty(.)) set.seed(seed) }
-	    design <- try(AlgDesign::optFederov(model, data = full, nRepeats = 50,
+      design <- try(AlgDesign::optFederov(model, data = full, nRepeats = 50,
                     nTrials = i, maxIteration=1000,
                     approximate = FALSE), silent = TRUE)
 
-	    if (is(design, "try-error")) next
-	    ind <- which(eff$Trials %in% i)
-	    eff[ind,"D-efficiency"] <- design$Dea
-	    eff[ind,"Balanced"] <-  all(i %% levs == 0)
+      if (is(design, "try-error")) next
+      ind <- which(eff$Trials %in% i)
+      eff[ind, "D-efficiency"] <- design$Dea
+      eff[ind, "Balanced"] <-  all(i %% levs == 0)
 
-	    if (design$Dea == 1) break
-	  }
+      if (design$Dea == 1) break
+    }
 
     if (!is(design, "try-error")) 
       cor_mat <- sshhr(polycor::hetcor(design$design, std.err = FALSE)$correlations)
 
-	  if (exists("cor_mat")) {
+    if (exists("cor_mat")) {
        detcm <- det(cor_mat)
 
       full <- arrange_(full, .dots = names(df)) %>% 
@@ -106,17 +106,17 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
       part <- arrange_(design$design, .dots = names(df)) %>%
         {suppressMessages(dplyr::right_join(full, .))}
 
-	    list(df = df, cor_mat = cor_mat, detcm = detcm, Dea = design$Dea,
+      list(df = df, cor_mat = cor_mat, detcm = detcm, Dea = design$Dea,
            part = part,
-	         full = full,
-	         eff = na.omit(eff),
-	         seed = seed)
-	  } else if (!is.na(trials)) {
-	    "No solution exists for the selected number of trials"
-	  } else {
-	    "No solution found"
-	  }
-	}
+           full = full,
+           eff = na.omit(eff),
+           seed = seed)
+    } else if (!is.na(trials)) {
+      "No solution exists for the selected number of trials"
+    } else {
+      "No solution found"
+    }
+  }
 
   part_fac(df_list, model = as.formula(model), int = nInt, trials = trials, seed = seed) %>%
     add_class("doe")

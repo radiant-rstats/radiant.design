@@ -27,7 +27,7 @@ sampling <- function(dataset, var, sample_size,
   ## use seed if provided
   seed %>% gsub("[^0-9]","",.) %>% { if (!is_empty(.)) set.seed(seed) }
 
-	## example list of names obtained from http://listofrandomnames.com
+  ## example list of names obtained from http://listofrandomnames.com
   # dat$rnd_number <- runif(nrow(dat), min = 0, max = 1) %>% round(3)
   dat$rnd_number <- runif(nrow(dat), min = 0, max = 1)
   seldat <- dat %>%
@@ -64,7 +64,7 @@ summary.sampling <- function(object, prn = TRUE, ...) {
     cat("Random seed:", object$seed,"\n")
   cat("Sample size:", object$sample_size, "\n\n")
   cat("Selected:\n")
-	print(formatdf(object$seldat, dec = 3), row.names = FALSE)
+  print(formatdf(object$seldat, dec = 3), row.names = FALSE)
   if (prn) {
     cat("\nSampling frame:\n")
     print(formatdf(object$dat, dec = 3), row.names = FALSE)

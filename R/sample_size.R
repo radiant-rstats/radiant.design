@@ -31,23 +31,27 @@ sample_size <- function(type,
                         pop_correction = "no",
                         pop_size = 1000000) {
 
-	if (pop_correction == "yes" && is_not(pop_size)) pop_size <- 1000000
+  if (pop_correction == "yes" && is_not(pop_size)) pop_size <- 1000000
 
-	if (is_not(conf_lev) || conf_lev < 0) conf_lev <- 1.96
+  if (is_not(conf_lev) || conf_lev < 0) conf_lev <- 1.96
 
-	zval <- conf_lev
+  zval <- conf_lev
 
-	if (type == "mean") {
-		if (is_not(err_mean)) return("Please select an acceptable error greater than 0" %>% add_class("sample_size"))
-		n <- (zval^2 * sd_mean^2) / err_mean^2
-	} else {
-		if (is_not(err_prop)) return("Please select an acceptable error greater than 0" %>% add_class("sample_size"))
-		n <- (zval^2 * p_prop * (1 - p_prop)) / err_prop^2
-	}
+  if (type == "mean") {
+    if (is_not(err_mean)) 
+      return("Please select an acceptable error greater than 0" %>% 
+        add_class("sample_size"))
+    n <- (zval^2 * sd_mean^2) / err_mean^2
+  } else {
+    if (is_not(err_prop)) 
+      return("Please select an acceptable error greater than 0" %>% 
+        add_class("sample_size"))
+    n <- (zval^2 * p_prop * (1 - p_prop)) / err_prop^2
+  }
 
-	if (pop_correction == 'yes') n <- n * pop_size / ((n - 1) + pop_size)
+  if (pop_correction == 'yes') n <- n * pop_size / ((n - 1) + pop_size)
 
-	n <- ceiling(n)
+  n <- ceiling(n)
 
   as.list(environment()) %>% add_class("sample_size")
 }
@@ -70,32 +74,32 @@ summary.sample_size <- function(object, ...) {
 
   if (is.character(object)) return(object)
 
-	cat("Sample size calculation\n")
+  cat("Sample size calculation\n")
 
-	if (object$type == "mean") {
-	  cat("Calculation type     : Mean\n")
-		cat("Acceptable Error     :", object$err_mean, "\n")
-		cat("Sample std. deviation:", object$sd_mean, "\n")
-	} else {
-	  cat("Type: Proportion\n")
-		cat("Acceptable Error     :", object$err_prop, "\n")
-		cat("Sample proportion    :", object$p_prop, "\n")
-	}
+  if (object$type == "mean") {
+    cat("Calculation type     : Mean\n")
+    cat("Acceptable Error     :", object$err_mean, "\n")
+    cat("Sample std. deviation:", object$sd_mean, "\n")
+  } else {
+    cat("Type: Proportion\n")
+    cat("Acceptable Error     :", object$err_prop, "\n")
+    cat("Sample proportion    :", object$p_prop, "\n")
+  }
 
-	cat("Confidence level     :", object$conf_lev, "\n")
-	cat("Incidence rate       :", object$incidence, "\n")
-	cat("Response rate        :", object$response, "\n")
+  cat("Confidence level     :", object$conf_lev, "\n")
+  cat("Incidence rate       :", object$incidence, "\n")
+  cat("Response rate        :", object$response, "\n")
 
-	if (object$pop_correction == "no") {
-		cat("Population correction: None\n")
-	} else {
-		cat("Population correction: Yes\n")
-		cat("Population size      :", formatnr(object$pop_size, dec = 0), "\n")
-	}
+  if (object$pop_correction == "no") {
+    cat("Population correction: None\n")
+  } else {
+    cat("Population correction: Yes\n")
+    cat("Population size      :", formatnr(object$pop_size, dec = 0), "\n")
+  }
 
-	cat("\nRequired sample size     :", formatnr(object$n, dec = 0))
-	cat("\nRequired contact attempts:", formatnr(ceiling(object$n / object$incidence / object$response), dec = 0))
-	cat("\n\nChoose a z.value:\n")
+  cat("\nRequired sample size     :", formatnr(object$n, dec = 0))
+  cat("\nRequired contact attempts:", formatnr(ceiling(object$n / object$incidence / object$response), dec = 0))
+  cat("\n\nChoose a z.value:\n")
 
   for (z in c(.80, .85, .90, .95, .99))
     cat(paste0(100*z,"%\t"),-qnorm((1 - z)/2) %>% round(2),"\n")

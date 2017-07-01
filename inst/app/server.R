@@ -41,7 +41,7 @@ shinyServer(function(input, output, session) {
     radiant.data::copy_all(radiant.design)
   }
 
- 	## source analysis tools for design app
+  ## source analysis tools for design app
   for (file in list.files(c("tools/analysis"), pattern="\\.(r|R)$", full.names = TRUE))
     source(file, encoding = getOption("radiant.encoding"), local = TRUE)
 

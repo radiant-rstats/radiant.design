@@ -25,18 +25,18 @@ output$ui_smp_var <- renderUI({
 output$ui_sampling <- renderUI({
   req(input$dataset)
   tagList(
-  	wellPanel(
-	 	 	uiOutput("ui_smp_var"),
+    wellPanel(
+      uiOutput("ui_smp_var"),
       tags$table(
         tags$td(numericInput("smp_sample_size", "Sample size:", min = 1,
-                   value = state_init("smp_sample_size",1))),
+                             value = state_init("smp_sample_size",1))),
         tags$td(numericInput("smp_seed", label = "Rnd. seed:", min = 0,
-                   value = state_init("doe_seed", init = NA)))
+                             value = state_init("doe_seed", init = NA)))
       )
     ),
     help_and_report(modal_title = 'Sampling', fun_name = 'sampling',
                     help_file = inclMD(file.path(getOption("radiant.path.design"),"app/tools/help/sampling.md")))
- 	)
+  )
 })
 
 output$sampling <- renderUI({
@@ -47,13 +47,16 @@ output$sampling <- renderUI({
     smp_output_panels <- tagList(
        tabPanel("Summary",
          downloadLink("dl_sample", "", class = "fa fa-download alignright"), br(),
-         verbatimTextOutput("summary_sampling"))
+         verbatimTextOutput("summary_sampling")
+       )
     )
 
-    stat_tab_panel(menu = "Design > Sample",
-                  tool = "Random sampling",
-                  tool_ui = "ui_sampling",
-                  output_panels = smp_output_panels)
+    stat_tab_panel(
+      menu = "Design > Sample", 
+      tool = "Random sampling", 
+      tool_ui = "ui_sampling", 
+      output_panels = smp_output_panels
+    )
 })
 
 .sampling <- reactive({
