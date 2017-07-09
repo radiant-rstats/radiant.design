@@ -76,8 +76,11 @@ output$ui_doe <- renderUI({
       downloadButton("doe_download", "Factors"),
       fileInput("doe_upload", "Upload factors:", multiple = FALSE, accept = ".txt")
     ),
-    help_and_report(modal_title = "Design of Experiments", fun_name = "doe",
-                    help_file = inclMD(file.path(getOption("radiant.path.design"),"app/tools/help/doe.md")))
+    help_and_report(
+      modal_title = "Design of Experiments", 
+      fun_name = "doe",
+      help_file = inclMD(file.path(getOption("radiant.path.design"),"app/tools/help/doe.md"))
+    )
   )
 })
 
@@ -100,13 +103,27 @@ observeEvent(input$doe_add, {
 })
 
 observeEvent(input$doe_del, {
-  input$doe_factors %>% strsplit("\n") %>% unlist %>% head(., -1) %>% paste0(collapse = "\n") %>%
+  input$doe_factors %>% 
+    strsplit("\n") %>% 
+    unlist %>% 
+    head(., -1) %>% 
+    paste0(collapse = "\n") %>%
     updateTextInput(session = session, "doe_factors", value = .)
 })
 
-doe_maker <- function(id = "factors", rows = 5, pre = "doe_") {
+doe_maker <- function(id = "factors", 
+                      rows = 5, 
+                      pre = "doe_", 
+                      placeholder = "Upload an experimental design using the 'Upload factors' button or create a new design using the inputs on the left of the screen. For help click the ? on the bottom left of the screen") {
   id <- paste0(pre, id)
-  tags$textarea(state_init(id), id = id, type = "text", rows = rows, class = "form-control")
+  tags$textarea(
+    state_init(id), 
+    id = id, 
+    type = "text", 
+    rows = rows, 
+    placeholder = placeholder,
+    class = "form-control"
+  )
 }
 
 ## output is called from the main radiant ui.R

@@ -100,17 +100,24 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
     if (exists("cor_mat")) {
        detcm <- det(cor_mat)
 
-      full <- arrange_(full, .dots = names(df)) %>% 
+      # full <- arrange_(full, .dots = names(df)) %>% 
+      full <- arrange_at(full, .vars = names(df)) %>% 
         data.frame(trial = 1:nrow(full), .)
 
-      part <- arrange_(design$design, .dots = names(df)) %>%
+      # part <- arrange_(design$design, .dots = names(df)) %>%
+      part <- arrange_at(design$design, .vars = names(df)) %>%
         {suppressMessages(dplyr::right_join(full, .))}
 
-      list(df = df, cor_mat = cor_mat, detcm = detcm, Dea = design$Dea,
-           part = part,
-           full = full,
-           eff = na.omit(eff),
-           seed = seed)
+      list(
+        df = df, 
+        cor_mat = cor_mat, 
+        detcm = detcm, 
+        Dea = design$Dea,
+        part = part,
+        full = full,
+        eff = na.omit(eff),
+        seed = seed
+      )
     } else if (!is.na(trials)) {
       "No solution exists for the selected number of trials"
     } else {

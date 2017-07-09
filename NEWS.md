@@ -1,3 +1,7 @@
+# CHANGES IN radiant.design 0.8.7.1
+
+* Upgraded dplyr dependency to 0.7.1
+
 # CHANGES IN radiant.design 0.8.1
 
 - Code cleanup
