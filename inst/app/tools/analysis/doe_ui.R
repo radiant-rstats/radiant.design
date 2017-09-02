@@ -114,7 +114,7 @@ observeEvent(input$doe_del, {
 doe_maker <- function(id = "factors", 
                       rows = 5, 
                       pre = "doe_", 
-                      placeholder = "Upload an experimental design using the 'Upload factors' button or create a new design using the inputs on the left of the screen. For help click the ? on the bottom left of the screen") {
+                      placeholder = "Upload an experimental design using the 'Upload factors' button or create a new design using the inputs on the left of the screen. For help, click the ? icon on the bottom left of the screen") {
   id <- paste0(pre, id)
   tags$textarea(
     state_init(id), 
