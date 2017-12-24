@@ -4,6 +4,14 @@
 #'
 #' @param run Run radiant.design in an external browser ("browser") or in the Rstudio viewer ("viewer")
 #'
+#' @importFrom rstudioapi viewer
+#'
+#' @examples
+#' \dontrun{
+#' radiant.design::radiant.design()
+#' radiant.design::radiant.design("viewer")
+#' }
+#'
 #' @export
 radiant.design <- function(run = "browser") {
   if (!"package:radiant.design" %in% search()) {
