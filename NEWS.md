@@ -1,10 +1,8 @@
-# CHANGES IN radiant.design 0.8.7.4
+# CHANGES IN radiant.design 0.8.9
 
-* Upgraded tidyr dependency to 0.7
-
-# CHANGES IN radiant.design 0.8.7.1
-
-* Upgraded dplyr dependency to 0.7.1
+* Upgraded tidyr dependency to 0.7.2
+* Upgraded dplyr dependency to 0.7.4
+* Applied `styler` on code
 
 # CHANGES IN radiant.design 0.8.1
 
