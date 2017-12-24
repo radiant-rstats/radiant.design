@@ -7,12 +7,15 @@
 \alias{radiant.design}
 \title{radiant.design}
 \usage{
-radiant.design()
+radiant.design(run = "browser")
+}
+\arguments{
+\item{run}{Run radiant.design in an external browser ("browser") or in the the Rstudio viewer ("viewer")}
 }
 \description{
 radiant.design
 
-Launch Radiant in the default browser
+Launch radiant.design in default browser or Rstudio Viewer
 }
 \details{
 See \url{https://radiant-rstats.github.io/docs} for documentation and tutorials
