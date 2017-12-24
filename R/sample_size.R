@@ -30,7 +30,6 @@ sample_size <- function(type,
                         response = 1,
                         pop_correction = "no",
                         pop_size = 1000000) {
-
   if (pop_correction == "yes" && is_not(pop_size)) pop_size <- 1000000
 
   if (is_not(conf_lev) || conf_lev < 0) conf_lev <- 1.96
@@ -38,18 +37,20 @@ sample_size <- function(type,
   zval <- conf_lev
 
   if (type == "mean") {
-    if (is_not(err_mean)) 
-      return("Please select an acceptable error greater than 0" %>% 
+    if (is_not(err_mean)) {
+      return("Please select an acceptable error greater than 0" %>%
         add_class("sample_size"))
-    n <- (zval^2 * sd_mean^2) / err_mean^2
+    }
+    n <- (zval ^ 2 * sd_mean ^ 2) / err_mean ^ 2
   } else {
-    if (is_not(err_prop)) 
-      return("Please select an acceptable error greater than 0" %>% 
+    if (is_not(err_prop)) {
+      return("Please select an acceptable error greater than 0" %>%
         add_class("sample_size"))
-    n <- (zval^2 * p_prop * (1 - p_prop)) / err_prop^2
+    }
+    n <- (zval ^ 2 * p_prop * (1 - p_prop)) / err_prop ^ 2
   }
 
-  if (pop_correction == 'yes') n <- n * pop_size / ((n - 1) + pop_size)
+  if (pop_correction == "yes") n <- n * pop_size / ((n - 1) + pop_size)
 
   n <- ceiling(n)
 
@@ -71,7 +72,6 @@ sample_size <- function(type,
 #'
 #' @export
 summary.sample_size <- function(object, ...) {
-
   if (is.character(object)) return(object)
 
   cat("Sample size calculation\n")
@@ -102,7 +102,7 @@ summary.sample_size <- function(object, ...) {
   cat("\n\nChoose a z.value:\n")
 
   for (z in c(.80, .85, .90, .95, .99))
-    cat(paste0(100*z,"%\t"),-qnorm((1 - z)/2) %>% round(2),"\n")
+    cat(paste0(100 * z, "%\t"), -qnorm((1 - z) / 2) %>% round(2), "\n")
 
   rm(object)
 }

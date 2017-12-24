@@ -21,20 +21,20 @@
 #'
 #' @export
 doe <- function(factors, int = "", trials = NA, seed = NA) {
-
   df_list <-
-    gsub("[ ]{2,}"," ",factors) %>%
-    gsub("/","",.) %>%
-    gsub("\\\\n","\n",.) %>%
-    gsub("[ ]*;[ ]*",";",.) %>%
-    gsub(";{2,}",";",.) %>%
-    gsub("[;]+[ ]{0,}\n","\n",.) %>%
-    gsub("[ ]{1,}\n","\n",.) %>%
-    gsub("\n[ ]+","\n",.) %>%
-    gsub("[\n]{2,}","\n",.) %>%
-    gsub("[ ]+","_",.) %>%
-    strsplit(.,"\n") %>%
-    .[[1]] %>% strsplit(";")
+    gsub("[ ]{2,}", " ", factors) %>%
+    gsub("/", "", .) %>%
+    gsub("\\\\n", "\n", .) %>%
+    gsub("[ ]*;[ ]*", ";", .) %>%
+    gsub(";{2,}", ";", .) %>%
+    gsub("[;]+[ ]{0,}\n", "\n", .) %>%
+    gsub("[ ]{1,}\n", "\n", .) %>%
+    gsub("\n[ ]+", "\n", .) %>%
+    gsub("[\n]{2,}", "\n", .) %>%
+    gsub("[ ]+", "_", .) %>%
+    strsplit(., "\n") %>%
+    .[[1]] %>%
+    strsplit(";")
 
   df_names <- c()
   if (length(df_list) < 2) return("DOE requires at least two factors" %>% add_class("doe"))
@@ -53,7 +53,6 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
   }
 
   part_fac <- function(df, model = ~ ., int = 0, trials = NA, seed = 172110) {
-
     full <- expand.grid(df)
 
     ###############################################
@@ -68,8 +67,9 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
     max_trials <- nrow(full)
 
     ## make sure the number of trials set by the user is within an appropriate range
-    if (!is_empty(trials)) 
+    if (!is_empty(trials)) {
       max_trials <- min_trials <- max(min(trials, max_trials), min_trials)
+    }
 
     ## define a data.frame that will store design spec
     eff <-
@@ -81,37 +81,43 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
       )
 
     for (i in min_trials:max_trials) {
-      seed %>% gsub("[^0-9]","",.) %>% { if (!is_empty(.)) set.seed(seed) }
-      design <- try(AlgDesign::optFederov(model, data = full, nRepeats = 50,
-                    nTrials = i, maxIteration=1000,
-                    approximate = FALSE), silent = TRUE)
+      seed %>% gsub("[^0-9]", "", .) %>% {
+        if (!is_empty(.)) set.seed(seed)
+      }
+      design <- try(AlgDesign::optFederov(
+        model, data = full, nRepeats = 50,
+        nTrials = i, maxIteration = 1000,
+        approximate = FALSE
+      ), silent = TRUE)
 
       if (is(design, "try-error")) next
       ind <- which(eff$Trials %in% i)
       eff[ind, "D-efficiency"] <- design$Dea
-      eff[ind, "Balanced"] <-  all(i %% levs == 0)
+      eff[ind, "Balanced"] <- all(i %% levs == 0)
 
       if (design$Dea == 1) break
     }
 
-    if (!is(design, "try-error")) 
+    if (!is(design, "try-error")) {
       cor_mat <- sshhr(polycor::hetcor(design$design, std.err = FALSE)$correlations)
+    }
 
     if (exists("cor_mat")) {
-       detcm <- det(cor_mat)
+      detcm <- det(cor_mat)
 
-      # full <- arrange_(full, .dots = names(df)) %>% 
-      full <- arrange_at(full, .vars = names(df)) %>% 
+      # full <- arrange_(full, .dots = names(df)) %>%
+      full <- arrange_at(full, .vars = names(df)) %>%
         data.frame(trial = 1:nrow(full), .)
 
       # part <- arrange_(design$design, .dots = names(df)) %>%
-      part <- arrange_at(design$design, .vars = names(df)) %>%
-        {suppressMessages(dplyr::right_join(full, .))}
+      part <- arrange_at(design$design, .vars = names(df)) %>% {
+        suppressMessages(dplyr::right_join(full, .))
+      }
 
       list(
-        df = df, 
-        cor_mat = cor_mat, 
-        detcm = detcm, 
+        df = df,
+        cor_mat = cor_mat,
+        detcm = detcm,
         Dea = design$Dea,
         part = part,
         full = full,
@@ -146,14 +152,14 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
 #'
 #' @export
 summary.doe <- function(object, eff = TRUE, part = TRUE, full = TRUE, ...) {
-
   if (!is.list(object)) return(object)
 
   cat("Experimental design\n")
-  cat("# trials for partial factorial:", nrow(object$part),"\n")
-  cat("# trials for full factorial   :", nrow(object$full),"\n")
-  if (!is.null(object$seed) && !is.na(object$seed))
-    cat("Random seed                   :", object$seed,"\n")
+  cat("# trials for partial factorial:", nrow(object$part), "\n")
+  cat("# trials for full factorial   :", nrow(object$full), "\n")
+  if (!is.null(object$seed) && !is.na(object$seed)) {
+    cat("Random seed                   :", object$seed, "\n")
+  }
 
   cat("\nAttributes and levels:\n")
   nl <- names(object$df)
@@ -168,8 +174,8 @@ summary.doe <- function(object, eff = TRUE, part = TRUE, full = TRUE, ...) {
 
   if (part) {
     cat("\nPartial factorial design correlations:\n")
-    nrdec <- ifelse (object$detcm == 1, 0, 3)
-    print(round(object$cor_mat, nrdec) , row.names = FALSE)
+    nrdec <- ifelse(object$detcm == 1, 0, 3)
+    print(round(object$cor_mat, nrdec), row.names = FALSE)
 
     cat("\nPartial factorial design:\n")
     print(object$part, row.names = FALSE)

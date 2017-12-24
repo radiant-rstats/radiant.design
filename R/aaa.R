@@ -1,5 +1,5 @@
 # to avoid 'no visible binding for global variable' NOTE
-globalVariables(c(".","rnd_number"))
+globalVariables(c(".", "rnd_number"))
 
 #' radiant.design
 #'
