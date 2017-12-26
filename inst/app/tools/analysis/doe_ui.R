@@ -11,8 +11,7 @@ doe_inputs <- reactive({
 
 output$ui_doe_int <- renderUI({
   req(!is_empty(input$doe_factors))
-  vars <-
-    gsub("[ ]{2,}", " ", input$doe_factors) %>%
+  vars <- gsub("[ ]{2,}", " ", input$doe_factors) %>%
     gsub("/", "", .) %>%
     gsub("\\\\n", "\n", .) %>%
     gsub("[ ]*;[ ]*", ";", .) %>%
@@ -197,9 +196,7 @@ output$doe_download_full <- downloadHandler(
   },
   content = function(file) {
     .doe() %>%
-      {
-        if (class(.)[1] == "character") . else .$full
-      } %>%
+      {if (class(.)[1] == "character") . else .$full} %>%
       write.csv(file, row.names = FALSE)
   }
 )
@@ -228,13 +225,25 @@ observeEvent(input$doe_upload, {
 })
 
 observeEvent(input$doe_report, {
-  xcmd <- "# write.csv(result$part, file = \"~/part_factorial.csv\")"
+  if (getOption("radiant.local", default = FALSE)) {
+    pdir <- getOption("radiant.write_dir", default = "~/")
+    xcmd <- paste0("# write.csv(result$part, file = \"", pdir, "part_factorial.csv\")")
+  } else {
+    xcmd <- ""
+  }
   inp_out <- list(list(eff = TRUE, part = TRUE, full = TRUE))
+
+  inp <- clean_args(doe_inputs(), doe_args) 
+  if (!is_empty(inp[["factors"]])) {
+    inp[["factors"]] <- strsplit(inp[["factors"]], "\n")[[1]]
+  }
+
   update_report(
-    inp_main = clean_args(doe_inputs(), doe_args),
+    inp_main = inp,
     fun_name = "doe",
     outputs = "summary",
     inp_out = inp_out,
+    wrap = TRUE,
     figs = FALSE,
     xcmd = xcmd
   )

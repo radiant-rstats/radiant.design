@@ -21,8 +21,7 @@
 #'
 #' @export
 doe <- function(factors, int = "", trials = NA, seed = NA) {
-  df_list <-
-    gsub("[ ]{2,}", " ", factors) %>%
+  df_list <- gsub("[ ]{2,}", " ", paste0(factors, collapse = "\n")) %>%
     gsub("/", "", .) %>%
     gsub("\\\\n", "\n", .) %>%
     gsub("[ ]*;[ ]*", ";", .) %>%
