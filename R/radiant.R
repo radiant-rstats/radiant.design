@@ -1,32 +1,25 @@
-#' Launch radiant.design in default browser or Rstudio Viewer
+#' Launch radiant.design in default browser
 #'
 #' @details See \url{https://radiant-rstats.github.io/docs} for documentation and tutorials
 #'
-#' @param run Run radiant.design in an external browser ("browser") or in the Rstudio viewer ("viewer")
-#'
-#' @importFrom rstudioapi viewer
+#' @importFrom radiant.data launch
 #'
 #' @examples
 #' \dontrun{
-#' radiant.design::radiant.design()
-#' radiant.design::radiant.design("viewer")
+#' radiant.design()
 #' }
-#'
 #' @export
-radiant.design <- function(run = "browser") {
-  if (!"package:radiant.design" %in% search()) {
-    if (!sshhr(require(radiant.design))) {
-      stop("\nCalling radiant.design start function but radiant.design is not installed.")
-    }
-  }
-  run <- if (run == "viewer") {
-    message("\nStarting radiant.design in Rstudio Viewer ...")
-    rstudioapi::viewer
-  } else {
-    message("\nStarting radiant.design in default browser ...\n\nUse radiant.design::radiant.design(\"viewer\") to open radiant.design in Rstudio Viewer")
-    TRUE
-  }
-  suppressPackageStartupMessages(
-    shiny::runApp(system.file("app", package = "radiant.design"), launch.browser = run)
-  )
-}
+radiant.design <- function() radiant.data::launch(package = "radiant.design", run = "browser")
+
+#' Launch radiant.design in the Rstudio viewer
+#'
+#' @details See \url{https://radiant-rstats.github.io/docs} for documentation and tutorials
+#'
+#' @importFrom radiant.data launch
+#'
+#' @examples
+#' \dontrun{
+#' radiant.design_viewer()
+#' }
+#' @export
+radiant.design_viewer <- function() radiant.data::launch(package = "radiant.design", run = "viewer")

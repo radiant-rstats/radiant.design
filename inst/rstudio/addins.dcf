@@ -1,4 +1,9 @@
-Name: Radiant - Design
-Description: Start Radiant - Design app
+Name: Start radiant.design (viewer)
+Description: Start radiant.design in rstudio viewer
+Binding: radiant.design_viewer
+Interactive: true
+
+Name: Start radiant.design (browser)
+Description: Start radiant.design in default browser
 Binding: radiant.design
 Interactive: true
