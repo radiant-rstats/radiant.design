@@ -4,6 +4,7 @@ doe_args <- as.list(formals(doe))
 ## list of function inputs selected by user
 doe_inputs <- reactive({
   ## loop needed because reactive values don't allow single bracket indexing
+  # for (i in r_drop(names(doe_args)))
   for (i in names(doe_args))
     doe_args[[i]] <- input[[paste0("doe_", i)]]
   doe_args
@@ -45,14 +46,39 @@ output$ui_doe_levels <- renderUI({
       value = state_init(paste0("doe_level", nr))
     )
   }
-
   lapply(3:input$doe_max, make_level)
+})
+
+observe({
+  ## dep on most inputs
+  # for (i in r_drop(names(viz_args))) {
+  #   cat(paste0("viz_", i, " = ", input[[paste0("viz_", i)]]), "\n")
+  # }; cat("\n")
+  # dep on most inputs
+  # print(names(doe_args))
+  sapply(names(doe_args), function(x) input[[paste0("doe_", x)]])
+
+  ## tried with .visualize but didn't quite work
+  # isolate({
+  #   print(paste0(attr(.visualize, "observable")$.invalidated, " ", 
+  #                attr(viz_inputs, "observable")$.invalidated))
+  # })
+
+  ## notify user when the plot needed to be updated
+  ## based on https://stackoverflow.com/questions/45478521/listen-to-reactive-invalidation-in-shiny
+  if (pressed(input$doe_run) && !is_empty(input$doe_factors)) {
+    if (isTRUE(attr(doe_inputs, "observable")$.invalidated)) {
+      updateActionButton(session, "doe_run", "Update design", icon = icon("refresh", class = "fa-spin"))
+    } else {
+      updateActionButton(session, "doe_run", "Create design", icon = icon("play"))
+    }
+  }
 })
 
 output$ui_doe <- renderUI({
   tagList(
     wellPanel(
-      actionButton("doe_run", "Create", width = "100%")
+      actionButton("doe_run", "Create design", width = "100%", icon = icon("play"), class = "btn-success")
     ),
     wellPanel(
       tags$table(
@@ -82,8 +108,9 @@ output$ui_doe <- renderUI({
       downloadButton("doe_download_part", "Partial"),
       downloadButton("doe_download_full", "Full"),
       HTML("</br><label>Download factors:</label></br>"),
-      downloadButton("doe_download", "Factors"),
-      fileInput("doe_upload", "Upload factors:", multiple = FALSE, accept = ".txt")
+      downloadButton("doe_download", "Factors", class = "btn-primary"),
+      # fileInput("doe_upload", "Upload factors:", multiple = FALSE, accept = ".txt")
+      file_upload_button("doe_upload", label = "Upload factors:", accept = ".txt", buttonLabel = "Factors", class = "btn-primary")
     ),
     help_and_report(
       modal_title = "Design of Experiments",
@@ -125,12 +152,17 @@ doe_maker <- function(id = "factors",
                       rows = 5,
                       pre = "doe_",
                       placeholder = "Upload an experimental design using the 'Upload factors' button or create a new design using the inputs on the left of the screen. For help, click the ? icon on the bottom left of the screen") {
+
   id <- paste0(pre, id)
   tags$textarea(
     state_init(id),
     id = id,
     type = "text",
     rows = rows,
+    autocomplete = "off",
+    autocorrect = "off",
+    autocapitalize = "off",
+    spellcheck = "false",
     placeholder = placeholder,
     class = "form-control"
   )
@@ -211,14 +243,14 @@ output$doe_download <- downloadHandler(
 )
 
 observeEvent(input$doe_upload, {
-  paste0(readLines(input$doe_upload$datapath), collapse = "\n") %>%
-    updateTextInput(session = session, "doe_factors", value = .)
+  fct <- paste0(readLines(input$doe_upload$datapath), collapse = "\n")
+  updateTextInput(session = session, "doe_factors", value = fct)
 
   ## cleaning out previous settings
   updateNumericInput(session = session, "doe_max", value = 2)
   updateNumericInput(session = session, "doe_trials", value = NA)
   updateTextInput(session = session, "doe_name", value = "")
-  for (i in 1:9) {
+  for (i in 1:10) {
     r_state[[paste0("doe_level", i)]] <<- NULL
     updateTextInput(session = session, paste0("doe_level", i), value = "")
   }
@@ -233,7 +265,7 @@ observeEvent(input$doe_report, {
   }
   inp_out <- list(list(eff = TRUE, part = TRUE, full = TRUE))
 
-  inp <- clean_args(doe_inputs(), doe_args) 
+  inp <- clean_args(doe_inputs(), doe_args)
   if (!is_empty(inp[["factors"]])) {
     inp[["factors"]] <- strsplit(inp[["factors"]], "\n")[[1]]
   }
@@ -243,7 +275,6 @@ observeEvent(input$doe_report, {
     fun_name = "doe",
     outputs = "summary",
     inp_out = inp_out,
-    wrap = TRUE,
     figs = FALSE,
     xcmd = xcmd
   )

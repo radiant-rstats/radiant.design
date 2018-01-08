@@ -1,3 +1,8 @@
+# CHANGES IN radiant.design 0.9.0
+
+* Enhanced keyboard shortcuts
+* `Create design` button indicates when the design should be updated based on changes in user input
+
 # CHANGES IN radiant.design 0.8.9
 
 * Upgraded tidyr dependency to 0.7.2
