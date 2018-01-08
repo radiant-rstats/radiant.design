@@ -65,9 +65,9 @@ summary.sampling <- function(object, prn = TRUE, ...) {
   }
   cat("Sample size:", object$sample_size, "\n\n")
   cat("Selected:\n")
-  print(formatdf(as.data.frame(object$seldat), dec = 3), row.names = FALSE)
+  print(formatdf(as.data.frame(object$seldat, stringsAsFactors = FALSE), dec = 3), row.names = FALSE)
   if (prn) {
     cat("\nSampling frame:\n")
-    print(formatdf(as.data.frame(object$dat), dec = 3), row.names = FALSE)
+    print(formatdf(as.data.frame(object$dat, stringsAsFactors = FALSE), dec = 3), row.names = FALSE)
   }
 }

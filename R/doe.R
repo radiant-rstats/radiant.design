@@ -71,12 +71,12 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
     }
 
     ## define a data.frame that will store design spec
-    eff <-
-      data.frame(
+    eff <- data.frame(
         Trials = min_trials:max_trials,
         "D-efficiency" = NA,
         "Balanced" = NA,
-        check.names = FALSE
+        check.names = FALSE,
+        stringsAsFactors = FALSE
       )
 
     for (i in min_trials:max_trials) {
@@ -104,11 +104,9 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
     if (exists("cor_mat")) {
       detcm <- det(cor_mat)
 
-      # full <- arrange_(full, .dots = names(df)) %>%
       full <- arrange_at(full, .vars = names(df)) %>%
-        data.frame(trial = 1:nrow(full), .)
+        data.frame(trial = 1:nrow(full), ., stringsAsFactors = FALSE)
 
-      # part <- arrange_(design$design, .dots = names(df)) %>%
       part <- arrange_at(design$design, .vars = names(df)) %>% {
         suppressMessages(dplyr::right_join(full, .))
       }
