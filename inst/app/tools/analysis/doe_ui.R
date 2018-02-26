@@ -51,21 +51,7 @@ output$ui_doe_levels <- renderUI({
 
 observe({
   ## dep on most inputs
-  # for (i in r_drop(names(viz_args))) {
-  #   cat(paste0("viz_", i, " = ", input[[paste0("viz_", i)]]), "\n")
-  # }; cat("\n")
-  # dep on most inputs
-  # print(names(doe_args))
   sapply(names(doe_args), function(x) input[[paste0("doe_", x)]])
-
-  ## tried with .visualize but didn't quite work
-  # isolate({
-  #   print(paste0(attr(.visualize, "observable")$.invalidated, " ", 
-  #                attr(viz_inputs, "observable")$.invalidated))
-  # })
-
-  ## notify user when the plot needed to be updated
-  ## based on https://stackoverflow.com/questions/45478521/listen-to-reactive-invalidation-in-shiny
   if (pressed(input$doe_run) && !is_empty(input$doe_factors)) {
     if (isTRUE(attr(doe_inputs, "observable")$.invalidated)) {
       updateActionButton(session, "doe_run", "Update design", icon = icon("refresh", class = "fa-spin"))
@@ -82,18 +68,27 @@ output$ui_doe <- renderUI({
     ),
     wellPanel(
       tags$table(
-        tags$td(numericInput(
-          "doe_max", label = "Max levels:", min = 2, max = 10,
-          value = state_init("doe_max", init = 2), width = "80px"
-        )),
-        tags$td(numericInput(
-          "doe_trials", label = "# trials:", min = 0,
-          value = state_init("doe_trials", init = NA), width = "65px"
-        )),
-        tags$td(numericInput(
-          "doe_seed", label = "Rnd. seed:", min = 0,
-          value = state_init("doe_seed", init = 172110), width = "100%"
-        ))
+        tags$td(
+          numericInput(
+            "doe_max", label = "Max levels:", min = 2, max = 10,
+            value = state_init("doe_max", init = 2),
+            width = "80px"
+          )
+        ),
+        tags$td(
+          numericInput(
+            "doe_trials", label = "# trials:", min = 1, step = 1,
+            value = state_init("doe_trials", init = NA),
+            width = "65px"
+          )
+        ),
+        tags$td(
+          numericInput(
+            "doe_seed", label = "Rnd. seed:", min = 0,
+            value = state_init("doe_seed", init = 172110),
+            width = "100%"
+          )
+        )
       ),
       HTML("<label>Variable name: <i id='doe_add' title='Add variable' href='#' class='action-button fa fa-plus-circle'></i>
             <i id='doe_del' title='Remove variable' href='#' class='action-button fa fa-minus-circle'></i></label>"),
