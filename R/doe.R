@@ -21,6 +21,7 @@
 #'
 #' @export
 doe <- function(factors, int = "", trials = NA, seed = NA) {
+
   df_list <- gsub("[ ]{2,}", " ", paste0(factors, collapse = "\n")) %>%
     gsub("/", "", .) %>%
     gsub("\\\\n", "\n", .) %>%
@@ -140,6 +141,7 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
 #' @param eff If TRUE print efficiency output
 #' @param part If TRUE print partial factorial
 #' @param full If TRUE print full factorial
+#' @param dec Number of decimals to show
 #' @param ... further arguments passed to or from other methods.
 #'
 #' @seealso \code{\link{doe}} to calculate results
@@ -148,13 +150,13 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
 #' "price; $10; $13; $16\nfood; popcorn; gourmet; no food" %>% doe %>% summary
 #'
 #' @export
-summary.doe <- function(object, eff = TRUE, part = TRUE, full = TRUE, ...) {
+summary.doe <- function(object, eff = TRUE, part = TRUE, full = TRUE, dec = 3, ...) {
   if (!is.list(object)) return(object)
 
   cat("Experimental design\n")
   cat("# trials for partial factorial:", nrow(object$part), "\n")
   cat("# trials for full factorial   :", nrow(object$full), "\n")
-  if (!is.null(object$seed) && !is.na(object$seed)) {
+  if (!is_empty(object$seed)) {
     cat("Random seed                   :", object$seed, "\n")
   }
 
@@ -166,14 +168,15 @@ summary.doe <- function(object, eff = TRUE, part = TRUE, full = TRUE, ...) {
 
   if (eff) {
     cat("\nDesign efficiency:\n")
-    print(formatdf(object$eff, dec = 3), row.names = FALSE)
+    formatdf(object$eff, dec = dec) %>% 
+      print(row.names = FALSE)
+
+    cat("\nPartial factorial design correlations:\n")
+    round(object$cor_mat, ifelse(object$detcm == 1, 0, dec)) %>%
+      print(row.names = FALSE)
   }
 
   if (part) {
-    cat("\nPartial factorial design correlations:\n")
-    nrdec <- ifelse(object$detcm == 1, 0, 3)
-    print(round(object$cor_mat, nrdec), row.names = FALSE)
-
     cat("\nPartial factorial design:\n")
     print(object$part, row.names = FALSE)
   }

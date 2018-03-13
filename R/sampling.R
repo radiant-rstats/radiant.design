@@ -43,6 +43,7 @@ sampling <- function(dataset, var, sample_size,
 #'
 #' @param object Return value from \code{\link{sampling}}
 #' @param prn Print full sampling frame. Default is TRUE
+#' @param dec Number of decimals to show
 #' @param ... further arguments passed to or from other methods
 #'
 #' @examples
@@ -53,7 +54,7 @@ sampling <- function(dataset, var, sample_size,
 #' @seealso \code{\link{sampling}} to generate the results
 #'
 #' @export
-summary.sampling <- function(object, prn = TRUE, ...) {
+summary.sampling <- function(object, prn = TRUE, dec = 3, ...) {
   cat("Sampling (simple random)\n")
   cat("Data       :", object$dataset, "\n")
   if (object$data_filter %>% gsub("\\s", "", .) != "") {
@@ -65,9 +66,15 @@ summary.sampling <- function(object, prn = TRUE, ...) {
   }
   cat("Sample size:", object$sample_size, "\n\n")
   cat("Selected:\n")
-  print(formatdf(as.data.frame(object$seldat, stringsAsFactors = FALSE), dec = 3), row.names = FALSE)
+  as.data.frame(object$seldat, stringsAsFactors = FALSE) %>%
+      formatdf(dec = 3) %>%
+      print(row.names = FALSE)
+  # print(formatdf(as.data.frame(object$seldat, stringsAsFactors = FALSE), dec = 3), row.names = FALSE)
   if (prn) {
     cat("\nSampling frame:\n")
-    print(formatdf(as.data.frame(object$dat, stringsAsFactors = FALSE), dec = 3), row.names = FALSE)
+    as.data.frame(object$dat, stringsAsFactors = FALSE) %>%
+      formatdf(dec = 3) %>%
+      print(row.names = FALSE)
+    # print(formatdf(as.data.frame(object$dat, stringsAsFactors = FALSE), dec = 3), row.names = FALSE)
   }
 }

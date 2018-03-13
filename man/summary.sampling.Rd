@@ -4,12 +4,14 @@
 \alias{summary.sampling}
 \title{Summary method for the sampling function}
 \usage{
-\method{summary}{sampling}(object, prn = TRUE, ...)
+\method{summary}{sampling}(object, prn = TRUE, dec = 3, ...)
 }
 \arguments{
 \item{object}{Return value from \code{\link{sampling}}}
 
 \item{prn}{Print full sampling frame. Default is TRUE}
+
+\item{dec}{Number of decimals to show}
 
 \item{...}{further arguments passed to or from other methods}
 }

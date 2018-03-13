@@ -210,9 +210,7 @@ output$doe_download_part <- downloadHandler(
   },
   content = function(file) {
     .doe() %>%
-      {
-        if (class(.)[1] == "character") . else .$part
-      } %>%
+      {if (class(.)[1] == "character") . else .$part} %>%
       write.csv(file, row.names = FALSE)
   }
 )
