@@ -85,7 +85,7 @@ output$ui_doe <- renderUI({
         tags$td(
           numericInput(
             "doe_seed", label = "Rnd. seed:", min = 0,
-            value = state_init("doe_seed", init = 172110),
+            value = state_init("doe_seed", init = 1234),  ## prev default seed 172110
             width = "100%"
           )
         )
