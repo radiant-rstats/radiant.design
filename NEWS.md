@@ -1,8 +1,4 @@
-# CHANGES IN radiant.design 0.9.0.1
-
-
-
-# CHANGES IN radiant.design 0.9.0
+# CHANGES IN radiant.design 0.9.1
 
 * Enhanced keyboard shortcuts
 * `Create design` button indicates when the design should be updated based on changes in user input
