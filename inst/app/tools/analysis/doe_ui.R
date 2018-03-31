@@ -4,7 +4,6 @@ doe_args <- as.list(formals(doe))
 ## list of function inputs selected by user
 doe_inputs <- reactive({
   ## loop needed because reactive values don't allow single bracket indexing
-  # for (i in r_drop(names(doe_args)))
   for (i in names(doe_args))
     doe_args[[i]] <- input[[paste0("doe_", i)]]
   doe_args
@@ -100,12 +99,15 @@ output$ui_doe <- renderUI({
     ),
     wellPanel(
       HTML("<label>Download factorial design:</label></br>"),
-      downloadButton("doe_download_part", "Partial"),
-      downloadButton("doe_download_full", "Full"),
+      download_button("doe_download_part", "Partial"),
+      download_button("doe_download_full", "Full"),
       HTML("</br><label>Download factors:</label></br>"),
-      downloadButton("doe_download", "Factors", class = "btn-primary"),
-      # fileInput("doe_upload", "Upload factors:", multiple = FALSE, accept = ".txt")
-      file_upload_button("doe_upload", label = "Upload factors:", accept = ".txt", buttonLabel = "Factors", class = "btn-primary")
+      download_button("doe_download", "Factors", class = "btn-primary"),
+      HTML("</br><label>Upload factors:</label></br>"),
+      file_upload_button(
+        "doe_upload", label = NULL, accept = ".txt", 
+        buttonLabel = "Factors", class = "btn-primary"
+      )
     ),
     help_and_report(
       modal_title = "Design of Experiments",
@@ -117,7 +119,6 @@ output$ui_doe <- renderUI({
 
 observeEvent(input$doe_add, {
   req(input$doe_max)
-
   dup <- input$doe_name
   for (i in 1:input$doe_max) {
     dtmp <- input[[paste0("doe_level", i)]]
@@ -204,39 +205,62 @@ output$doe <- renderUI({
   summary(.doe(), eff = TRUE, part = TRUE, full = TRUE)
 })
 
-output$doe_download_part <- downloadHandler(
-  filename = function() {
-    "part_factorial.csv"
-  },
-  content = function(file) {
-    .doe() %>%
-      {if (class(.)[1] == "character") . else .$part} %>%
-      write.csv(file, row.names = FALSE)
-  }
+dl_doe_download_part <- function(path) {
+  .doe() %>%
+    {if (class(.)[1] == "character") . else .$part} %>%
+    write.csv(path, row.names = FALSE)
+}
+
+download_handler(
+  id = "doe_download_part", 
+  fun = dl_doe_download_part, 
+  fn = "part_factorial.csv",
+  caption = "Download partial factorial"
 )
 
-output$doe_download_full <- downloadHandler(
-  filename = function() {
-    "full_factorial.csv"
-  },
-  content = function(file) {
-    .doe() %>%
-      {if (class(.)[1] == "character") . else .$full} %>%
-      write.csv(file, row.names = FALSE)
-  }
+dl_doe_download_full <- function(path) {
+  .doe() %>%
+    {if (class(.)[1] == "character") . else .$full} %>%
+    write.csv(path, row.names = FALSE)
+}
+
+download_handler(
+  id = "doe_download_full", 
+  fun = dl_doe_download_full, 
+  fn = "full_factorial.csv",
+  caption = "Download full factorial"
 )
 
-output$doe_download <- downloadHandler(
-  filename = function() {
-    "design_factors.txt"
-  },
-  content = function(file) {
-    cat(paste0(input$doe_factors, "\n"), file = file)
-  }
+dl_doe_download <- function(path) {
+  cat(paste0(input$doe_factors, "\n"), file = path)
+}
+
+download_handler(
+  id = "doe_download", 
+  fun = dl_doe_download, 
+  fn = "doe_factors.txt",
+  caption = "Download DOE factors",
+  type = "txt"
 )
 
 observeEvent(input$doe_upload, {
-  fct <- paste0(readLines(input$doe_upload$datapath), collapse = "\n")
+  if (isTRUE(getOption("radiant.launch", "browser") == "viewer")) {
+    path <- rstudioapi::selectFile(
+      caption = "Select .txt",
+      filter = "Select .txt (*.txt)",
+      path = getOption("radiant.launch_dir")
+    )
+    if (is(path, "try-error") || is_empty(path)) return()
+    inFile <- data.frame(
+      name = basename(path),
+      datapath = path, 
+      stringsAsFactors = FALSE
+    )
+  } else {
+    inFile <- input$doe_upload
+  }
+
+  fct <- paste0(readLines(inFile$datapath), collapse = "\n")
   updateTextInput(session = session, "doe_factors", value = fct)
 
   ## cleaning out previous settings

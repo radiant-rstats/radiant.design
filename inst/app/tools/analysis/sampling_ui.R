@@ -54,7 +54,7 @@ output$sampling <- renderUI({
   smp_output_panels <- tagList(
     tabPanel(
       "Summary",
-      downloadLink("dl_sample", "", class = "fa fa-download alignright"), br(),
+      download_link("dl_sample"), br(),
       verbatimTextOutput("summary_sampling")
     )
   )
@@ -90,16 +90,18 @@ observeEvent(input$sampling_report, {
   )
 })
 
-output$dl_sample <- downloadHandler(
-  filename = function() {
-    "sample.csv"
-  },
-  content = function(file) {
-    resp <- .sampling()
-    if ("seldat" %in% names(resp)) {
-      write.csv(resp$seldat, file = file, row.names = FALSE)
-    } else {
-      cat("No valid sample available", file = file)
-    }
+dl_sample <- function(path) {
+  resp <- .sampling()
+  if ("seldat" %in% names(resp)) {
+    write.csv(resp$seldat, file = path, row.names = FALSE)
+  } else {
+    cat("No valid sample available", file = path)
   }
+}
+
+download_handler(
+  id = "dl_sample", 
+  fun = dl_sample, 
+  fn = paste0(input$dataset, "_sample.csv"),
+  caption = "Download random sample"
 )

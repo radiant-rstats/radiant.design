@@ -1,5 +1,6 @@
-# CHANGES IN radiant.design 0.9.1
+# CHANGES IN radiant.design 0.9.2
 
+* Upload and download data using the Rstudio file browser. Allows using relative paths to files (e.g., data or images inside an Rstudio project)
 * Enhanced keyboard shortcuts
 * `Create design` button indicates when the design should be updated based on changes in user input
 

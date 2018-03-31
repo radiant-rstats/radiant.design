@@ -3,5 +3,5 @@
 ^inst/rstudio$
 ^build$
 ^\.travis\.yml$
+^.*\.sublime-project$
 cran-comments.md
-radiant.sublime-project
