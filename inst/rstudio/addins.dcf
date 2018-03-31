@@ -1,5 +1,10 @@
+Name: Start radiant.design (window)
+Description: Start radiant.design in an Rstudio window
+Binding: radiant.design_window
+Interactive: true
+
 Name: Start radiant.design (viewer)
-Description: Start radiant.design in rstudio viewer
+Description: Start radiant.design in the Rstudio viewer
 Binding: radiant.design_viewer
 Interactive: true
 
