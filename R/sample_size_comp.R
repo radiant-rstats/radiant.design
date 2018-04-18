@@ -18,16 +18,12 @@
 #' @seealso \code{\link{summary.sample_size_comp}} to summarize results
 #'
 #' @export
-sample_size_comp <- function(type,
-                             n = NULL,
-                             p1 = NULL,
-                             p2 = NULL,
-                             delta = NULL,
-                             sd = NULL,
-                             conf_lev = NULL,
-                             power = NULL,
-                             ratio = 1,
-                             alternative = "two.sided") {
+sample_size_comp <- function(
+ type, n = NULL, p1 = NULL, p2 = NULL, delta = NULL,
+ sd = NULL, conf_lev = NULL, power = NULL, ratio = 1,
+ alternative = "two.sided"
+) {
+
   if (!is.null(n) && is.na(n)) n <- NULL
   if (!is.null(power) && is.na(power)) power <- NULL
   if (!is.null(conf_lev) && is.na(conf_lev)) conf_lev <- NULL
@@ -99,7 +95,6 @@ summary.sample_size_comp <- function(object, ...) {
   if (is.character(object)) return(object)
 
   cat("Sample size calculation for comparisons\n")
-
   cat("Type            :", object$type, "\n")
   if (object$ratio == 1) {
     cat("Sample size     :", object$res$n, "\n")

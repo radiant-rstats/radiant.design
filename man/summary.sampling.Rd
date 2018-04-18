@@ -4,12 +4,12 @@
 \alias{summary.sampling}
 \title{Summary method for the sampling function}
 \usage{
-\method{summary}{sampling}(object, prn = TRUE, dec = 3, ...)
+\method{summary}{sampling}(object, prn = FALSE, dec = 3, ...)
 }
 \arguments{
 \item{object}{Return value from \code{\link{sampling}}}
 
-\item{prn}{Print full sampling frame. Default is TRUE}
+\item{prn}{Print full sampling frame. Default is FALSE}
 
 \item{dec}{Number of decimals to show}
 
@@ -23,7 +23,7 @@ See \url{https://radiant-rstats.github.io/docs/design/sampling.html} for an exam
 }
 \examples{
 set.seed(1234)
-result <- sampling("rndnames", "Names", 10)
+result <- sampling(rndnames, "Names", 10)
 summary(result)
 
 }

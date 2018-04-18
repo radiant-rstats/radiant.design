@@ -80,7 +80,7 @@ output$sampling <- renderUI({
   if (is_not(input$smp_sample_size)) return("Please select a sample size of 1 or greater.")
   if (has_duplicates(.getdata()[[input$smp_var]])) return(rt)
 
-  summary(.sampling(), print_sf = TRUE)
+  summary(.sampling(), prn = TRUE)
 })
 
 observeEvent(input$sampling_report, {

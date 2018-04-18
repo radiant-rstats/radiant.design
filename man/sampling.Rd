@@ -7,9 +7,9 @@
 sampling(dataset, var, sample_size, seed = NA, data_filter = "")
 }
 \arguments{
-\item{dataset}{Dataset name (string). This can be a dataframe in the global environment or an element in an r_data list from Radiant}
+\item{dataset}{Dataset to sample from}
 
-\item{var}{The variable to sample from}
+\item{var}{The variable to sample from ()}
 
 \item{sample_size}{Number of units to select}
 
@@ -27,7 +27,7 @@ Simple random sampling
 See \url{https://radiant-rstats.github.io/docs/design/sampling.html} for an example in Radiant
 }
 \examples{
-result <- sampling("rndnames","Names",10)
+result <- sampling(rndnames, "Names", 10)
 
 }
 \seealso{

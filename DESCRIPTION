@@ -1,15 +1,15 @@
 Package: radiant.design
 Type: Package
 Title: Design Menu for Radiant: Business Analytics using R and Shiny
-Version: 0.9.2
-Date: 2018-3-30
+Version: 0.9.3
+Date: 2018-4-18
 Authors@R: person("Vincent", "Nijs", , "radiant@rady.ucsd.edu", c("aut", "cre"))
 Description: The Radiant Design menu includes interfaces for design of
     experiments, sampling, and sample size calculation. The application extends
     the functionality in radiant.data.
 Depends:
-    R (>= 3.3.0),
-    radiant.data (>= 0.9.2),
+    R (>= 3.4.0),
+    radiant.data (>= 0.9.3.0),
     mvtnorm
 Imports:
     dplyr (>= 0.7.4),
@@ -25,4 +25,5 @@ URL: https://github.com/radiant-rstats/radiant.design, https://radiant-rstats.gi
 BugReports: https://github.com/radiant-rstats/radiant.design/issues
 License: AGPL-3 | file LICENSE
 LazyData: true
+Encoding: UTF-8
 RoxygenNote: 6.0.1
