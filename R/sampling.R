@@ -20,16 +20,16 @@ sampling <- function(
   seed = NA, data_filter = ""
 ) {
 
-  dat <- getdata(dataset, var, filt = data_filter)
-  if (!is_string(dataset)) dataset <- deparse(substitute(dataset)) %>% set_attr("df", TRUE)
+  df_name <- if (is_string(dataset)) dataset else deparse(substitute(dataset))
+  dataset <- getdata(dataset, var, filt = data_filter)
   if (is_not(sample_size)) return(add_class("Please select a sample size of 1 or greater", "sampling"))
 
   ## use seed if provided
   seed %>% gsub("[^0-9]", "", .) %>% 
     {if (!is_empty(.)) set.seed(seed)}
 
-  dat$rnd_number <- runif(nrow(dat), min = 0, max = 1)
-  seldat <- arrange(dat, desc(rnd_number)) %>%
+  dataset$rnd_number <- runif(nrow(dataset), min = 0, max = 1)
+  seldat <- arrange(dataset, desc(rnd_number)) %>%
     .[seq_len(max(1, sample_size)), , drop = FALSE]
 
   as.list(environment()) %>% add_class("sampling")
@@ -54,7 +54,7 @@ sampling <- function(
 #' @export
 summary.sampling <- function(object, prn = FALSE, dec = 3, ...) {
   cat("Sampling (simple random)\n")
-  cat("Data       :", object$dataset, "\n")
+  cat("Data       :", object$df_name, "\n")
   if (object$data_filter %>% gsub("\\s", "", .) != "") {
     cat("Filter     :", gsub("\\n", "", object$data_filter), "\n")
   }
@@ -69,7 +69,7 @@ summary.sampling <- function(object, prn = FALSE, dec = 3, ...) {
       print(row.names = FALSE)
   if (prn) {
     cat("\nSampling frame:\n")
-    as.data.frame(object$dat, stringsAsFactors = FALSE) %>%
+    as.data.frame(object$dataset, stringsAsFactors = FALSE) %>%
       formatdf(dec = dec) %>%
       print(row.names = FALSE)
   }
