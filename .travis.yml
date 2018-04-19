@@ -5,4 +5,4 @@ dist: trusty
 
 r_github_packages:
   - trestletech/shinyAce
-  - radiant-rstats/radiant.data
+  - radiant-rstats/radiant.data@MRB
