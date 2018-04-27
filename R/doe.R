@@ -10,7 +10,7 @@
 #' @return A list with all variables defined in the function as an object of class doe
 #'
 #' @examples
-#' "price; $10; $13; $16\nfood; popcorn; gourmet; no food" %>% doe
+#' c("price; $10; $13; $16", "food; popcorn; gourmet; no food") %>% doe()
 #'
 #' @seealso \code{\link{summary.doe}} to summarize results
 #'
@@ -147,7 +147,7 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
 #' @seealso \code{\link{doe}} to calculate results
 #'
 #' @examples
-#' "price; $10; $13; $16\nfood; popcorn; gourmet; no food" %>% doe %>% summary
+#' c("price; $10; $13; $16", "food; popcorn; gourmet; no food") %>% doe() %>% summary()
 #'
 #' @export
 summary.doe <- function(object, eff = TRUE, part = TRUE, full = TRUE, dec = 3, ...) {
