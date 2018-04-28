@@ -27,7 +27,7 @@ Summary method for doe function
 See \url{https://radiant-rstats.github.io/docs/design/doe.html} for an example in Radiant
 }
 \examples{
-"price; $10; $13; $16\\nfood; popcorn; gourmet; no food" \%>\% doe \%>\% summary
+c("price; $10; $13; $16", "food; popcorn; gourmet; no food") \%>\% doe() \%>\% summary()
 
 }
 \seealso{
