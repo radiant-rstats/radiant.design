@@ -2,6 +2,7 @@
 ^\.Rproj\.user$
 ^inst/rstudio$
 ^build$
+^docs$
 ^\.travis\.yml$
 ^.*\.sublime-project$
 cran-comments.md
