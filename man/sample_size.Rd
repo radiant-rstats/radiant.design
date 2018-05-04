@@ -39,7 +39,7 @@ Sample size calculation
 See \url{https://radiant-rstats.github.io/docs/design/sample_size.html} for an example in Radiant
 }
 \examples{
-result <- sample_size(type = "mean", err_mean = 2, sd_mean = 10)
+sample_size(type = "mean", err_mean = 2, sd_mean = 10)
 
 }
 \seealso{

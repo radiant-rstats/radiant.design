@@ -2,7 +2,7 @@
 #'
 #' @details See \url{https://radiant-rstats.github.io/docs/design/sampling.html} for an example in Radiant
 #'
-#' @param dataset Dataset to sample from 
+#' @param dataset Dataset to sample from
 #' @param var The variable to sample from ()
 #' @param sample_size Number of units to select
 #' @param seed Random seed to use as the starting point
@@ -11,7 +11,7 @@
 #' @return A list of variables defined in sampling as an object of class sampling
 #'
 #' @examples
-#' result <- sampling(rndnames, "Names", 10)
+#' sampling(rndnames, "Names", 10)
 #'
 #' @seealso \code{\link{summary.sampling}} to summarize results
 #' @export
@@ -25,7 +25,7 @@ sampling <- function(
   if (is_not(sample_size)) return(add_class("Please select a sample size of 1 or greater", "sampling"))
 
   ## use seed if provided
-  seed %>% gsub("[^0-9]", "", .) %>% 
+  seed %>% gsub("[^0-9]", "", .) %>%
     {if (!is_empty(.)) set.seed(seed)}
 
   dataset$rnd_number <- runif(nrow(dataset), min = 0, max = 1)

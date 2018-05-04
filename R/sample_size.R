@@ -16,7 +16,7 @@
 #' @return A list of variables defined in sample_size as an object of class sample_size
 #'
 #' @examples
-#' result <- sample_size(type = "mean", err_mean = 2, sd_mean = 10)
+#' sample_size(type = "mean", err_mean = 2, sd_mean = 10)
 #'
 #' @seealso \code{\link{summary.sample_size}} to summarize results
 #' @export

@@ -27,7 +27,7 @@ Simple random sampling
 See \url{https://radiant-rstats.github.io/docs/design/sampling.html} for an example in Radiant
 }
 \examples{
-result <- sampling(rndnames, "Names", 10)
+sampling(rndnames, "Names", 10)
 
 }
 \seealso{
