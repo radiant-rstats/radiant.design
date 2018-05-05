@@ -3,6 +3,7 @@
 ^inst/rstudio$
 ^build$
 ^docs$
+^vignettes$
 ^\.travis\.yml$
 ^.*\.sublime-project$
 cran-comments.md

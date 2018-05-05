@@ -1,0 +1,7 @@
+---
+title: "Design > Sampling"
+author: "Vincent R. Nijs</br>Rady School of Management (UCSD)"
+---
+
+```{r child = "_sampling.Rmd"}
+```
