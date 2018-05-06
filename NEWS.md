@@ -4,7 +4,7 @@
 
 * Various changes to the code to accomodate the use of `shiny::makeReactiveBinding`. The advantage is that the code generated for _Report > Rmd_ and _Report > R_ will no longer have to use `r_data` to store and access data. This means that code generated and used in the Radiant browser interface will be directly usable without the browser interface as well.
 
-# radiant.design 0.9.2
+# radiant.design 0.9.2.0
 
 ## Major changes
 
@@ -12,7 +12,7 @@
 * Enhanced keyboard shortcuts
 * `Create design` button indicates when the design should be updated based on changes in user input
 
-# radiant.design 0.8.9
+# radiant.design 0.8.9.0
 
 ## Minor changes
 
@@ -20,7 +20,7 @@
 * Upgraded dplyr dependency to 0.7.4
 * Applied `styler` on code
 
-# radiant.design 0.8.1
+# radiant.design 0.8.1.0
 
 ## Minor changes
 
@@ -31,7 +31,7 @@
 
 - Fix for incomplete final line warning in sampling.md
 
-# radiant.design 0.8.0
+# radiant.design 0.8.0.0
 
 ## Minor changes
 
