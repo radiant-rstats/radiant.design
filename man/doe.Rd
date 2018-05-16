@@ -25,7 +25,11 @@ Create (partial) factorial design
 See \url{https://radiant-rstats.github.io/docs/design/doe.html} for an example in Radiant
 }
 \examples{
-c("price; $10; $13; $16", "food; popcorn; gourmet; no food") \%>\% doe()
+doe(c("price; $10; $13; $16", "food; popcorn; gourmet; no food"))
+doe(
+  c("price; $10; $13; $16", "food; popcorn; gourmet; no food"),
+  "price:food", trials = 9, seed = 1234
+)
 
 }
 \seealso{

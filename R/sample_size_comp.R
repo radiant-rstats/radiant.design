@@ -17,6 +17,12 @@
 #'
 #' @seealso \code{\link{summary.sample_size_comp}} to summarize results
 #'
+#' @examples
+#' sample_size_comp(
+#'   type = "proportion", p1 = 0.1, p2 = 0.15,
+#'   conf_lev = 0.95, power = 0.8
+#' )
+#'
 #' @export
 sample_size_comp <- function(
  type, n = NULL, p1 = NULL, p2 = NULL, delta = NULL,
@@ -40,7 +46,10 @@ sample_size_comp <- function(
       return("Exactly one of 'Sample size', 'Delta', 'Std. deviation',\n'Confidence level', and 'Power' must be blank or NULL" %>% add_class("sample_size_comp"))
     }
 
-    res <- power.t.test(n = n, delta = delta, sd = sd, sig.level = sig.level, power = power, alternative = alternative) %>%
+    res <- power.t.test(
+      n = n, delta = delta, sd = sd, sig.level = sig.level,
+      power = power, alternative = alternative
+    ) %>%
       tidy()
 
     ## adjustment based on http://powerandsamplesize.com/Calculators/Compare-2-Means/2-Sample-Equality
@@ -63,7 +72,10 @@ sample_size_comp <- function(
       return("Exactly one of 'Sample size', 'Proportion 1', 'Proportion 2',\n'Confidence level', and 'Power' must be blank or NULL" %>% add_class("sample_size_comp"))
     }
 
-    res <- power.prop.test(n = n, p1 = p1, p2 = p2, sig.level = sig.level, power = power, alternative = alternative) %>%
+    res <- power.prop.test(
+      n = n, p1 = p1, p2 = p2, sig.level = sig.level,
+      power = power, alternative = alternative
+    ) %>%
       tidy()
 
     ## adjustment based on http://powerandsamplesize.com/Calculators/Compare-2-Proportions/2-Sample-Equality
@@ -73,10 +85,6 @@ sample_size_comp <- function(
     n2 <- ceiling(n2)
     n1 <- ceiling(ratio * n2)
   }
-
-  res$n <- formatnr(ceiling(res$n), dec = 0)
-  res$n1 <- formatnr(n1, dec = 0)
-  res$n2 <- formatnr(n2, dec = 0)
 
   as.list(environment()) %>% add_class("sample_size_comp")
 }
@@ -90,28 +98,34 @@ sample_size_comp <- function(
 #'
 #' @seealso \code{\link{sample_size_comp}} to generate the results
 #'
+#' @examples
+#' sample_size_comp(
+#'   type = "proportion", p1 = 0.1, p2 = 0.15,
+#'   conf_lev = 0.95, power = 0.8
+#' ) %>% summary()
+#'
 #' @export
 summary.sample_size_comp <- function(object, ...) {
   if (is.character(object)) return(object)
 
-  cat("Sample size calculation for comparisons\n")
-  cat("Type            :", object$type, "\n")
+  cat("Sample size calculation for comparison of",  ifelse(object$type == "proportion", "proportions", "means"), "\n")
   if (object$ratio == 1) {
-    cat("Sample size     :", object$res$n, "\n")
+    cat(paste0("Sample size 1    : ", formatnr(object$n1, dec = 0), "\n"))
   } else {
-    cat(paste0("Sample size 1   : ", object$res$n1, " (", object$res$n2, " x ", object$ratio, ")\n"))
-    cat(paste0("Sample size 2   : ", object$res$n2, "\n"))
+    cat(paste0("Sample size 1    : ", formatnr(object$n1, dec = 0), " (", formatnr(object$n2, dec = 0), " x ", object$ratio, ")\n"))
   }
+  cat(paste0("Sample size 2    : ", formatnr(object$n2, dec = 0), "\n"))
+  cat(paste0("Total sample size: ", formatnr(object$n1 + object$n2, dec = 0), "\n"))
 
   if (object$type == "mean") {
-    cat("Delta           :", object$res$delta, "\n")
-    cat("Std. deviation  :", object$res$sd, "\n")
+    cat("Delta            :", object$res$delta, "\n")
+    cat("Std. deviation   :", object$res$sd, "\n")
   } else {
-    cat("Proportion 1    :", object$res$p1, "\n")
-    cat("Proportion 2    :", object$res$p2, "\n")
+    cat("Proportion 1     :", object$res$p1, "\n")
+    cat("Proportion 2     :", object$res$p2, "\n")
   }
-  cat("Confidence level:", 1 - object$res$sig.level, "\n")
-  cat("Power           :", object$res$power, "\n")
-  cat("Ratio (n1 / n2) :", object$ratio, "\n")
-  cat("Alternative     :", object$alternative, "\n\n")
+  cat("Confidence level :", 1 - object$res$sig.level, "\n")
+  cat("Power            :", object$res$power, "\n")
+  cat("Ratio (n1 / n2)  :", object$ratio, "\n")
+  cat("Alternative      :", object$alternative, "\n\n")
 }

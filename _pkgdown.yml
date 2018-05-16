@@ -1,0 +1,32 @@
+reference:
+- title: Design > Design of Experiments (DOE)
+  desc: Functions used to create (fractional) factorial experimental designs
+  contents:
+    - doe
+    - summary.doe
+- title: Design > Sample
+  desc: Functions used with Design > Sample
+  contents:
+    - sampling
+    - summary.sampling
+    - sample_size
+    - summary.sample_size
+    - sample_size_comp
+    - summary.sample_size_comp
+- title: Data sets
+  desc: Data sets bundled with radiant.design
+  contents:
+    - rndnames
+- title: Starting radiant.design
+  desc: Functions used to start the radiant.design shiny app
+  contents:
+    - radiant.design
+    - radiant.design_viewer
+    - radiant.design_window
+articles:
+- title: Design Menu
+  contents:
+    - pkgdown/doe
+    - pkgdown/sampling
+    - pkgdown/sample_size
+    - pkgdown/sample_size_comp

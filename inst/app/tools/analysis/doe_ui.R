@@ -244,7 +244,7 @@ download_handler(
 )
 
 observeEvent(input$doe_upload, {
-  if (isTRUE(getOption("radiant.launch", "browser") == "viewer")) {
+  if (!isTRUE(getOption("radiant.launch", "browser") == "browser")) {
     path <- rstudioapi::selectFile(
       caption = "Select .txt",
       filter = "Select .txt (*.txt)",

@@ -23,8 +23,7 @@ See \url{https://radiant-rstats.github.io/docs/design/sampling.html} for an exam
 }
 \examples{
 set.seed(1234)
-result <- sampling(rndnames, "Names", 10)
-summary(result)
+sampling(rndnames, "Names", 10) \%>\% summary()
 
 }
 \seealso{

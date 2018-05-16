@@ -64,8 +64,8 @@ sample_size <- function(
 #' @param ... further arguments passed to or from other methods
 #'
 #' @examples
-#' result <- sample_size(type = "mean", err_mean = 2, sd_mean = 10)
-#' summary(result)
+#' sample_size(type = "mean", err_mean = 2, sd_mean = 10) %>%
+#'   summary()
 #'
 #' @seealso \code{\link{sample_size}} to generate the results
 #'

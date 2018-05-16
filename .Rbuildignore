@@ -6,4 +6,5 @@
 ^vignettes$
 ^\.travis\.yml$
 ^.*\.sublime-project$
+_pkgdown.yml
 cran-comments.md

@@ -38,6 +38,13 @@ Sample size calculation for comparisons
 \details{
 See \url{https://radiant-rstats.github.io/docs/design/sample_size_comp.html} for an example in Radiant
 }
+\examples{
+sample_size_comp(
+  type = "proportion", p1 = 0.1, p2 = 0.15,
+  conf_lev = 0.95, power = 0.8
+)
+
+}
 \seealso{
 \code{\link{summary.sample_size_comp}} to summarize results
 }

@@ -46,8 +46,7 @@ sampling <- function(
 #'
 #' @examples
 #' set.seed(1234)
-#' result <- sampling(rndnames, "Names", 10)
-#' summary(result)
+#' sampling(rndnames, "Names", 10) %>% summary()
 #'
 #' @seealso \code{\link{sampling}} to generate the results
 #'

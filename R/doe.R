@@ -10,7 +10,11 @@
 #' @return A list with all variables defined in the function as an object of class doe
 #'
 #' @examples
-#' c("price; $10; $13; $16", "food; popcorn; gourmet; no food") %>% doe()
+#' doe(c("price; $10; $13; $16", "food; popcorn; gourmet; no food"))
+#' doe(
+#'   c("price; $10; $13; $16", "food; popcorn; gourmet; no food"),
+#'   "price:food", trials = 9, seed = 1234
+#' )
 #'
 #' @seealso \code{\link{summary.doe}} to summarize results
 #'
@@ -147,7 +151,9 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
 #' @seealso \code{\link{doe}} to calculate results
 #'
 #' @examples
-#' c("price; $10; $13; $16", "food; popcorn; gourmet; no food") %>% doe() %>% summary()
+#' c("price; $10; $13; $16", "food; popcorn; gourmet; no food") %>%
+#'   doe() %>%
+#'   summary()
 #'
 #' @export
 summary.doe <- function(object, eff = TRUE, part = TRUE, full = TRUE, dec = 3, ...) {
@@ -168,7 +174,7 @@ summary.doe <- function(object, eff = TRUE, part = TRUE, full = TRUE, dec = 3, .
 
   if (eff) {
     cat("\nDesign efficiency:\n")
-    formatdf(object$eff, dec = dec) %>% 
+    formatdf(object$eff, dec = dec) %>%
       print(row.names = FALSE)
 
     cat("\nPartial factorial design correlations:\n")
