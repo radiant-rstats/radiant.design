@@ -21,7 +21,7 @@ sampling <- function(
 ) {
 
   df_name <- if (is_string(dataset)) dataset else deparse(substitute(dataset))
-  dataset <- getdata(dataset, var, filt = data_filter)
+  dataset <- get_data(dataset, var, filt = data_filter)
   if (is_not(sample_size)) return(add_class("Please select a sample size of 1 or greater", "sampling"))
 
   ## use seed if provided
@@ -64,12 +64,12 @@ summary.sampling <- function(object, prn = FALSE, dec = 3, ...) {
   cat("Sample size:", object$sample_size, "\n\n")
   cat("Selected:\n")
   as.data.frame(object$seldat, stringsAsFactors = FALSE) %>%
-      formatdf(dec = dec) %>%
+      format_df(dec = dec) %>%
       print(row.names = FALSE)
   if (prn) {
     cat("\nSampling frame:\n")
     as.data.frame(object$dataset, stringsAsFactors = FALSE) %>%
-      formatdf(dec = dec) %>%
+      format_df(dec = dec) %>%
       print(row.names = FALSE)
   }
 }

@@ -78,7 +78,7 @@ output$sampling <- renderUI({
 
   if (not_available(input$smp_var)) return(rt)
   if (is_not(input$smp_sample_size)) return("Please select a sample size of 1 or greater.")
-  if (has_duplicates(.getdata()[[input$smp_var]])) return(rt)
+  if (has_duplicates(.get_data()[[input$smp_var]])) return(rt)
 
   summary(.sampling(), prn = TRUE)
 })

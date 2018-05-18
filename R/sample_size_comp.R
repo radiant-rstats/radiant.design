@@ -110,12 +110,12 @@ summary.sample_size_comp <- function(object, ...) {
 
   cat("Sample size calculation for comparison of",  ifelse(object$type == "proportion", "proportions", "means"), "\n")
   if (object$ratio == 1) {
-    cat(paste0("Sample size 1    : ", formatnr(object$n1, dec = 0), "\n"))
+    cat(paste0("Sample size 1    : ", format_nr(object$n1, dec = 0), "\n"))
   } else {
-    cat(paste0("Sample size 1    : ", formatnr(object$n1, dec = 0), " (", formatnr(object$n2, dec = 0), " x ", object$ratio, ")\n"))
+    cat(paste0("Sample size 1    : ", format_nr(object$n1, dec = 0), " (", format_nr(object$n2, dec = 0), " x ", object$ratio, ")\n"))
   }
-  cat(paste0("Sample size 2    : ", formatnr(object$n2, dec = 0), "\n"))
-  cat(paste0("Total sample size: ", formatnr(object$n1 + object$n2, dec = 0), "\n"))
+  cat(paste0("Sample size 2    : ", format_nr(object$n2, dec = 0), "\n"))
+  cat(paste0("Total sample size: ", format_nr(object$n1 + object$n2, dec = 0), "\n"))
 
   if (object$type == "mean") {
     cat("Delta            :", object$res$delta, "\n")

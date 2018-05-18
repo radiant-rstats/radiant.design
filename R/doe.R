@@ -174,7 +174,7 @@ summary.doe <- function(object, eff = TRUE, part = TRUE, full = TRUE, dec = 3, .
 
   if (eff) {
     cat("\nDesign efficiency:\n")
-    formatdf(object$eff, dec = dec) %>%
+    format_df(object$eff, dec = dec) %>%
       print(row.names = FALSE)
 
     cat("\nPartial factorial design correlations:\n")
