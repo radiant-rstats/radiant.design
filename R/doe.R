@@ -4,7 +4,7 @@
 #'
 #' @param factors Categorical variables used as input for design
 #' @param int Vector of interaction terms to consider when generating design
-#' @param trials Number of trial to create. If NA then all feasible designs will be considered until a design with perfect D-efficiency is found
+#' @param trials Number of trials to create. If NA then all feasible designs will be considered until a design with perfect D-efficiency is found
 #' @param seed Random seed to use as the starting point
 #'
 #' @return A list with all variables defined in the function as an object of class doe
@@ -13,7 +13,7 @@
 #' doe(c("price; $10; $13; $16", "food; popcorn; gourmet; no food"))
 #' doe(
 #'   c("price; $10; $13; $16", "food; popcorn; gourmet; no food"),
-#'   "price:food", trials = 9, seed = 1234
+#'   int = "price:food", trials = 9, seed = 1234
 #' )
 #'
 #' @seealso \code{\link{summary.doe}} to summarize results

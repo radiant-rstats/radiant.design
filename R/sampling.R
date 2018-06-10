@@ -3,7 +3,7 @@
 #' @details See \url{https://radiant-rstats.github.io/docs/design/sampling.html} for an example in Radiant
 #'
 #' @param dataset Dataset to sample from
-#' @param var The variable to sample from ()
+#' @param var The variable to sample
 #' @param sample_size Number of units to select
 #' @param seed Random seed to use as the starting point
 #' @param data_filter Expression entered in, e.g., Data > View to filter the dataset in Radiant. The expression should be a string (e.g., "price > 10000")

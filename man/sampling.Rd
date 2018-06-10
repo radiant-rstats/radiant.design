@@ -9,7 +9,7 @@ sampling(dataset, var, sample_size, seed = NA, data_filter = "")
 \arguments{
 \item{dataset}{Dataset to sample from}
 
-\item{var}{The variable to sample from ()}
+\item{var}{The variable to sample}
 
 \item{sample_size}{Number of units to select}
 

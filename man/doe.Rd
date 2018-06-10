@@ -11,7 +11,7 @@ doe(factors, int = "", trials = NA, seed = NA)
 
 \item{int}{Vector of interaction terms to consider when generating design}
 
-\item{trials}{Number of trial to create. If NA then all feasible designs will be considered until a design with perfect D-efficiency is found}
+\item{trials}{Number of trials to create. If NA then all feasible designs will be considered until a design with perfect D-efficiency is found}
 
 \item{seed}{Random seed to use as the starting point}
 }
@@ -28,7 +28,7 @@ See \url{https://radiant-rstats.github.io/docs/design/doe.html} for an example i
 doe(c("price; $10; $13; $16", "food; popcorn; gourmet; no food"))
 doe(
   c("price; $10; $13; $16", "food; popcorn; gourmet; no food"),
-  "price:food", trials = 9, seed = 1234
+  int = "price:food", trials = 9, seed = 1234
 )
 
 }
