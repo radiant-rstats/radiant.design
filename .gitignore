@@ -1,6 +1,10 @@
 .Rproj.user
 .Rhistory
+.Rapp.history
 .RData
 .Ruserdata
+radiant.design.sublime-project
+radiant.design.Rproj
 .DS_Store
-
+^revdep$
+cran-comments.md
