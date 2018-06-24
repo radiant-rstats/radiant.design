@@ -15,7 +15,6 @@ Imports:
     dplyr (>= 0.7.5),
     shiny (>= 1.1.0),
     AlgDesign (>= 1.1.7.3),
-    rstudioapi (>= 0.7),
     import (>= 1.1.0),
     polycor,
     methods
