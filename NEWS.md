@@ -1,3 +1,7 @@
+# radiant.design 0.9.6.0
+
+* Using [`shinyFiles`](https://github.com/thomasp85/shinyFiles) to provide convenient access to data located on a server
+
 # radiant.design 0.9.5.0
 
 ## Major changes

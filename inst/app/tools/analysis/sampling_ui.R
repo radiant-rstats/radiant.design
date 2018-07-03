@@ -102,6 +102,7 @@ dl_sample <- function(path) {
 download_handler(
   id = "dl_sample", 
   fun = dl_sample, 
-  fn = paste0(input$dataset, "_sample.csv"),
-  caption = "Download random sample"
+  fn = function() paste0(input$dataset, "_sample"),
+  type = "csv",
+  caption = "Save random sample"
 )

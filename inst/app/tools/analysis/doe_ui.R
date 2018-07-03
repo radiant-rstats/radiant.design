@@ -98,15 +98,17 @@ output$ui_doe <- renderUI({
       uiOutput("ui_doe_int")
     ),
     wellPanel(
-      HTML("<label>Download factorial design:</label></br>"),
-      download_button("doe_download_part", "Partial"),
-      download_button("doe_download_full", "Full"),
-      HTML("</br><label>Download factors:</label></br>"),
+      HTML("<label>Save factorial design:</label></br>"),
+      tags$table(
+        tags$td(download_button("doe_download_part", "Partial")),
+        tags$td(download_button("doe_download_full", "Full"))
+      ),
+      HTML("</br><label>Save factors:</label></br>"),
       download_button("doe_download", "Factors", class = "btn-primary"),
       HTML("</br><label>Upload factors:</label></br>"),
       file_upload_button(
-        "doe_upload", label = NULL, accept = ".txt", 
-        buttonLabel = "Factors", class = "btn-primary"
+        "doe_upload", label = "Upload factors", accept = ".txt", 
+        buttonLabel = "Factors", title = "Upload DOE factors", class = "btn-primary"
       )
     ),
     help_and_report(
@@ -144,10 +146,10 @@ observeEvent(input$doe_del, {
     updateTextInput(session = session, "doe_factors", value = .)
 })
 
-doe_maker <- function(id = "factors",
-                      rows = 5,
-                      pre = "doe_",
-                      placeholder = "Upload an experimental design using the 'Upload factors' button or create a new design using the inputs on the left of the screen. For help, click the ? icon on the bottom left of the screen") {
+doe_maker <- function(
+  id = "factors", rows = 5, pre = "doe_",
+  placeholder = "Upload an experimental design using the 'Upload factors' button or create a new design using the inputs on the left of the screen. For help, click the ? icon on the bottom left of the screen"
+) {
 
   id <- paste0(pre, id)
   tags$textarea(
@@ -213,9 +215,11 @@ dl_doe_download_part <- function(path) {
 
 download_handler(
   id = "doe_download_part", 
+  label = "Partial",
   fun = dl_doe_download_part, 
-  fn = "part_factorial.csv",
-  caption = "Download partial factorial"
+  fn = "part_factorial",
+  caption = "Save partial factorial",
+  btn = "button"
 )
 
 dl_doe_download_full <- function(path) {
@@ -226,9 +230,11 @@ dl_doe_download_full <- function(path) {
 
 download_handler(
   id = "doe_download_full", 
+  label = "Full",
   fun = dl_doe_download_full, 
-  fn = "full_factorial.csv",
-  caption = "Download full factorial"
+  fn = "full_factorial",
+  caption = "Save full factorial",
+  btn = "button"
 )
 
 dl_doe_download <- function(path) {
@@ -237,20 +243,33 @@ dl_doe_download <- function(path) {
 
 download_handler(
   id = "doe_download", 
+  label = "Factors",
   fun = dl_doe_download, 
-  fn = "doe_factors.txt",
-  caption = "Download DOE factors",
-  type = "txt"
+  fn = "doe_factors",
+  caption = "Save DOE factors",
+  type = "txt",
+  class = "btn-primary",
+  btn = "button"
 )
 
+if (!getOption("radiant.shinyFiles", FALSE)) {
+  doe_uploadfile <- shinyFiles::shinyFileChoose(
+    input = input,
+    id = "doe_upload",
+    session = session,
+    roots = volumes,
+    filetype = "txt"
+  )
+}
+
 observeEvent(input$doe_upload, {
-  if (!isTRUE(getOption("radiant.launch", "browser") == "browser")) {
-    path <- rstudioapi::selectFile(
-      caption = "Select .txt",
-      filter = "Select .txt (*.txt)",
-      path = getOption("radiant.launch_dir")
-    )
-    if (is(path, "try-error") || is_empty(path)) return()
+  if (getOption("radiant.shinyFiles", FALSE)) {
+    path <- shinyFiles::parseFilePaths(sf_volumes, input$doe_upload)
+    if (is(path, "try-error") || is_empty(path$datapath)) {
+      return()
+    } else {
+      path <- path$datapath
+    }
     inFile <- data.frame(
       name = basename(path),
       datapath = path, 
