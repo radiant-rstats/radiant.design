@@ -265,7 +265,7 @@ if (!getOption("radiant.shinyFiles", FALSE)) {
 observeEvent(input$doe_upload, {
   if (getOption("radiant.shinyFiles", FALSE)) {
     path <- shinyFiles::parseFilePaths(sf_volumes, input$doe_upload)
-    if (is(path, "try-error") || is_empty(path$datapath)) {
+    if (inherits(path, "try-error") || is_empty(path$datapath)) {
       return()
     } else {
       path <- path$datapath
