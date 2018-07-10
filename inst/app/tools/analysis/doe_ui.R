@@ -107,7 +107,7 @@ output$ui_doe <- renderUI({
       download_button("doe_download", "Factors", class = "btn-primary"),
       HTML("</br><label>Upload factors:</label></br>"),
       file_upload_button(
-        "doe_upload", label = "Upload factors", accept = ".txt", 
+        "doe_upload", label = "Upload factors", accept = ".txt",
         buttonLabel = "Factors", title = "Upload DOE factors", class = "btn-primary"
       )
     ),
@@ -214,9 +214,9 @@ dl_doe_download_part <- function(path) {
 }
 
 download_handler(
-  id = "doe_download_part", 
+  id = "doe_download_part",
   label = "Partial",
-  fun = dl_doe_download_part, 
+  fun = dl_doe_download_part,
   fn = "part_factorial",
   caption = "Save partial factorial",
   btn = "button"
@@ -229,9 +229,9 @@ dl_doe_download_full <- function(path) {
 }
 
 download_handler(
-  id = "doe_download_full", 
+  id = "doe_download_full",
   label = "Full",
-  fun = dl_doe_download_full, 
+  fun = dl_doe_download_full,
   fn = "full_factorial",
   caption = "Save full factorial",
   btn = "button"
@@ -242,9 +242,9 @@ dl_doe_download <- function(path) {
 }
 
 download_handler(
-  id = "doe_download", 
+  id = "doe_download",
   label = "Factors",
-  fun = dl_doe_download, 
+  fun = dl_doe_download,
   fn = "doe_factors",
   caption = "Save DOE factors",
   type = "txt",
@@ -272,7 +272,7 @@ observeEvent(input$doe_upload, {
     }
     inFile <- data.frame(
       name = basename(path),
-      datapath = path, 
+      datapath = path,
       stringsAsFactors = FALSE
     )
   } else {
@@ -294,7 +294,7 @@ observeEvent(input$doe_upload, {
 
 observeEvent(input$doe_report, {
   if (getOption("radiant.local", default = FALSE)) {
-    pdir <- getOption("radiant.write_dir", default = "~/")
+    pdir <- getOption("radiant.launch_dir")
     xcmd <- paste0("# write.csv(result$part, file = \"", pdir, "part_factorial.csv\")")
   } else {
     xcmd <- ""
