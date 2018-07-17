@@ -6,5 +6,6 @@
 radiant.design.sublime-project
 radiant.design.Rproj
 .DS_Store
-^revdep$
+revdep/
+docs/
 cran-comments.md
