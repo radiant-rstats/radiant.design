@@ -204,123 +204,38 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>sampling</span>(<span class='no'>rndnames</span>, <span class='st'>"Names"</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt; $seldat
-#&gt;                  Names rnd_number
-#&gt; 1           Many Mcvey  0.9982450
-#&gt; 2         Maximo Manzi  0.9885015
-#&gt; 3    Antonietta Alfano  0.9770535
-#&gt; 4         Shawn Salmon  0.9672963
-#&gt; 5      Dalene Dubreuil  0.9601184
-#&gt; 6  Christine Chevalier  0.9553637
-#&gt; 7     Federico Fillion  0.9353908
-#&gt; 8          Hubert Hyer  0.9323459
-#&gt; 9   Sanford Steinfeldt  0.9303239
-#&gt; 10     Dagny Distefano  0.9126530
+#&gt; # A tibble: 10 x 2
+#&gt;    Names               rnd_number
+#&gt;    &lt;chr&gt;                    &lt;dbl&gt;
+#&gt;  1 Many Mcvey               0.998
+#&gt;  2 Maximo Manzi             0.989
+#&gt;  3 Antonietta Alfano        0.977
+#&gt;  4 Shawn Salmon             0.967
+#&gt;  5 Dalene Dubreuil          0.960
+#&gt;  6 Christine Chevalier      0.955
+#&gt;  7 Federico Fillion         0.935
+#&gt;  8 Hubert Hyer              0.932
+#&gt;  9 Sanford Steinfeldt       0.930
+#&gt; 10 Dagny Distefano          0.913
 #&gt; 
 #&gt; $df_name
 #&gt; [1] "rndnames"
 #&gt; 
 #&gt; $dataset
-#&gt;                   Names   rnd_number
-#&gt; 1        Ervin Escalona 0.6862422745
-#&gt; 2        Allan Ammerman 0.4166287233
-#&gt; 3     Milton Mothershed 0.7570262463
-#&gt; 4          Deshawn Dawn 0.7757948679
-#&gt; 5             Jc Julius 0.5735870199
-#&gt; 6          Denver Delph 0.1886987926
-#&gt; 7           Jed Jameson 0.7582653339
-#&gt; 8        Zachariah Zeno 0.0926830929
-#&gt; 9           Cyril Class 0.6223585266
-#&gt; 10         Lauren Lukas 0.4159132016
-#&gt; 11        Hershel Hentz 0.7765108705
-#&gt; 12      Darrell Draheim 0.8078028020
-#&gt; 13         Shawn Salmon 0.9672963202
-#&gt; 14       Beau Bannerman 0.2159032512
-#&gt; 15       Stephen Slough 0.8670089110
-#&gt; 16         Cole Cropper 0.4169180284
-#&gt; 17   Stacy Schrecengost 0.5130287160
-#&gt; 18         Kent Keasler 0.7749373205
-#&gt; 19           Omar Ogden 0.1325433177
-#&gt; 20         Perry Pearcy 0.4119076421
-#&gt; 21     Courtney Carmody 0.6620475734
-#&gt; 22         Derek Dorsch 0.9077197670
-#&gt; 23      Napoleon Norman 0.3444916373
-#&gt; 24         Rodney Regis 0.1052430642
-#&gt; 25          Hubert Hyer 0.9323459219
-#&gt; 26        Foster Fugate 0.1999332728
-#&gt; 27       Emery Etchison 0.0540183072
-#&gt; 28         Tomas Tupper 0.4258400758
-#&gt; 29         Robin Ramsay 0.3387958198
-#&gt; 30           Tom Tomita 0.2756013027
-#&gt; 31      Travis Thornley 0.6634905422
-#&gt; 32         Hank Heavner 0.7838960970
-#&gt; 33           Ahmed Avey 0.4396973667
-#&gt; 34   Sanford Steinfeldt 0.9303238676
-#&gt; 35    Douglass Daddario 0.2722072056
-#&gt; 36        Dominic Duhon 0.6590290293
-#&gt; 37       Emanuel Esquer 0.3802892941
-#&gt; 38     Federico Fillion 0.9353907774
-#&gt; 39         Jarrod Jolly 0.7355009299
-#&gt; 40   Lawrence Levasseur 0.5900904534
-#&gt; 41        Kurtis Kieser 0.8146524148
-#&gt; 42            Ty Troyer 0.8824088296
-#&gt; 43          Bryce Billy 0.7454413087
-#&gt; 44          Brooks Buie 0.5017915608
-#&gt; 45         Maximo Manzi 0.9885014733
-#&gt; 46            Lino Luse 0.5552680509
-#&gt; 47       Mark Mccloskey 0.8797018330
-#&gt; 48          Tory Tilman 0.6304392638
-#&gt; 49           Angel Aker 0.6132155319
-#&gt; 50          Jean Joseph 0.0336092997
-#&gt; 51        Susann Sauers 0.2547006856
-#&gt; 52      Deborah Deckard 0.7759688012
-#&gt; 53           Many Mcvey 0.9982450008
-#&gt; 54      Dalene Dubreuil 0.9601184016
-#&gt; 55   Gabriella Gurganus 0.7509288136
-#&gt; 56       Kellie Kealoha 0.6805038610
-#&gt; 57            Amie Asay 0.2468864541
-#&gt; 58        Robbi Randell 0.6065629770
-#&gt; 59      Jacquelin James 0.5739705635
-#&gt; 60     Jennefer Jansson 0.0495949083
-#&gt; 61         Latisha Lutz 0.3728201450
-#&gt; 62        Glenda Garris 0.8947680488
-#&gt; 63       Elana Eslinger 0.3917717456
-#&gt; 64     Margene Martelli 0.5169452706
-#&gt; 65        Breana Ballou 0.1752800765
-#&gt; 66     Christal Chaires 0.1926054636
-#&gt; 67       Carlotta Clack 0.5465086957
-#&gt; 68        Doretha Dever 0.3931208388
-#&gt; 69            Eden Epps 0.6251974967
-#&gt; 70         Essie Elwood 0.5722047726
-#&gt; 71       Antonina Alers 0.1406190705
-#&gt; 72      Amberly Ahumada 0.2892716692
-#&gt; 73  Bernadette Basnight 0.0006121558
-#&gt; 74  Christine Chevalier 0.9553637172
-#&gt; 75        Shemeka Solar 0.3994099500
-#&gt; 76    Antonietta Alfano 0.9770535454
-#&gt; 77    Rozanne Raulerson 0.5117741989
-#&gt; 78           Willa Well 0.4671611886
-#&gt; 79      Jazmin Jeffcoat 0.7238354937
-#&gt; 80      Marcell Meisner 0.1420735531
-#&gt; 81  Matilda Mcgillivray 0.5235777793
-#&gt; 82    Davida Derrickson 0.5604211201
-#&gt; 83     Clarita Calandra 0.6603428058
-#&gt; 84      Angelita Archer 0.3722657019
-#&gt; 85        Dorinda Dehne 0.1361519932
-#&gt; 86           Nona Nosal 0.0738809260
-#&gt; 87        Jesusa Jordon 0.7615121801
-#&gt; 88        Elinore Elmer 0.7027949130
-#&gt; 89           Leanne Lew 0.7638952618
-#&gt; 90         Janey Jetton 0.1570562583
-#&gt; 91       Linette Lavery 0.5993446065
-#&gt; 92      Bernardine Bohr 0.7633417868
-#&gt; 93      Dagny Distefano 0.9126529882
-#&gt; 94       Racheal Ravelo 0.3080208497
-#&gt; 95      Kayla Krajewski 0.6570658754
-#&gt; 96    Marylee Malatesta 0.3378046290
-#&gt; 97          Janna Jacob 0.6042503819
-#&gt; 98          Alita Aikin 0.0839550188
-#&gt; 99        Junko Jungers 0.6056672356
-#&gt; 100         Denese Diem 0.5959110265
+#&gt; # A tibble: 100 x 2
+#&gt;    Names             rnd_number
+#&gt;    &lt;chr&gt;                  &lt;dbl&gt;
+#&gt;  1 Ervin Escalona        0.686 
+#&gt;  2 Allan Ammerman        0.417 
+#&gt;  3 Milton Mothershed     0.757 
+#&gt;  4 Deshawn Dawn          0.776 
+#&gt;  5 Jc Julius             0.574 
+#&gt;  6 Denver Delph          0.189 
+#&gt;  7 Jed Jameson           0.758 
+#&gt;  8 Zachariah Zeno        0.0927
+#&gt;  9 Cyril Class           0.622 
+#&gt; 10 Lauren Lukas          0.416 
+#&gt; # ... with 90 more rows
 #&gt; 
 #&gt; $var
 #&gt; [1] "Names"
