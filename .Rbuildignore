@@ -5,6 +5,6 @@
 ^docs$
 ^vignettes$
 ^\.travis\.yml$
-^.*\.sublime-project$
+radiant.design.code-workspace
 _pkgdown.yml
 cran-comments.md
