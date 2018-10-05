@@ -50,7 +50,7 @@ A partial factorial design may not be unique (i.e., there might be multiple comb
 
 Note that we will not be able to estimate all possible interactions between `price`, `sight`, and `food` if we use a design with 12 trials. This is the trade-off inherent in partial factorial designs! In fact, if we do want to estimate even one interaction (e.g., select `price:sight`) the appropriate design has 18 trials (i.e., the number in the full factorial design that includes all possible combinations of factor levels).
 
-## Partial factorial and Full factorial design
+## Partial and Full factorial design
 
 Click on the `Partial` or the `Full` button to download the Partial or Full factorial design in csv format .
 
