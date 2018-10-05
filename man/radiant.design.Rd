@@ -4,7 +4,6 @@
 \name{radiant.design}
 \alias{radiant.design}
 \alias{radiant.design-package}
-\alias{radiant.design}
 \title{radiant.design}
 \usage{
 radiant.design()
