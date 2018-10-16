@@ -6,7 +6,10 @@
 \alias{radiant.design-package}
 \title{radiant.design}
 \usage{
-radiant.design()
+radiant.design(state)
+}
+\arguments{
+\item{state}{Path to state file to load}
 }
 \description{
 radiant.design

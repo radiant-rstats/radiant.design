@@ -4,7 +4,10 @@
 \alias{radiant.design_window}
 \title{Launch radiant.design in an Rstudio window}
 \usage{
-radiant.design_window()
+radiant.design_window(state)
+}
+\arguments{
+\item{state}{Path to state file to load}
 }
 \description{
 Launch radiant.design in an Rstudio window
