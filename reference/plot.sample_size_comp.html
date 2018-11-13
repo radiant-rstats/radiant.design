@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create (partial) factorial design — doe • radiant.design</title>
+<title>Plot method for the sample_size_comp function — plot.sample_size_comp • radiant.design</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -36,9 +36,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
 
 
-<meta property="og:title" content="Create (partial) factorial design — doe" />
+<meta property="og:title" content="Plot method for the sample_size_comp function — plot.sample_size_comp" />
 
-<meta property="og:description" content="Create (partial) factorial design" />
+<meta property="og:description" content="Plot method for the sample_size_comp function" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -151,164 +151,47 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create (partial) factorial design</h1>
-    <small class="dont-index">Source: <a href='https://github.com/radiant-rstats/radiant.design/blob/master/R/doe.R'><code>R/doe.R</code></a></small>
-    <div class="hidden name"><code>doe.Rd</code></div>
+    <h1>Plot method for the sample_size_comp function</h1>
+    <small class="dont-index">Source: <a href='https://github.com/radiant-rstats/radiant.design/blob/master/R/sample_size_comp.R'><code>R/sample_size_comp.R</code></a></small>
+    <div class="hidden name"><code>plot.sample_size_comp.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Create (partial) factorial design</p>
+    <p>Plot method for the sample_size_comp function</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>doe</span>(<span class='no'>factors</span>, <span class='kw'>int</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>trials</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>NA</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for sample_size_comp</span>
+<span class='fu'>plot</span>(<span class='no'>x</span>, <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>factors</th>
-      <td><p>Categorical variables used as input for design</p></td>
+      <th>x</th>
+      <td><p>Return value from <code>sample_size_comp</code></p></td>
     </tr>
     <tr>
-      <th>int</th>
-      <td><p>Vector of interaction terms to consider when generating design</p></td>
-    </tr>
-    <tr>
-      <th>trials</th>
-      <td><p>Number of trials to create. If NA then all feasible designs will be considered until a design with perfect D-efficiency is found</p></td>
-    </tr>
-    <tr>
-      <th>seed</th>
-      <td><p>Random seed to use as the starting point</p></td>
+      <th>...</th>
+      <td><p>further arguments passed to or from other methods</p></td>
     </tr>
     </table>
     
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A list with all variables defined in the function as an object of class doe</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>See <a href='https://radiant-rstats.github.io/docs/design/doe.html'>https://radiant-rstats.github.io/docs/design/doe.html</a> for an example in Radiant</p>
+    <p>See <a href='https://radiant-rstats.github.io/docs/design/sample_size_comp.html'>https://radiant-rstats.github.io/docs/design/sample_size_comp.html</a> for an example in Radiant</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>summary.doe</code> to summarize results</p></div>
+    <div class='dont-index'><p><code>sample_size_comp</code> to generate the results</p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>doe</span>(<span class='fu'>c</span>(<span class='st'>"price; $10; $13; $16"</span>, <span class='st'>"food; popcorn; gourmet; no food"</span>))</div><div class='output co'>#&gt; $df
-#&gt; $df$price
-#&gt; [1] "$10" "$13" "$16"
-#&gt; 
-#&gt; $df$food
-#&gt; [1] "popcorn" "gourmet" "no_food"
-#&gt; 
-#&gt; 
-#&gt; $cor_mat
-#&gt;               price          food
-#&gt; price  1.000000e+00 -1.665335e-16
-#&gt; food  -1.665335e-16  1.000000e+00
-#&gt; 
-#&gt; $detcm
-#&gt; [1] 1
-#&gt; 
-#&gt; $Dea
-#&gt; [1] 1
-#&gt; 
-#&gt; $part
-#&gt;   trial price    food
-#&gt; 1     1   $10 popcorn
-#&gt; 2     2   $10 gourmet
-#&gt; 3     3   $10 no_food
-#&gt; 4     4   $13 popcorn
-#&gt; 5     5   $13 gourmet
-#&gt; 6     6   $13 no_food
-#&gt; 7     7   $16 popcorn
-#&gt; 8     8   $16 gourmet
-#&gt; 9     9   $16 no_food
-#&gt; 
-#&gt; $full
-#&gt;   trial price    food
-#&gt; 1     1   $10 popcorn
-#&gt; 2     2   $10 gourmet
-#&gt; 3     3   $10 no_food
-#&gt; 4     4   $13 popcorn
-#&gt; 5     5   $13 gourmet
-#&gt; 6     6   $13 no_food
-#&gt; 7     7   $16 popcorn
-#&gt; 8     8   $16 gourmet
-#&gt; 9     9   $16 no_food
-#&gt; 
-#&gt; $eff
-#&gt;   Trials D-efficiency Balanced
-#&gt; 1      5        0.018    FALSE
-#&gt; 2      6        0.449     TRUE
-#&gt; 3      7        0.383    FALSE
-#&gt; 4      8        0.368    FALSE
-#&gt; 5      9        1.000     TRUE
-#&gt; 
-#&gt; $seed
-#&gt; [1] NA
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "doe"  "list"</div><div class='input'><span class='fu'>doe</span>(
-  <span class='fu'>c</span>(<span class='st'>"price; $10; $13; $16"</span>, <span class='st'>"food; popcorn; gourmet; no food"</span>),
-  <span class='kw'>int</span> <span class='kw'>=</span> <span class='st'>"price:food"</span>, <span class='kw'>trials</span> <span class='kw'>=</span> <span class='fl'>9</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1234</span>
-)</div><div class='output co'>#&gt; $df
-#&gt; $df$price
-#&gt; [1] "$10" "$13" "$16"
-#&gt; 
-#&gt; $df$food
-#&gt; [1] "popcorn" "gourmet" "no_food"
-#&gt; 
-#&gt; 
-#&gt; $cor_mat
-#&gt;               price          food
-#&gt; price  1.000000e+00 -1.665335e-16
-#&gt; food  -1.665335e-16  1.000000e+00
-#&gt; 
-#&gt; $detcm
-#&gt; [1] 1
-#&gt; 
-#&gt; $Dea
-#&gt; [1] 1
-#&gt; 
-#&gt; $part
-#&gt;   trial price    food
-#&gt; 1     1   $10 popcorn
-#&gt; 2     2   $10 gourmet
-#&gt; 3     3   $10 no_food
-#&gt; 4     4   $13 popcorn
-#&gt; 5     5   $13 gourmet
-#&gt; 6     6   $13 no_food
-#&gt; 7     7   $16 popcorn
-#&gt; 8     8   $16 gourmet
-#&gt; 9     9   $16 no_food
-#&gt; 
-#&gt; $full
-#&gt;   trial price    food
-#&gt; 1     1   $10 popcorn
-#&gt; 2     2   $10 gourmet
-#&gt; 3     3   $10 no_food
-#&gt; 4     4   $13 popcorn
-#&gt; 5     5   $13 gourmet
-#&gt; 6     6   $13 no_food
-#&gt; 7     7   $16 popcorn
-#&gt; 8     8   $16 gourmet
-#&gt; 9     9   $16 no_food
-#&gt; 
-#&gt; $eff
-#&gt;   Trials D-efficiency Balanced
-#&gt; 1      9            1     TRUE
-#&gt; 
-#&gt; $seed
-#&gt; [1] 1234
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "doe"  "list"</div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>sample_size_comp</span>(
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"proportion"</span>, <span class='kw'>p1</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>p2</span> <span class='kw'>=</span> <span class='fl'>0.15</span>,
+  <span class='kw'>conf_lev</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>power</span> <span class='kw'>=</span> <span class='fl'>0.8</span>
+) <span class='kw'>%&gt;%</span> <span class='fu'>plot</span>()</div><div class='img'><img src='plot.sample_size_comp-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -316,8 +199,6 @@
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
-
       <li><a href="#details">Details</a></li>
 
       <li><a href="#see-also">See also</a></li>

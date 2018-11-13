@@ -67,7 +67,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">radiant.design</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.9.7.2</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.9.7.3</span>
       </span>
     </div>
 
@@ -162,7 +162,7 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>sample_size_comp</span>(<span class='no'>type</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>p1</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>p2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+    <pre class="usage"><span class='fu'>sample_size_comp</span>(<span class='no'>type</span>, <span class='kw'>n1</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>p1</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>p2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>delta</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>conf_lev</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>power</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alternative</span> <span class='kw'>=</span> <span class='st'>"two.sided"</span>)</pre>
     
@@ -174,8 +174,12 @@
       <td><p>Choose "mean" or "proportion"</p></td>
     </tr>
     <tr>
-      <th>n</th>
-      <td><p>Sample size</p></td>
+      <th>n1</th>
+      <td><p>Sample size for group 1</p></td>
+    </tr>
+    <tr>
+      <th>n2</th>
+      <td><p>Sample size for group 2</p></td>
     </tr>
     <tr>
       <th>p1</th>
@@ -228,17 +232,27 @@
     <pre class="examples"><div class='input'><span class='fu'>sample_size_comp</span>(
   <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"proportion"</span>, <span class='kw'>p1</span> <span class='kw'>=</span> <span class='fl'>0.1</span>, <span class='kw'>p2</span> <span class='kw'>=</span> <span class='fl'>0.15</span>,
   <span class='kw'>conf_lev</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>power</span> <span class='kw'>=</span> <span class='fl'>0.8</span>
-)</div><div class='output co'>#&gt; $n1
-#&gt; [1] 683
+)</div><div class='output co'>#&gt; $res
 #&gt; 
-#&gt; $n2
-#&gt; [1] 683
+#&gt;      Difference of proportion power calculation for binomial distribution (arcsine transformation) 
 #&gt; 
-#&gt; $res
-#&gt; # A tibble: 1 x 5
-#&gt;       n sig.level power    p1    p2
-#&gt;   &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-#&gt; 1  686.      0.05   0.8   0.1  0.15
+#&gt;               h = 0.1518977
+#&gt;               n = 680.3527
+#&gt;       sig.level = 0.05
+#&gt;           power = 0.8
+#&gt;     alternative = two.sided
+#&gt; 
+#&gt; NOTE: same sample sizes
+#&gt; 
+#&gt; 
+#&gt; $backout.ES.h
+#&gt; function (h, p) 
+#&gt; {
+#&gt;     sort(c(sin((h - 2 * asin(sqrt(p)))/2)^2, sin((-h - 2 * asin(sqrt(p)))/2)^2), 
+#&gt;         decreasing = TRUE)
+#&gt; }
+#&gt; &lt;bytecode: 0x7981a50&gt;
+#&gt; &lt;environment: 0x3e28bb8&gt;
 #&gt; 
 #&gt; $nr_null
 #&gt; [1] 1
@@ -252,8 +266,11 @@
 #&gt; $type
 #&gt; [1] "proportion"
 #&gt; 
-#&gt; $n
-#&gt; NULL
+#&gt; $n1
+#&gt; [1] 680.3527
+#&gt; 
+#&gt; $n2
+#&gt; [1] 680.3527
 #&gt; 
 #&gt; $p1
 #&gt; [1] 0.1
