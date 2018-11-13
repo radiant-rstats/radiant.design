@@ -4,14 +4,16 @@
 \alias{sample_size_comp}
 \title{Sample size calculation for comparisons}
 \usage{
-sample_size_comp(type, n = NULL, p1 = NULL, p2 = NULL,
+sample_size_comp(type, n1 = NULL, n2 = NULL, p1 = NULL, p2 = NULL,
   delta = NULL, sd = NULL, conf_lev = NULL, power = NULL,
   ratio = 1, alternative = "two.sided")
 }
 \arguments{
 \item{type}{Choose "mean" or "proportion"}
 
-\item{n}{Sample size}
+\item{n1}{Sample size for group 1}
+
+\item{n2}{Sample size for group 2}
 
 \item{p1}{Proportion 1 (only used when "proportion" is selected)}
 
