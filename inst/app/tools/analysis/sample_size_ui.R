@@ -42,7 +42,7 @@ output$ui_sample_size <- renderUI({
         condition = "input.ss_type != 'mean'",
         tags$div(title = "The acceptable error is the level of precision you require (i.e., the range within which the true proportion should lie). For example, ± 0.02. A lower acceptable error requires a larger sample size.",
           numericInput(
-            "ss_err_prop", "Acceptable Error (e.g., .03):", min = 0,
+            "ss_err_prop", "Acceptable Error:", min = 0,
             max = 1, value = state_init("ss_err_prop", .1), step = .01
           )
         ),
