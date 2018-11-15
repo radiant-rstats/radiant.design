@@ -1,4 +1,4 @@
-# radiant.design 0.9.7.3
+# radiant.design 0.9.7.4
 
 * Use the `pwr` package for sample size calculations when comparing groups (i.e., Design > Sample size (compare))
 * Load a state file on startup by providing a (relative) file path or a url

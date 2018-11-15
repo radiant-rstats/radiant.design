@@ -24,7 +24,7 @@
 #'   conf_lev = 0.95, power = 0.8
 #' )
 #'
-#' @importFrom pwr pwr.2p2n.test ES.h
+#' @importFrom pwr pwr.2p.test pwr.2p2n.test ES.h pwr.t.test pwr.t2n.test
 #'
 #' @export
 sample_size_comp <- function(
@@ -180,7 +180,7 @@ summary.sample_size_comp <- function(object, ...) {
   } else {
     cat("Proportion 1     :", object$p1, "\n")
     cat("Proportion 2     :", object$p2, "\n")
-    cat("Effect size      :", pwr::ES.h(p1 = object$p1, p2 = object$p2) %>% abs(), "\n")
+    cat("Effect size      :", pwr::ES.h(p1 = object$p1[1], p2 = object$p2[1]) %>% abs(), "\n")
   }
   cat("Confidence level :", 1 - object$res$sig.level, "\n")
   cat("Power            :", object$res$power, "\n")

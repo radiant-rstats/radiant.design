@@ -3,7 +3,6 @@
 ###############################
 ssc_type <- c("Mean" = "mean", "Proportion" = "proportion")
 # ssc_alternative <- c("Two sided" = "two.sided", "One sided" = "one.sided")
-# ssc_alternative <- c("Two sided" = "two.sided", "Less than" = "less", "Greater than" = "greater")
 ssc_alternative <- c("Two sided" = "two.sided", "Group 1 less than Group 2" = "less", "Group 1 greater than Group 2" = "greater")
 
 ## list of function arguments
@@ -39,7 +38,7 @@ output$ui_sample_size_comp <- renderUI({
           value = state_init("ssc_delta", 2), step = 1
         ),
         numericInput(
-          "ssc_sd", "Std. deviation (sd):", min = 0,
+          "ssc_sd", "Standard deviation:", min = 0,
           value = state_init("ssc_sd", 10), step = 1
         )
       ),
