@@ -22,13 +22,14 @@
 #' @export
 sample_size <- function(
  type, err_mean = 2, sd_mean = 10, err_prop = .1,
- p_prop = .5, conf_lev = 1.96, incidence = 1,
+ p_prop = .5, conf_lev = 0.95, incidence = 1,
  response = 1, pop_correction = "no", pop_size = 1000000
 ) {
 
   if (pop_correction == "yes" && is_not(pop_size)) pop_size <- 1000000
-  if (is_not(conf_lev) || conf_lev < 0) conf_lev <- 1.96
-  zval <- conf_lev
+  if (is_not(conf_lev) || conf_lev < 0 || conf_lev > 1) conf_lev <- 0.95
+  zval <- -qnorm((1 - conf_lev) / 2)
+
   if (type == "mean") {
     if (is_not(err_mean)) {
       return("Please select an acceptable error greater than 0" %>%
@@ -78,11 +79,11 @@ summary.sample_size <- function(object, ...) {
   if (object$type == "mean") {
     cat("Calculation type     : Mean\n")
     cat("Acceptable Error     :", object$err_mean, "\n")
-    cat("Sample std. deviation:", object$sd_mean, "\n")
+    cat("Standard deviation   :", object$sd_mean, "\n")
   } else {
-    cat("Type: Proportion\n")
+    cat("Calculation type     : Proportion\n")
     cat("Acceptable Error     :", object$err_prop, "\n")
-    cat("Sample proportion    :", object$p_prop, "\n")
+    cat("Proportion           :", object$p_prop, "\n")
   }
 
   cat("Confidence level     :", object$conf_lev, "\n")
@@ -98,10 +99,6 @@ summary.sample_size <- function(object, ...) {
 
   cat("\nRequired sample size     :", format_nr(object$n, dec = 0))
   cat("\nRequired contact attempts:", format_nr(ceiling(object$n / object$incidence / object$response), dec = 0))
-  cat("\n\nChoose a z.value:\n")
-
-  for (z in c(.80, .85, .90, .95, .99))
-    cat(paste0(100 * z, "%\t"), -qnorm((1 - z) / 2) %>% round(2), "\n")
 
   rm(object)
 }
