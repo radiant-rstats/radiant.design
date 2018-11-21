@@ -6,10 +6,12 @@
 \alias{radiant.design-package}
 \title{radiant.design}
 \usage{
-radiant.design(state)
+radiant.design(state, ...)
 }
 \arguments{
 \item{state}{Path to state file to load}
+
+\item{...}{additional arguments to pass to shiny::runApp (e.g, port = 8080)}
 }
 \description{
 radiant.design
