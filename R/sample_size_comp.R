@@ -55,18 +55,18 @@ sample_size_comp <- function(
     }
 
     if (is.null(power) || is.null(sig.level)) {
-      res <- try(pwr::pwr.t2n.test(n1 = n1, n2 = n2, d = delta / sd, sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
+      res <- try(pwr::pwr.t2n.test(n1 = as.numeric(n1), n2 = as.numeric(n2), d = delta / sd, sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
     } else if (is.null(n1) && is.null(n2)) {
       res <- try(pwr::pwr.t.test(d = delta / sd, sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
       if (!inherits(res, "try-error"))  n1 <- n2 <- res$n
     } else if (is.null(n1)) {
-      res <- try(pwr::pwr.t2n.test(n2 = n2, d = delta / sd, sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
+      res <- try(pwr::pwr.t2n.test(n2 = as.numeric(n2), d = delta / sd, sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
       if (!inherits(res, "try-error")) n1 <- res$n1
     } else if (is.null(n2)) {
-      res <- try(pwr::pwr.t2n.test(n1 = n1, d = delta / sd, sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
+      res <- try(pwr::pwr.t2n.test(n1 = as.numeric(n1), d = delta / sd, sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
       if (!inherits(res, "try-error")) n2 <- res$n2
     } else {
-      res <- try(pwr::pwr.t2n.test(n1 = n1, n2 = n2, sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
+      res <- try(pwr::pwr.t2n.test(n1 = as.numeric(n1), n2 = as.numeric(n2), sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
       if (!inherits(res, "try-error")) {
         if (is.null(delta)) {
           delta <- res$d * sd
@@ -112,18 +112,18 @@ sample_size_comp <- function(
     }
 
     if (is.null(power) || is.null(sig.level)) {
-      res <- try(pwr::pwr.2p2n.test(n1 = n1, n2 = n2, h = pwr::ES.h(p1 = p1, p2 = p2), sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
+      res <- try(pwr::pwr.2p2n.test(n1 = as.numeric(n1), n2 = as.numeric(n2), h = pwr::ES.h(p1 = p1, p2 = p2), sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
     } else if (is.null(n1) && is.null(n2)) {
       res <- try(pwr::pwr.2p.test(h = pwr::ES.h(p1 = p1, p2 = p2), sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
       if (!inherits(res, "try-error"))  n1 <- n2 <- res$n
     } else if (is.null(n1)) {
-      res <- try(pwr::pwr.2p2n.test(n2 = n2, h = pwr::ES.h(p1 = p1, p2 = p2), sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
+      res <- try(pwr::pwr.2p2n.test(n2 = as.numeric(n2), h = pwr::ES.h(p1 = p1, p2 = p2), sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
       if (!inherits(res, "try-error"))  n1 <- res$n1
     } else if (is.null(n2)) {
-      res <- try(pwr::pwr.2p2n.test(n1 = n1, h = pwr::ES.h(p1 = p1, p2 = p2), sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
+      res <- try(pwr::pwr.2p2n.test(n1 = as.numeric(n1), h = pwr::ES.h(p1 = p1, p2 = p2), sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
       if (!inherits(res, "try-error"))  n2 <- res$n2
     } else {
-      res <- try(pwr::pwr.2p2n.test(n1 = n1, n2 = n2, sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
+      res <- try(pwr::pwr.2p2n.test(n1 = as.numeric(n1), n2 = as.numeric(n2), sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
       if (!inherits(res, "try-error")) {
         if (is.null(p1)) {
           p1 <- backout.ES.h(res$h, p2)
@@ -166,9 +166,6 @@ summary.sample_size_comp <- function(object, ...) {
   if (inherits(object$res, "try-error")) return("Provided input does not generate valid results. Update input values ...")
 
   cat("Sample size calculation for comparison of",  ifelse(object$type == "proportion", "proportions", "means"), "\n")
-  # cat(paste0("Sample size 1    : ", format_nr(object$n1, dec = 2), "\n"))
-  # cat(paste0("Sample size 2    : ", format_nr(object$n2, dec = 2), "\n"))
-  # cat(paste0("Total sample size: ", format_nr(object$n1 + object$n2, dec = 0), "\n"))
   cat(paste0("Sample size 1    : ", ceiling(object$n1), "\n"))
   cat(paste0("Sample size 2    : ", ceiling(object$n2), "\n"))
   cat(paste0("Total sample size: ", ceiling(object$n1) + ceiling(object$n2), "\n"))
