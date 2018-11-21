@@ -247,17 +247,13 @@
 #&gt; 
 #&gt; 
 #&gt; $backout.ES.h
-#&gt; function(h, p) {
-#&gt;       sort(
-#&gt;         c(
-#&gt;           sin((h - 2*asin(sqrt(p)))/2)^2,
-#&gt;           sin((-h - 2*asin(sqrt(p)))/2)^2
-#&gt;         ),
-#&gt;         decreasing = TRUE
-#&gt;       )
-#&gt;     }
-#&gt; &lt;bytecode: 0x60781a0&gt;
-#&gt; &lt;environment: 0xa990a68&gt;
+#&gt; function (h, p) 
+#&gt; {
+#&gt;     sort(c(sin((h - 2 * asin(sqrt(p)))/2)^2, sin((-h - 2 * asin(sqrt(p)))/2)^2), 
+#&gt;         decreasing = TRUE)
+#&gt; }
+#&gt; &lt;bytecode: 0x7de7ab8&gt;
+#&gt; &lt;environment: 0xa8f5f20&gt;
 #&gt; 
 #&gt; $nr_null
 #&gt; [1] 1
