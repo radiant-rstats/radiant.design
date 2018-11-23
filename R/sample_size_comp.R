@@ -166,9 +166,9 @@ summary.sample_size_comp <- function(object, ...) {
   if (inherits(object$res, "try-error")) return("Provided input does not generate valid results. Update input values ...")
 
   cat("Sample size calculation for comparison of",  ifelse(object$type == "proportion", "proportions", "means"), "\n")
-  cat(paste0("Sample size 1    : ", ceiling(object$n1), "\n"))
-  cat(paste0("Sample size 2    : ", ceiling(object$n2), "\n"))
-  cat(paste0("Total sample size: ", ceiling(object$n1) + ceiling(object$n2), "\n"))
+  cat(paste0("Sample size 1    : ", format_nr(ceiling(object$n1), dec = 0), "\n"))
+  cat(paste0("Sample size 2    : ", format_nr(ceiling(object$n2), dec = 0), "\n"))
+  cat(paste0("Total sample size: ", format_nr(ceiling(object$n1) + ceiling(object$n2), dec = 0), "\n"))
 
   if (object$type == "mean") {
     cat("Delta            :", object$delta, "\n")

@@ -1,4 +1,4 @@
-# radiant.design 0.9.7.5
+# radiant.design 0.9.7.6
 
 * Option to pass additional arguments to `shiny::runApp` when starting radiant such as the port to use. For example, radiant.design::radiant.design("https://github.com/radiant-rstats/docs/raw/gh-pages/examples/demo-dvd-rnd.state.rda", port = 8080) 
 * Use the `pwr` package for sample size calculations when comparing groups (i.e., Design > Sample size (compare))
