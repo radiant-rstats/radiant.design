@@ -69,7 +69,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">radiant.design</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.7.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.8.0</span>
       </span>
     </div>
 
@@ -248,17 +248,13 @@
 #&gt; 
 #&gt; 
 #&gt; $backout.ES.h
-#&gt; function(h, p) {
-#&gt;       sort(
-#&gt;         c(
-#&gt;           sin((h - 2*asin(sqrt(p)))/2)^2,
-#&gt;           sin((-h - 2*asin(sqrt(p)))/2)^2
-#&gt;         ),
-#&gt;         decreasing = TRUE
-#&gt;       )
-#&gt;     }
-#&gt; &lt;bytecode: 0x93f1f58&gt;
-#&gt; &lt;environment: 0x7e03be0&gt;
+#&gt; function (h, p) 
+#&gt; {
+#&gt;     sort(c(sin((h - 2 * asin(sqrt(p)))/2)^2, sin((-h - 2 * asin(sqrt(p)))/2)^2), 
+#&gt;         decreasing = TRUE)
+#&gt; }
+#&gt; &lt;bytecode: 0x8820348&gt;
+#&gt; &lt;environment: 0x5352d40&gt;
 #&gt; 
 #&gt; $nr_null
 #&gt; [1] 1
