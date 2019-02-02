@@ -1,5 +1,6 @@
-# radiant.design 0.9.8.0
+# radiant.design 0.9.8.1
 
+* Checked for issues with upcoming dplyr 0.8.0
 * Option to pass additional arguments to `shiny::runApp` when starting radiant such as the port to use. For example, radiant.design::radiant.design("https://github.com/radiant-rstats/docs/raw/gh-pages/examples/demo-dvd-rnd.state.rda", port = 8080) 
 * Use the `pwr` package for sample size calculations when comparing groups (i.e., Design > Sample size (compare))
 * Load a state file on startup by providing a (relative) file path or a url
