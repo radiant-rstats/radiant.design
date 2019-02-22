@@ -12,8 +12,8 @@ Depends:
     radiant.data (>= 0.9.8.0),
     mvtnorm
 Imports:
-    dplyr (>= 0.7.6),
-    shiny (>= 1.1.0),
+    dplyr (>= 0.8.0),
+    shiny (>= 1.2.0),
     AlgDesign (>= 1.1.7.3),
     import (>= 1.1.0),
     pwr (>= 1.1.2),
