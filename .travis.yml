@@ -1,5 +1,5 @@
 language: r
-cache: packages
+# cache: packages
 r:
   - oldrel
   - release
@@ -12,7 +12,6 @@ r_packages:
   - devtools
 
 r_github_packages:
-  - trestletech/shinyAce
   - radiant-rstats/radiant.data
 
 after_success:
