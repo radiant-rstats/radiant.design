@@ -295,7 +295,7 @@ observeEvent(input$doe_upload, {
 observeEvent(input$doe_report, {
   if (getOption("radiant.local", default = FALSE)) {
     pdir <- getOption("radiant.launch_dir")
-    xcmd <- paste0("# write.csv(result$part, file = \"", pdir, "part_factorial.csv\")")
+    xcmd <- paste0('# write.csv(result$part, file = "part_factorial.csv")')
   } else {
     xcmd <- ""
   }
