@@ -1,4 +1,4 @@
-# radiant.design 0.9.8.1
+# radiant.design 0.9.9.0
 
 * Checked for issues with upcoming dplyr 0.8.0
 * Option to pass additional arguments to `shiny::runApp` when starting radiant such as the port to use. For example, radiant.design::radiant.design("https://github.com/radiant-rstats/docs/raw/gh-pages/examples/demo-dvd-rnd.state.rda", port = 8080) 
