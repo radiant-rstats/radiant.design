@@ -1,3 +1,7 @@
+if (isTRUE(getOption("radiant.from.package"))) {
+  library(radiant.design)
+}
+
 shinyServer(function(input, output, session) {
 
   ## source shared functions
@@ -10,7 +14,7 @@ shinyServer(function(input, output, session) {
       file.path(getOption("radiant.path.data"), "app/tools/app"),
       file.path(getOption("radiant.path.data"), "app/tools/data")
     ),
-    pattern = "\\.(r|R)$", 
+    pattern = "\\.(r|R)$",
     full.names = TRUE)) {
     source(file, encoding = getOption("radiant.encoding"), local = TRUE)
   }
@@ -38,14 +42,12 @@ shinyServer(function(input, output, session) {
   ## packages to use for example data
   options(radiant.example.data = c("radiant.data", "radiant.design"))
 
-  ## 'sourcing' radiant's package functions in the server.R environment
-  if (!"package:radiant.design" %in% search() && getOption("radiant.path.design") == "..") {
-    ## for shiny-server and development
-    for (file in list.files("../../R", pattern = "\\.(r|R)$", full.names = TRUE))
+  ## 'sourcing' package functions in the server.R environment for development
+  if (!isTRUE(getOption("radiant.from.package"))) {
+    for (file in list.files("../../R", pattern = "\\.(r|R)$", full.names = TRUE)) {
       source(file, encoding = getOption("radiant.encoding"), local = TRUE)
-  } else {
-    ## for use with launcher
-    radiant.data::copy_all(radiant.design)
+    }
+    cat("\nGetting radiant.design from source ...\n")
   }
 
   ## source analysis tools for design app

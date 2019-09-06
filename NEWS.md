@@ -1,3 +1,7 @@
+# radiant.design 1.1.0.0
+
+* Numerous small code changes to support enhanced auto-completion, tooltips, and annotations in shinyAce 0.4.1
+
 # radiant.design 0.9.9.0
 
 * Checked for issues with upcoming dplyr 0.8.0

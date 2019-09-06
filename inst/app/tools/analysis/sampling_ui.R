@@ -68,7 +68,9 @@ output$sampling <- renderUI({
 })
 
 .sampling <- reactive({
-  do.call(sampling, smp_inputs())
+  smpi <- smp_inputs()
+  smpi$envir <- r_data
+  do.call(sampling, smpi)
 })
 
 .summary_sampling <- reactive({

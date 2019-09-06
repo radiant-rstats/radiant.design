@@ -7,6 +7,7 @@
 #' @param sample_size Number of units to select
 #' @param seed Random seed to use as the starting point
 #' @param data_filter Expression entered in, e.g., Data > View to filter the dataset in Radiant. The expression should be a string (e.g., "price > 10000")
+#' @param envir Environment to extract data from
 #'
 #' @return A list of variables defined in sampling as an object of class sampling
 #'
@@ -17,11 +18,12 @@
 #' @export
 sampling <- function(
   dataset, var, sample_size,
-  seed = NA, data_filter = ""
+  seed = NA, data_filter = "",
+  envir = parent.frame()
 ) {
 
   df_name <- if (is_string(dataset)) dataset else deparse(substitute(dataset))
-  dataset <- get_data(dataset, var, filt = data_filter)
+  dataset <- get_data(dataset, var, filt = data_filter, envir = envir)
   if (is_not(sample_size)) return(add_class("Please select a sample size of 1 or greater", "sampling"))
 
   ## use seed if provided
@@ -31,6 +33,9 @@ sampling <- function(
   dataset$rnd_number <- runif(nrow(dataset), min = 0, max = 1)
   seldat <- arrange(dataset, desc(rnd_number)) %>%
     .[seq_len(max(1, sample_size)), , drop = FALSE]
+
+  # removing unneeded arguments
+  rm(envir)
 
   as.list(environment()) %>% add_class("sampling")
 }
