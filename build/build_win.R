@@ -1,4 +1,4 @@
-d## build for windows
+## build for windows
 rv <- R.Version()
 rv <- paste0(rv$major,".", strsplit(rv$minor,".", fixed = TRUE)[[1]][1])
 
@@ -9,4 +9,4 @@ if (grepl("[nN]", rvprompt))
 ## build for windows
 setwd(rstudioapi::getActiveProject())
 f <- devtools::build(binary = TRUE)
-devtools::install()
+devtools::install(upgrade = "never")
