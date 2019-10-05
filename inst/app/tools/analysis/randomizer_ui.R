@@ -14,7 +14,7 @@ rndr_inputs <- reactive({
         {updateTextInput(session, "rndr_conditions", value = paste0(., collapse = ", "))}
   rndr_args$probs <- unlist(strsplit(rndr_args$probs, "(\\s*,\\s*|\\s*;\\s*|\\s+)")) %>%
     as.numeric()
-  rndr_args 
+  rndr_args
 })
 
 output$ui_rndr_vars <- renderUI({
@@ -111,7 +111,8 @@ output$randomizer <- renderUI({
       "Summary",
       download_link("dl_randomizer"), br(),
       verbatimTextOutput("summary_randomizer"),
-      conditionalPanel("input.rndr_vars != null",
+      conditionalPanel(
+        "input.rndr_vars != undefined && input.rndr_vars != null && input.rndr_vars.length > 0",
         DT::dataTableOutput("table_randomizer")
       )
     )
@@ -163,11 +164,11 @@ observeEvent(input$randomizer_report, {
       updateTextInput(session, inputId = "rndr_name", value = dataset)
     }
     xcmd <- paste0(xcmd, "\n", dataset, " <- result$dataset\nregister(\"", dataset, "\")")
-  } 
+  }
 
   update_report(
     inp_main = clean_args(rndr_inputs(), rndr_args),
-    fun_name = "randomizer", outputs = "summary", 
+    fun_name = "randomizer", outputs = "summary",
     xcmd = xcmd, figs = FALSE
   )
 })
@@ -182,8 +183,8 @@ dl_randomizer <- function(path) {
 }
 
 download_handler(
-  id = "dl_randomizer", 
-  fun = dl_randomizer, 
+  id = "dl_randomizer",
+  fun = dl_randomizer,
   fn = function() paste0(input$dataset, "_rnd"),
   type = "csv",
   caption = "Save random assignment"
