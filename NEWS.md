@@ -1,3 +1,8 @@
+# radiant.design 1.1.1.0
+
+* New `Random assignment` tool based on the `randomizr` package. Uses the `randomizr::block_ra` function for stratified random sampling. See the help file for more information
+* Various enhancements to make _Design > Random sampling_ more flexible. See the updated help file 
+
 # radiant.design 1.1.0.0
 
 * Numerous small code changes to support enhanced auto-completion, tooltips, and annotations in shinyAce 0.4.1

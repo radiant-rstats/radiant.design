@@ -1,5 +1,6 @@
 help_design <- c(
-  "Design of Experiments" = "doe.md", "Random sampling" = "sampling.md", "Sample size (single)" = "sample_size.Rmd",
+  "Design of Experiments" = "doe.md", "Random sampling" = "sampling.md",
+  "Random assignment" = "randomizer.md", "Sample size (single)" = "sample_size.Rmd",
   "Sample size (compare)" = "sample_size_comp.Rmd"
 )
 output$help_design <- reactive(append_help("help_design", file.path(getOption("radiant.path.design"), "app/tools/help"), Rmd = TRUE))

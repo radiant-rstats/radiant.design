@@ -50,6 +50,8 @@ reference:
   contents:
     - sampling
     - summary.sampling
+    - randomizer
+    - summary.randomizer
     - sample_size
     - summary.sample_size
     - sample_size_comp
@@ -71,5 +73,6 @@ articles:
   contents:
     - pkgdown/doe
     - pkgdown/sampling
+    - pkgdown/randomizer
     - pkgdown/sample_size
     - pkgdown/sample_size_comp

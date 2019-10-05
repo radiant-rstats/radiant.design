@@ -15,20 +15,26 @@ smp_inputs <- reactive({
   smp_args
 })
 
-output$ui_smp_var <- renderUI({
+output$ui_smp_vars <- renderUI({
   vars <- varnames()
   selectInput(
-    inputId = "smp_var", label = "ID variable:",
-    choices = vars, selected = state_single("smp_var", vars),
-    multiple = FALSE
+    inputId = "smp_vars", label = "Variables:",
+    choices = vars, selected = state_multiple("smp_vars", vars, vars),
+    multiple = TRUE, selectize = FALSE,
+    size = min(12, length(vars))
   )
+})
+
+output$ui_smp_name <- renderUI({
+  req(input$dataset)
+  textInput("smp_name", "Store as:", "", placeholder = "Provide a name")
 })
 
 output$ui_sampling <- renderUI({
   req(input$dataset)
   tagList(
     wellPanel(
-      uiOutput("ui_smp_var"),
+      uiOutput("ui_smp_vars"),
       tags$table(
         tags$td(numericInput(
           "smp_sample_size", "Sample size:", min = 1,
@@ -36,8 +42,15 @@ output$ui_sampling <- renderUI({
         )),
         tags$td(numericInput(
           "smp_seed", label = "Rnd. seed:", min = 0,
-          value = state_init("doe_seed", init = NA)
+          value = state_init("smp_seed", init = 1234)
         ))
+      ),
+      checkboxInput("smp_sframe", "Show sampling frame ", value = state_init("smp_sframe", FALSE))
+    ),
+    wellPanel(
+      tags$table(
+        tags$td(uiOutput("ui_smp_name")),
+        tags$td(actionButton("smp_store", "Store", icon = icon("plus")), style = "padding-top:30px;")
       )
     ),
     help_and_report(
@@ -55,7 +68,12 @@ output$sampling <- renderUI({
     tabPanel(
       "Summary",
       download_link("dl_sample"), br(),
-      verbatimTextOutput("summary_sampling")
+      verbatimTextOutput("summary_sampling"),
+      DT::dataTableOutput("table_sampling"),
+      conditionalPanel(
+        "input.smp_sframe == true",
+        DT::dataTableOutput("table_sampling_frame")
+      )
     )
   )
 
@@ -68,34 +86,70 @@ output$sampling <- renderUI({
 })
 
 .sampling <- reactive({
+  validate(
+    need(input$smp_vars, "Select at least one variable"),
+    need(available(input$smp_vars), "Some selected variables are not available in this dataset")
+  )
   smpi <- smp_inputs()
   smpi$envir <- r_data
   do.call(sampling, smpi)
 })
 
 .summary_sampling <- reactive({
-  rt <-
-    "Entries for the selected ID variable should be unique (i.e., no duplicates).\nIf a variable of this type is not available please select another dataset.\n\n" %>%
-    suggest_data("rndnames")
+  if (not_available(input$smp_vars)) {
+    "For random sampling each row in the data should be distinct\n(i.e., no duplicates). Please select an appropriate dataset.\n\n" %>%
+      suggest_data("rndnames")
+  } else if (is_empty(input$smp_sample_size)) {
+    "Please select a sample size of 1 or greater"
+  } else {
+    summary(.sampling())
+  }
+})
 
-  if (not_available(input$smp_var)) return(rt)
-  if (is_not(input$smp_sample_size)) return("Please select a sample size of 1 or greater.")
-  if (has_duplicates(.get_data()[[input$smp_var]])) return(rt)
+output$table_sampling <- DT::renderDataTable({
+  req(input$smp_vars, input$smp_sample_size)
+  withProgress(message = "Generating sample", value = 1, {
+    smp <- .sampling()$seldat
+    dom <- ifelse(nrow(smp) <= 10, "t", "tip")
+    dtab(smp, dom = dom, caption = "Selected cases")
+  })
+})
 
-  summary(.sampling(), prn = TRUE)
+output$table_sampling_frame <- DT::renderDataTable({
+  req(input$smp_vars, input$smp_sample_size, input$smp_sframe)
+  withProgress(message = "Show sampling frame", value = 1, {
+    smp <- .sampling()
+    dtab(smp$dataset, dom = "tip", caption = "Sampling frame")
+  })
 })
 
 observeEvent(input$sampling_report, {
+  req(input$smp_sample_size)
+  nr <- min(100, max(input$smp_sample_size, 1))
+  xcmd <- paste0("# dtab(result$seldat, dom = \"tip\", caption = \"Selected cases\", nr = ", nr, ")")
+  if (isTRUE(input$smp_sframe)) {
+    xcmd <- paste0(xcmd, "\n# dtab(result$dataset, dom = \"tip\", caption = \"Sampling frame\", nr = 100)")
+  }
+  if (!is_empty(input$smp_name)) {
+    dataset <- fix_names(input$smp_name)
+    if (input$smp_name != dataset) {
+      updateTextInput(session, inputId = "smp_name", value = dataset)
+    }
+    xcmd <- paste0(xcmd, "\n", dataset, " <- select(result$seldat, -rnd_number)\nregister(\"", dataset, "\")")
+  } 
+
   update_report(
     inp_main = clean_args(smp_inputs(), smp_args),
-    fun_name = "sampling", outputs = "summary", figs = FALSE
+    fun_name = "sampling", outputs = "summary", 
+    xcmd = xcmd, figs = FALSE
   )
 })
 
 dl_sample <- function(path) {
   resp <- .sampling()
   if ("seldat" %in% names(resp)) {
-    write.csv(resp$seldat, file = path, row.names = FALSE)
+    seldat <- resp$seldat %>% select_at(setdiff(colnames(.), "rnd_number"))
+    write.csv(seldat, file = path, row.names = FALSE)
   } else {
     cat("No valid sample available", file = path)
   }
@@ -108,3 +162,37 @@ download_handler(
   type = "csv",
   caption = "Save random sample"
 )
+
+observeEvent(input$smp_store, {
+  req(input$smp_name)
+  resp <- .sampling()
+  if (!"seldat" %in% names(resp)) {
+    cat("No valid sample available")
+    return()
+  } 
+ 
+  dataset <- fix_names(input$smp_name)
+  if (input$smp_name != dataset) {
+    updateTextInput(session, inputId = "smp_name", value = dataset)
+  }
+
+  r_data[[dataset]] <- resp$seldat %>% select_at(setdiff(colnames(.), "rnd_number"))
+  register(dataset)
+  updateSelectInput(session, "dataset", selected = input$dataset)
+
+  ## See https://shiny.rstudio.com/reference/shiny/latest/modalDialog.html
+  showModal(
+    modalDialog(
+      title = "Data Stored",
+      span(
+        paste0("Dataset '", dataset, "' was successfully added to the
+                datasets dropdown. Add code to Report > Rmd or
+                Report > R to (re)create the results by clicking the
+                report icon on the bottom left of your screen.")
+      ),
+      footer = modalButton("OK"),
+      size = "s",
+      easyClose = TRUE
+    )
+  )
+})

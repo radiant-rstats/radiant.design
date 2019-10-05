@@ -1,7 +1,7 @@
 // based on http://stackoverflow.com/a/32340906/1974918
 // and http://stackoverflow.com/a/8774101/1974918
 // run_return.js file not correctly loaded when running radiant design ui.R
-$(document).keydown(function(event) {
+$(document).keydown(function (event) {
   // ...uploads don't have a visibility property/method ...
   if ($("#doe_download").is(":visible") && (event.metaKey || event.ctrlKey) && event.shiftKey === false && event.keyCode == 79) {
     // file dialog pops up twice for some weird reason when using ui.R
@@ -15,4 +15,11 @@ $(document).keydown(function(event) {
     document.getElementById("doe_download").click();
     event.preventDefault();
   }
+
+  if ($("#smp_name").is(":focus") && event.keyCode == 13) {
+    $("#smp_store").click();
+  } else if ($("#rndr_name").is(":focus") && event.keyCode == 13) {
+    $("#rndr_store").click();
+  }
+
 });
