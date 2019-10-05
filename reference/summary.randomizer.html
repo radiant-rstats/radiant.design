@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sample size calculation — sample_size • radiant.design</title>
+<title>Summary method for the randomizer function — summary.randomizer • radiant.design</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
 
 
 
-<meta property="og:title" content="Sample size calculation — sample_size" />
-<meta property="og:description" content="Sample size calculation" />
+<meta property="og:title" content="Summary method for the randomizer function — summary.randomizer" />
+<meta property="og:description" content="Summary method for the randomizer function" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -159,111 +159,66 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Sample size calculation</h1>
-    <small class="dont-index">Source: <a href='https://github.com/radiant-rstats/radiant.design/blob/master/R/sample_size.R'><code>R/sample_size.R</code></a></small>
-    <div class="hidden name"><code>sample_size.Rd</code></div>
+    <h1>Summary method for the randomizer function</h1>
+    <small class="dont-index">Source: <a href='https://github.com/radiant-rstats/radiant.design/blob/master/R/randomizer.R'><code>R/randomizer.R</code></a></small>
+    <div class="hidden name"><code>summary.randomizer.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Sample size calculation</p>
+    <p>Summary method for the randomizer function</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sample_size</span>(<span class='no'>type</span>, <span class='kw'>err_mean</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>sd_mean</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>err_prop</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
-  <span class='kw'>p_prop</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>conf_lev</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>incidence</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>response</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>pop_correction</span> <span class='kw'>=</span> <span class='st'>"no"</span>, <span class='kw'>pop_size</span> <span class='kw'>=</span> <span class='fl'>1e+06</span>)</pre>
+    <pre class="usage"><span class='co'># S3 method for randomizer</span>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>dec</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>type</th>
-      <td><p>Choose "mean" or "proportion"</p></td>
+      <th>object</th>
+      <td><p>Return value from <code>randomizer</code></p></td>
     </tr>
     <tr>
-      <th>err_mean</th>
-      <td><p>Acceptable Error for Mean</p></td>
+      <th>dec</th>
+      <td><p>Number of decimals to show</p></td>
     </tr>
     <tr>
-      <th>sd_mean</th>
-      <td><p>Standard deviation for Mean</p></td>
-    </tr>
-    <tr>
-      <th>err_prop</th>
-      <td><p>Acceptable Error for Proportion</p></td>
-    </tr>
-    <tr>
-      <th>p_prop</th>
-      <td><p>Initial proportion estimate for Proportion</p></td>
-    </tr>
-    <tr>
-      <th>conf_lev</th>
-      <td><p>Confidence level</p></td>
-    </tr>
-    <tr>
-      <th>incidence</th>
-      <td><p>Incidence rate (i.e., fraction of valid respondents)</p></td>
-    </tr>
-    <tr>
-      <th>response</th>
-      <td><p>Response rate</p></td>
-    </tr>
-    <tr>
-      <th>pop_correction</th>
-      <td><p>Apply correction for population size ("yes","no")</p></td>
-    </tr>
-    <tr>
-      <th>pop_size</th>
-      <td><p>Population size</p></td>
+      <th>...</th>
+      <td><p>further arguments passed to or from other methods</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A list of variables defined in sample_size as an object of class sample_size</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>See <a href='https://radiant-rstats.github.io/docs/design/sample_size.html'>https://radiant-rstats.github.io/docs/design/sample_size.html</a> for an example in Radiant</p>
+    <p>See <a href='https://radiant-rstats.github.io/docs/design/randomizer.html'>https://radiant-rstats.github.io/docs/design/randomizer.html</a> for an example in Radiant</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>summary.sample_size</code> to summarize results</p></div>
+    <div class='dont-index'><p><code>randomizer</code> to generate the results</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>sample_size</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>err_mean</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>sd_mean</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='output co'>#&gt; $n
-#&gt; [1] 97
+    <pre class="examples"><div class='input'><span class='fu'>randomizer</span>(<span class='no'>rndnames</span>, <span class='st'>"Names"</span>, <span class='kw'>conditions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"test"</span>, <span class='st'>"control"</span>)) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>()</div><div class='output co'>#&gt; Random assignment (simple random)
+#&gt; Data         : rndnames 
+#&gt; Variables    : Names 
+#&gt; Conditions   : test control 
+#&gt; Probabilities: 0.5 0.5 
+#&gt; Random seed  : 1234 
+#&gt; Duplicates   : Based on selected variables, no duplicate rows exist 
 #&gt; 
-#&gt; $zval
-#&gt; [1] 1.959964
+#&gt; Assigment frequencies:
 #&gt; 
-#&gt; $type
-#&gt; [1] "mean"
+#&gt;    test control     Sum 
+#&gt;      50      50     100 
 #&gt; 
-#&gt; $err_mean
-#&gt; [1] 2
+#&gt; Assigment proportions:
 #&gt; 
-#&gt; $sd_mean
-#&gt; [1] 10
-#&gt; 
-#&gt; $conf_lev
-#&gt; [1] 0.95
-#&gt; 
-#&gt; $incidence
-#&gt; [1] 1
-#&gt; 
-#&gt; $response
-#&gt; [1] 1
-#&gt; 
-#&gt; $pop_correction
-#&gt; [1] "no"
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "sample_size" "list"       </div><div class='input'>
+#&gt;    test control 
+#&gt;     0.5     0.5 </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
       <li><a href="#details">Details</a></li>
       <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>

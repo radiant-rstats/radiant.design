@@ -75,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">radiant.design</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -168,7 +168,7 @@
     <p>Simple random sampling</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sampling</span>(<span class='no'>dataset</span>, <span class='no'>var</span>, <span class='no'>sample_size</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>data_filter</span> <span class='kw'>=</span> <span class='st'>""</span>,
+    <pre class="usage"><span class='fu'>sampling</span>(<span class='no'>dataset</span>, <span class='no'>vars</span>, <span class='no'>sample_size</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1234</span>, <span class='kw'>data_filter</span> <span class='kw'>=</span> <span class='st'>""</span>,
   <span class='kw'>envir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -179,8 +179,8 @@
       <td><p>Dataset to sample from</p></td>
     </tr>
     <tr>
-      <th>var</th>
-      <td><p>The variable to sample</p></td>
+      <th>vars</th>
+      <td><p>The variables to sample</p></td>
     </tr>
     <tr>
       <th>sample_size</th>
@@ -202,7 +202,7 @@
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of variables defined in sampling as an object of class sampling</p>
+    <p>A list  of class 'sampling' with all variables defined in the sampling function</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>See <a href='https://radiant-rstats.github.io/docs/design/sampling.html'>https://radiant-rstats.github.io/docs/design/sampling.html</a> for an example in Radiant</p>
@@ -212,47 +212,235 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'>sampling</span>(<span class='no'>rndnames</span>, <span class='st'>"Names"</span>, <span class='fl'>10</span>)</div><div class='output co'>#&gt; $seldat
-#&gt; # A tibble: 10 x 2
-#&gt;    Names               rnd_number
-#&gt;    &lt;chr&gt;                    &lt;dbl&gt;
-#&gt;  1 Many Mcvey               0.998
-#&gt;  2 Maximo Manzi             0.989
-#&gt;  3 Antonietta Alfano        0.977
-#&gt;  4 Shawn Salmon             0.967
-#&gt;  5 Dalene Dubreuil          0.960
-#&gt;  6 Christine Chevalier      0.955
-#&gt;  7 Federico Fillion         0.935
-#&gt;  8 Hubert Hyer              0.932
-#&gt;  9 Sanford Steinfeldt       0.930
-#&gt; 10 Dagny Distefano          0.913
+#&gt;    rnd_number               Names
+#&gt; 1   0.9921504        Jarrod Jolly
+#&gt; 2   0.9264005 Matilda Mcgillivray
+#&gt; 3   0.9234335      Beau Bannerman
+#&gt; 4   0.9146582        Tomas Tupper
+#&gt; 5   0.9004246     Bernardine Bohr
+#&gt; 6   0.8985805          Nona Nosal
+#&gt; 7   0.8961858        Janey Jetton
+#&gt; 8   0.8928364     Amberly Ahumada
+#&gt; 9   0.8648338        Latisha Lutz
+#&gt; 10  0.8609154           Jc Julius
+#&gt; 
+#&gt; $rnd_number
+#&gt;      rnd_number
+#&gt; 1   0.113703411
+#&gt; 2   0.622299405
+#&gt; 3   0.609274733
+#&gt; 4   0.623379442
+#&gt; 5   0.860915384
+#&gt; 6   0.640310605
+#&gt; 7   0.009495756
+#&gt; 8   0.232550506
+#&gt; 9   0.666083758
+#&gt; 10  0.514251141
+#&gt; 11  0.693591292
+#&gt; 12  0.544974836
+#&gt; 13  0.282733584
+#&gt; 14  0.923433484
+#&gt; 15  0.292315840
+#&gt; 16  0.837295628
+#&gt; 17  0.286223285
+#&gt; 18  0.266820780
+#&gt; 19  0.186722790
+#&gt; 20  0.232225911
+#&gt; 21  0.316612455
+#&gt; 22  0.302693371
+#&gt; 23  0.159046003
+#&gt; 24  0.039995918
+#&gt; 25  0.218799541
+#&gt; 26  0.810598552
+#&gt; 27  0.525697547
+#&gt; 28  0.914658166
+#&gt; 29  0.831345047
+#&gt; 30  0.045770263
+#&gt; 31  0.456091482
+#&gt; 32  0.265186672
+#&gt; 33  0.304672203
+#&gt; 34  0.507306870
+#&gt; 35  0.181096208
+#&gt; 36  0.759670635
+#&gt; 37  0.201248038
+#&gt; 38  0.258809819
+#&gt; 39  0.992150418
+#&gt; 40  0.807352340
+#&gt; 41  0.553333591
+#&gt; 42  0.646406094
+#&gt; 43  0.311824307
+#&gt; 44  0.621819198
+#&gt; 45  0.329770176
+#&gt; 46  0.501997473
+#&gt; 47  0.677094527
+#&gt; 48  0.484991239
+#&gt; 49  0.243928827
+#&gt; 50  0.765459788
+#&gt; 51  0.073779880
+#&gt; 52  0.309686602
+#&gt; 53  0.717271743
+#&gt; 54  0.504545912
+#&gt; 55  0.152998959
+#&gt; 56  0.503933488
+#&gt; 57  0.493960923
+#&gt; 58  0.751200197
+#&gt; 59  0.174649824
+#&gt; 60  0.848392410
+#&gt; 61  0.864833832
+#&gt; 62  0.041857275
+#&gt; 63  0.317182155
+#&gt; 64  0.013749939
+#&gt; 65  0.239025727
+#&gt; 66  0.706494617
+#&gt; 67  0.308094757
+#&gt; 68  0.508547566
+#&gt; 69  0.051646619
+#&gt; 70  0.564569840
+#&gt; 71  0.121480187
+#&gt; 72  0.892836382
+#&gt; 73  0.014627256
+#&gt; 74  0.783121104
+#&gt; 75  0.089961333
+#&gt; 76  0.519189981
+#&gt; 77  0.384266688
+#&gt; 78  0.070052497
+#&gt; 79  0.320644422
+#&gt; 80  0.668495397
+#&gt; 81  0.926400476
+#&gt; 82  0.471909721
+#&gt; 83  0.142615343
+#&gt; 84  0.544269755
+#&gt; 85  0.196174652
+#&gt; 86  0.898580489
+#&gt; 87  0.389499785
+#&gt; 88  0.310870780
+#&gt; 89  0.160028663
+#&gt; 90  0.896185850
+#&gt; 91  0.166393780
+#&gt; 92  0.900424596
+#&gt; 93  0.134078195
+#&gt; 94  0.131614134
+#&gt; 95  0.105287503
+#&gt; 96  0.511583581
+#&gt; 97  0.300199054
+#&gt; 98  0.026716895
+#&gt; 99  0.309647431
+#&gt; 100 0.742119657
 #&gt; 
 #&gt; $df_name
 #&gt; [1] "rndnames"
 #&gt; 
 #&gt; $dataset
-#&gt; # A tibble: 100 x 2
-#&gt;    Names             rnd_number
-#&gt;    &lt;chr&gt;                  &lt;dbl&gt;
-#&gt;  1 Ervin Escalona        0.686 
-#&gt;  2 Allan Ammerman        0.417 
-#&gt;  3 Milton Mothershed     0.757 
-#&gt;  4 Deshawn Dawn          0.776 
-#&gt;  5 Jc Julius             0.574 
-#&gt;  6 Denver Delph          0.189 
-#&gt;  7 Jed Jameson           0.758 
-#&gt;  8 Zachariah Zeno        0.0927
-#&gt;  9 Cyril Class           0.622 
-#&gt; 10 Lauren Lukas          0.416 
-#&gt; # … with 90 more rows
+#&gt;      rnd_number               Names
+#&gt; 1   0.113703411      Ervin Escalona
+#&gt; 2   0.622299405      Allan Ammerman
+#&gt; 3   0.609274733   Milton Mothershed
+#&gt; 4   0.623379442        Deshawn Dawn
+#&gt; 5   0.860915384           Jc Julius
+#&gt; 6   0.640310605        Denver Delph
+#&gt; 7   0.009495756         Jed Jameson
+#&gt; 8   0.232550506      Zachariah Zeno
+#&gt; 9   0.666083758         Cyril Class
+#&gt; 10  0.514251141        Lauren Lukas
+#&gt; 11  0.693591292       Hershel Hentz
+#&gt; 12  0.544974836     Darrell Draheim
+#&gt; 13  0.282733584        Shawn Salmon
+#&gt; 14  0.923433484      Beau Bannerman
+#&gt; 15  0.292315840      Stephen Slough
+#&gt; 16  0.837295628        Cole Cropper
+#&gt; 17  0.286223285  Stacy Schrecengost
+#&gt; 18  0.266820780        Kent Keasler
+#&gt; 19  0.186722790          Omar Ogden
+#&gt; 20  0.232225911        Perry Pearcy
+#&gt; 21  0.316612455    Courtney Carmody
+#&gt; 22  0.302693371        Derek Dorsch
+#&gt; 23  0.159046003     Napoleon Norman
+#&gt; 24  0.039995918        Rodney Regis
+#&gt; 25  0.218799541         Hubert Hyer
+#&gt; 26  0.810598552       Foster Fugate
+#&gt; 27  0.525697547      Emery Etchison
+#&gt; 28  0.914658166        Tomas Tupper
+#&gt; 29  0.831345047        Robin Ramsay
+#&gt; 30  0.045770263          Tom Tomita
+#&gt; 31  0.456091482     Travis Thornley
+#&gt; 32  0.265186672        Hank Heavner
+#&gt; 33  0.304672203          Ahmed Avey
+#&gt; 34  0.507306870  Sanford Steinfeldt
+#&gt; 35  0.181096208   Douglass Daddario
+#&gt; 36  0.759670635       Dominic Duhon
+#&gt; 37  0.201248038      Emanuel Esquer
+#&gt; 38  0.258809819    Federico Fillion
+#&gt; 39  0.992150418        Jarrod Jolly
+#&gt; 40  0.807352340  Lawrence Levasseur
+#&gt; 41  0.553333591       Kurtis Kieser
+#&gt; 42  0.646406094           Ty Troyer
+#&gt; 43  0.311824307         Bryce Billy
+#&gt; 44  0.621819198         Brooks Buie
+#&gt; 45  0.329770176        Maximo Manzi
+#&gt; 46  0.501997473           Lino Luse
+#&gt; 47  0.677094527      Mark Mccloskey
+#&gt; 48  0.484991239         Tory Tilman
+#&gt; 49  0.243928827          Angel Aker
+#&gt; 50  0.765459788         Jean Joseph
+#&gt; 51  0.073779880       Susann Sauers
+#&gt; 52  0.309686602     Deborah Deckard
+#&gt; 53  0.717271743          Many Mcvey
+#&gt; 54  0.504545912     Dalene Dubreuil
+#&gt; 55  0.152998959  Gabriella Gurganus
+#&gt; 56  0.503933488      Kellie Kealoha
+#&gt; 57  0.493960923           Amie Asay
+#&gt; 58  0.751200197       Robbi Randell
+#&gt; 59  0.174649824     Jacquelin James
+#&gt; 60  0.848392410    Jennefer Jansson
+#&gt; 61  0.864833832        Latisha Lutz
+#&gt; 62  0.041857275       Glenda Garris
+#&gt; 63  0.317182155      Elana Eslinger
+#&gt; 64  0.013749939    Margene Martelli
+#&gt; 65  0.239025727       Breana Ballou
+#&gt; 66  0.706494617    Christal Chaires
+#&gt; 67  0.308094757      Carlotta Clack
+#&gt; 68  0.508547566       Doretha Dever
+#&gt; 69  0.051646619           Eden Epps
+#&gt; 70  0.564569840        Essie Elwood
+#&gt; 71  0.121480187      Antonina Alers
+#&gt; 72  0.892836382     Amberly Ahumada
+#&gt; 73  0.014627256 Bernadette Basnight
+#&gt; 74  0.783121104 Christine Chevalier
+#&gt; 75  0.089961333       Shemeka Solar
+#&gt; 76  0.519189981   Antonietta Alfano
+#&gt; 77  0.384266688   Rozanne Raulerson
+#&gt; 78  0.070052497          Willa Well
+#&gt; 79  0.320644422     Jazmin Jeffcoat
+#&gt; 80  0.668495397     Marcell Meisner
+#&gt; 81  0.926400476 Matilda Mcgillivray
+#&gt; 82  0.471909721   Davida Derrickson
+#&gt; 83  0.142615343    Clarita Calandra
+#&gt; 84  0.544269755     Angelita Archer
+#&gt; 85  0.196174652       Dorinda Dehne
+#&gt; 86  0.898580489          Nona Nosal
+#&gt; 87  0.389499785       Jesusa Jordon
+#&gt; 88  0.310870780       Elinore Elmer
+#&gt; 89  0.160028663          Leanne Lew
+#&gt; 90  0.896185850        Janey Jetton
+#&gt; 91  0.166393780      Linette Lavery
+#&gt; 92  0.900424596     Bernardine Bohr
+#&gt; 93  0.134078195     Dagny Distefano
+#&gt; 94  0.131614134      Racheal Ravelo
+#&gt; 95  0.105287503     Kayla Krajewski
+#&gt; 96  0.511583581   Marylee Malatesta
+#&gt; 97  0.300199054         Janna Jacob
+#&gt; 98  0.026716895         Alita Aikin
+#&gt; 99  0.309647431       Junko Jungers
+#&gt; 100 0.742119657         Denese Diem
 #&gt; 
-#&gt; $var
+#&gt; $vars
 #&gt; [1] "Names"
 #&gt; 
 #&gt; $sample_size
 #&gt; [1] 10
 #&gt; 
 #&gt; $seed
-#&gt; [1] NA
+#&gt; [1] 1234
 #&gt; 
 #&gt; $data_filter
 #&gt; [1] ""
@@ -281,7 +469,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>

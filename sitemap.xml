@@ -19,6 +19,9 @@
     <loc>https://radiant-rstats.github.io/radiant.design/reference/radiant.design_window.html</loc>
   </url>
   <url>
+    <loc>https://radiant-rstats.github.io/radiant.design/reference/randomizer.html</loc>
+  </url>
+  <url>
     <loc>https://radiant-rstats.github.io/radiant.design/reference/rndnames.html</loc>
   </url>
   <url>
@@ -34,6 +37,9 @@
     <loc>https://radiant-rstats.github.io/radiant.design/reference/summary.doe.html</loc>
   </url>
   <url>
+    <loc>https://radiant-rstats.github.io/radiant.design/reference/summary.randomizer.html</loc>
+  </url>
+  <url>
     <loc>https://radiant-rstats.github.io/radiant.design/reference/summary.sample_size.html</loc>
   </url>
   <url>
@@ -44,6 +50,9 @@
   </url>
   <url>
     <loc>https://radiant-rstats.github.io/radiant.design/articles/pkgdown/doe.html</loc>
+  </url>
+  <url>
+    <loc>https://radiant-rstats.github.io/radiant.design/articles/pkgdown/randomizer.html</loc>
   </url>
   <url>
     <loc>https://radiant-rstats.github.io/radiant.design/articles/pkgdown/sample_size.html</loc>

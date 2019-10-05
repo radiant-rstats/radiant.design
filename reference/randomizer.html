@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sample size calculation — sample_size • radiant.design</title>
+<title>Randomize cases into experimental conditions — randomizer • radiant.design</title>
 
 
 <!-- jquery -->
@@ -41,8 +41,8 @@
 
 
 
-<meta property="og:title" content="Sample size calculation — sample_size" />
-<meta property="og:description" content="Sample size calculation" />
+<meta property="og:title" content="Randomize cases into experimental conditions — randomizer" />
+<meta property="og:description" content="Randomize cases into experimental conditions" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -159,104 +159,79 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Sample size calculation</h1>
-    <small class="dont-index">Source: <a href='https://github.com/radiant-rstats/radiant.design/blob/master/R/sample_size.R'><code>R/sample_size.R</code></a></small>
-    <div class="hidden name"><code>sample_size.Rd</code></div>
+    <h1>Randomize cases into experimental conditions</h1>
+    <small class="dont-index">Source: <a href='https://github.com/radiant-rstats/radiant.design/blob/master/R/randomizer.R'><code>R/randomizer.R</code></a></small>
+    <div class="hidden name"><code>randomizer.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Sample size calculation</p>
+    <p>Randomize cases into experimental conditions</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sample_size</span>(<span class='no'>type</span>, <span class='kw'>err_mean</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>sd_mean</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>err_prop</span> <span class='kw'>=</span> <span class='fl'>0.1</span>,
-  <span class='kw'>p_prop</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>conf_lev</span> <span class='kw'>=</span> <span class='fl'>0.95</span>, <span class='kw'>incidence</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>response</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>pop_correction</span> <span class='kw'>=</span> <span class='st'>"no"</span>, <span class='kw'>pop_size</span> <span class='kw'>=</span> <span class='fl'>1e+06</span>)</pre>
+    <pre class="usage"><span class='fu'>randomizer</span>(<span class='no'>dataset</span>, <span class='no'>vars</span>, <span class='kw'>conditions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>), <span class='kw'>blocks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>probs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1234</span>, <span class='kw'>data_filter</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>envir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>type</th>
-      <td><p>Choose "mean" or "proportion"</p></td>
+      <th>dataset</th>
+      <td><p>Dataset to sample from</p></td>
     </tr>
     <tr>
-      <th>err_mean</th>
-      <td><p>Acceptable Error for Mean</p></td>
+      <th>vars</th>
+      <td><p>The variables to sample</p></td>
     </tr>
     <tr>
-      <th>sd_mean</th>
-      <td><p>Standard deviation for Mean</p></td>
+      <th>conditions</th>
+      <td><p>Conditions to assign to</p></td>
     </tr>
     <tr>
-      <th>err_prop</th>
-      <td><p>Acceptable Error for Proportion</p></td>
+      <th>blocks</th>
+      <td><p>A vector to use for blocking or a data.frame from which to construct a blocking vector</p></td>
     </tr>
     <tr>
-      <th>p_prop</th>
-      <td><p>Initial proportion estimate for Proportion</p></td>
+      <th>probs</th>
+      <td><p>A vector of assignment probabilities for each treatment conditions. By default each condition is assigned with equal probability</p></td>
     </tr>
     <tr>
-      <th>conf_lev</th>
-      <td><p>Confidence level</p></td>
+      <th>seed</th>
+      <td><p>Random seed to use as the starting point</p></td>
     </tr>
     <tr>
-      <th>incidence</th>
-      <td><p>Incidence rate (i.e., fraction of valid respondents)</p></td>
+      <th>data_filter</th>
+      <td><p>Expression entered in, e.g., Data &gt; View to filter the dataset in Radiant. The expression should be a string (e.g., "price &gt; 10000")</p></td>
     </tr>
     <tr>
-      <th>response</th>
-      <td><p>Response rate</p></td>
-    </tr>
-    <tr>
-      <th>pop_correction</th>
-      <td><p>Apply correction for population size ("yes","no")</p></td>
-    </tr>
-    <tr>
-      <th>pop_size</th>
-      <td><p>Population size</p></td>
+      <th>envir</th>
+      <td><p>Environment to extract data from</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of variables defined in sample_size as an object of class sample_size</p>
+    <p>A list of variables defined in randomizer as an object of class randomizer</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>See <a href='https://radiant-rstats.github.io/docs/design/sample_size.html'>https://radiant-rstats.github.io/docs/design/sample_size.html</a> for an example in Radiant</p>
+    <p>Wrapper for the complete_ra and block_ra from the randomizr package. See <a href='https://radiant-rstats.github.io/docs/design/randomizer.html'>https://radiant-rstats.github.io/docs/design/randomizer.html</a> for an example in Radiant</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>summary.sample_size</code> to summarize results</p></div>
+    <div class='dont-index'><p><code>summary.sampling</code> to summarize results</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>sample_size</span>(<span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"mean"</span>, <span class='kw'>err_mean</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>sd_mean</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='output co'>#&gt; $n
-#&gt; [1] 97
-#&gt; 
-#&gt; $zval
-#&gt; [1] 1.959964
-#&gt; 
-#&gt; $type
-#&gt; [1] "mean"
-#&gt; 
-#&gt; $err_mean
-#&gt; [1] 2
-#&gt; 
-#&gt; $sd_mean
-#&gt; [1] 10
-#&gt; 
-#&gt; $conf_lev
-#&gt; [1] 0.95
-#&gt; 
-#&gt; $incidence
-#&gt; [1] 1
-#&gt; 
-#&gt; $response
-#&gt; [1] 1
-#&gt; 
-#&gt; $pop_correction
-#&gt; [1] "no"
-#&gt; 
-#&gt; attr(,"class")
-#&gt; [1] "sample_size" "list"       </div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>randomizer</span>(<span class='no'>rndnames</span>, <span class='st'>"Names"</span>, <span class='kw'>conditions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"test"</span>, <span class='st'>"control"</span>)) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>()</div><div class='output co'>#&gt; List of 8
+#&gt;  $ df_name    : chr "rndnames"
+#&gt;  $ dataset    :'data.frame':	100 obs. of  2 variables:
+#&gt;   ..$ .conditions: Factor w/ 2 levels "test","control": 1 2 2 2 2 2 1 1 2 1 ...
+#&gt;   ..$ Names      : chr [1:100] "Ervin Escalona" "Allan Ammerman" "Milton Mothershed" "Deshawn Dawn" ...
+#&gt;  $ vars       : chr "Names"
+#&gt;  $ conditions : chr [1:2] "test" "control"
+#&gt;  $ blocks     : NULL
+#&gt;  $ probs      : num [1:2] 0.5 0.5
+#&gt;  $ seed       : chr "1234"
+#&gt;  $ data_filter: chr ""
+#&gt;  - attr(*, "class")= chr [1:2] "randomizer" "list"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

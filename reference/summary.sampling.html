@@ -75,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">radiant.design</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -169,7 +169,7 @@
     </div>
 
     <pre class="usage"><span class='co'># S3 method for sampling</span>
-<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>prn</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>dec</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='no'>...</span>)</pre>
+<span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>(<span class='no'>object</span>, <span class='kw'>dec</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='no'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -177,10 +177,6 @@
     <tr>
       <th>object</th>
       <td><p>Return value from <code>sampling</code></p></td>
-    </tr>
-    <tr>
-      <th>prn</th>
-      <td><p>Print full sampling frame. Default is FALSE</p></td>
     </tr>
     <tr>
       <th>dec</th>
@@ -200,24 +196,13 @@
     <div class='dont-index'><p><code>sampling</code> to generate the results</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1234</span>)
-<span class='fu'>sampling</span>(<span class='no'>rndnames</span>, <span class='st'>"Names"</span>, <span class='fl'>10</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>()</div><div class='output co'>#&gt; Sampling (simple random)
+    <pre class="examples"><div class='input'><span class='fu'>sampling</span>(<span class='no'>rndnames</span>, <span class='st'>"Names"</span>, <span class='fl'>10</span>) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span>()</div><div class='output co'>#&gt; Sampling (simple random)
 #&gt; Data       : rndnames 
-#&gt; ID variable: Names 
+#&gt; Variables  : Names 
+#&gt; Random seed: 1234 
 #&gt; Sample size: 10 
-#&gt; 
-#&gt; Selected:
-#&gt;                Names rnd_number
-#&gt;         Jarrod Jolly      0.992
-#&gt;  Matilda Mcgillivray      0.926
-#&gt;       Beau Bannerman      0.923
-#&gt;         Tomas Tupper      0.915
-#&gt;      Bernardine Bohr      0.900
-#&gt;           Nona Nosal      0.899
-#&gt;         Janey Jetton      0.896
-#&gt;      Amberly Ahumada      0.893
-#&gt;         Latisha Lutz      0.865
-#&gt;            Jc Julius      0.861</div><div class='input'>
+#&gt; Duplicates : Based on selected variables, no duplicate rows exist 
+#&gt; </div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -239,7 +224,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
 
       </footer>
