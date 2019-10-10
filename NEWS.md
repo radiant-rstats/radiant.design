@@ -1,5 +1,6 @@
-# radiant.design 1.1.1.0
+# radiant.design 1.1.2.0
 
+* Documentation updates (i.e., key functions for each tool)
 * New `Random assignment` tool based on the `randomizr` package. Uses the `randomizr::block_ra` function for stratified random sampling. See the help file for more information
 * Various enhancements to make _Design > Random sampling_ more flexible. See the updated help file 
 
