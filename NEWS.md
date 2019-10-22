@@ -1,5 +1,6 @@
-# radiant.design 1.1.2.0
+# radiant.design 1.1.3.0
 
+* Added `estimable` function that can be used to determine which coefficients could be estimated based on a partial factorial design. Adapted from a function written by Blakeley MsShane at https://github.com/fzettelmeyer/mktg482/blob/master/R/expdesign.R
 * Documentation updates (i.e., key functions for each tool)
 * New `Random assignment` tool based on the `randomizr` package. Uses the `randomizr::block_ra` function for stratified random sampling. See the help file for more information
 * Various enhancements to make _Design > Random sampling_ more flexible. See the updated help file 

@@ -45,6 +45,7 @@ reference:
   contents:
     - doe
     - summary.doe
+    - estimable
 - title: Design > Sample
   desc: Functions used with Design > Sample
   contents:

@@ -5,7 +5,7 @@
 \title{Summary method for doe function}
 \usage{
 \method{summary}{doe}(object, eff = TRUE, part = TRUE, full = TRUE,
-  dec = 3, ...)
+  est = TRUE, dec = 3, ...)
 }
 \arguments{
 \item{object}{Return value from \code{\link{doe}}}
@@ -15,6 +15,8 @@
 \item{part}{If TRUE print partial factorial}
 
 \item{full}{If TRUE print full factorial}
+
+\item{est}{If TRUE print number of effects that will be estimable using the partial factorial design}
 
 \item{dec}{Number of decimals to show}
 
