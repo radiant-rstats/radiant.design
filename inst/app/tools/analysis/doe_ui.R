@@ -48,17 +48,8 @@ output$ui_doe_levels <- renderUI({
   lapply(3:input$doe_max, make_level)
 })
 
-observe({
-  ## dep on most inputs
-  sapply(names(doe_args), function(x) input[[paste0("doe_", x)]])
-  if (pressed(input$doe_run) && !is_empty(input$doe_factors)) {
-    if (isTRUE(attr(doe_inputs, "observable")$.invalidated)) {
-      updateActionButton(session, "doe_run", "Update design", icon = icon("refresh", class = "fa-spin"))
-    } else {
-      updateActionButton(session, "doe_run", "Create design", icon = icon("play"))
-    }
-  }
-})
+## add a spinning refresh icon if the design needs to be (re)calculated
+run_refresh(doe_args, "doe", init = "factors", label = "Create design", relabel = "Update design", data = FALSE)
 
 output$ui_doe <- renderUI({
   tagList(

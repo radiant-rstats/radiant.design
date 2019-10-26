@@ -1,3 +1,8 @@
+# radiant.design 1.2.0.0
+
+* Update action buttons that initiate calculations when one or more relevant inputs are changed. When, for example, and experimental design should be updated, a spinning "refresh" icon will be shown
+* Allow fractions as input for the `Random assignment` tool
+
 # radiant.design 1.1.3.0
 
 * Added `estimable` function that can be used to determine which coefficients could be estimated based on a partial factorial design. Adapted from a function written by Blakeley MsShane at https://github.com/fzettelmeyer/mktg482/blob/master/R/expdesign.R

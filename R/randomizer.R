@@ -43,8 +43,9 @@ randomizer <- function(
 
   if (is_empty(probs)) {
     probs <- length(conditions) %>% {rep(1/., .)}
-  } 
-  if (length(probs) != length(conditions)) {
+  } else if (length(probs) == 1) {
+    probs <- rep(probs, length(conditions))
+  } else if (length(probs) != length(conditions)) {
     probs <- NULL
   }
 

@@ -12,8 +12,7 @@ rndr_inputs <- reactive({
   rndr_args$conditions <- unlist(strsplit(rndr_args$conditions, "(\\s*,\\s*|\\s*;\\s*)")) %>%
         fix_names() %T>%
         {updateTextInput(session, "rndr_conditions", value = paste0(., collapse = ", "))}
-  rndr_args$probs <- unlist(strsplit(rndr_args$probs, "(\\s*,\\s*|\\s*;\\s*|\\s+)")) %>%
-    as.numeric()
+
   rndr_args
 })
 
@@ -62,18 +61,8 @@ output$ui_rndr_name <- renderUI({
   textInput("rndr_name", "Store as:", "", placeholder = "Provide a name")
 })
 
-observe({
-  ## dep on most inputs
-  sapply(names(rndr_args), function(x) input[[paste0("rndr_", x)]])
-  # if (pressed(input$rndr_run) && !is_empty(input$rndr_vars)) {
-  if (pressed(input$rndr_run)) {
-    if (isTRUE(attr(rndr_inputs, "observable")$.invalidated)) {
-      updateActionButton(session, "rndr_run", "Update assignment", icon = icon("refresh", class = "fa-spin"))
-    } else {
-      updateActionButton(session, "rndr_run", "Assign conditions", icon = icon("play"))
-    }
-  }
-})
+## add a spinning refresh icon if the simulation needs to be (re)run
+run_refresh(rndr_args, "rndr", init = "vars", label = "Assign conditions", relabel = "Re-assign conditions")
 
 output$ui_randomizer <- renderUI({
   req(input$dataset)
@@ -134,6 +123,10 @@ output$randomizer <- renderUI({
   withProgress(message = "Randomly assigning", value = 1, {
     rndi <- rndr_inputs()
     rndi$envir <- r_data
+    asNum <- function(x) ifelse(length(x) > 1, as.numeric(x[1]) / as.numeric(x[2]), as.numeric(x))
+    rndi$probs <- unlist(strsplit(rndi$probs, "(\\s*,\\s*|\\s*;\\s*|\\s+)")) %>%
+      strsplit("/") %>% 
+      sapply(asNum)
     do.call(randomizer, rndi)
   })
 })
@@ -166,8 +159,11 @@ observeEvent(input$randomizer_report, {
     xcmd <- paste0(xcmd, "\n", dataset, " <- result$dataset\nregister(\"", dataset, "\")")
   }
 
+  rndi <- rndr_inputs()
+  rndi$probs <- radiant.data::make_vec(rndi$probs)
+
   update_report(
-    inp_main = clean_args(rndr_inputs(), rndr_args),
+    inp_main = clean_args(rndi, rndr_args),
     fun_name = "randomizer", outputs = "summary",
     xcmd = xcmd, figs = FALSE
   )
