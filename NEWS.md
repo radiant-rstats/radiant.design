@@ -1,6 +1,6 @@
 # radiant.design 1.2.0.0
 
-* Update action buttons that initiate calculations when one or more relevant inputs are changed. When, for example, and experimental design should be updated, a spinning "refresh" icon will be shown
+* Update action buttons that initiate calculations when one or more relevant inputs are changed. When, for example, an experimental design should be updated, a spinning "refresh" icon will be shown
 * Allow fractions as input for the `Random assignment` tool
 
 # radiant.design 1.1.3.0
