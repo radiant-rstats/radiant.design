@@ -179,6 +179,7 @@ summary.doe <- function(object, eff = TRUE, part = TRUE, full = TRUE, est = TRUE
       print(row.names = FALSE)
 
     cat("\nPartial factorial design correlations:\n")
+    cat("** Note: Variables are assumed to be ordinal **\n")
     round(object$cor_mat, ifelse(object$detcm == 1, 0, dec)) %>%
       print(row.names = FALSE)
   }

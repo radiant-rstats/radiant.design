@@ -1,3 +1,7 @@
+# radiant.design 1.2.1.0
+
+* Added not that the design factors used as input to calculate a correlation using polycor::hetcor are assumed to be ordinal
+
 # radiant.design 1.2.0.0
 
 * Update action buttons that initiate calculations when one or more relevant inputs are changed. When, for example, an experimental design should be updated, a spinning "refresh" icon will be shown
