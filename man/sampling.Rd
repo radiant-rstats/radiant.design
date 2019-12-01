@@ -5,7 +5,7 @@
 \title{Simple random sampling}
 \usage{
 sampling(dataset, vars, sample_size, seed = 1234, data_filter = "",
-  envir = parent.frame())
+  na.rm = FALSE, envir = parent.frame())
 }
 \arguments{
 \item{dataset}{Dataset to sample from}
@@ -17,6 +17,8 @@ sampling(dataset, vars, sample_size, seed = 1234, data_filter = "",
 \item{seed}{Random seed to use as the starting point}
 
 \item{data_filter}{Expression entered in, e.g., Data > View to filter the dataset in Radiant. The expression should be a string (e.g., "price > 10000")}
+
+\item{na.rm}{Remove rows with missing values (FALSE or TRUE)}
 
 \item{envir}{Environment to extract data from}
 }
