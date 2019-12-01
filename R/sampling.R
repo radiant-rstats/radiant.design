@@ -7,6 +7,7 @@
 #' @param sample_size Number of units to select
 #' @param seed Random seed to use as the starting point
 #' @param data_filter Expression entered in, e.g., Data > View to filter the dataset in Radiant. The expression should be a string (e.g., "price > 10000")
+#' @param na.rm Remove rows with missing values (FALSE or TRUE)
 #' @param envir Environment to extract data from
 #'
 #' @return A list  of class 'sampling' with all variables defined in the sampling function
@@ -19,11 +20,11 @@
 sampling <- function(
   dataset, vars, sample_size,
   seed = 1234, data_filter = "",
-  envir = parent.frame()
+  na.rm = FALSE,  envir = parent.frame()
 ) {
 
   df_name <- if (is_string(dataset)) dataset else deparse(substitute(dataset))
-  dataset <- get_data(dataset, vars, filt = data_filter, envir = envir)
+  dataset <- get_data(dataset, vars, filt = data_filter, na.rm = na.rm, envir = envir)
   if (is_not(sample_size)) return(add_class("Please select a sample size of 1 or greater", "sampling"))
 
   ## use seed if provided
@@ -48,8 +49,8 @@ sampling <- function(
 #' @param object Return value from \code{\link{sampling}}
 #' @param dec Number of decimals to show
 #' @param ... further arguments passed to or from other methods
-#' 
-#' @importFrom dplyr distinct 
+#'
+#' @importFrom dplyr distinct
 #'
 #' @examples
 #' sampling(rndnames, "Names", 10) %>% summary()

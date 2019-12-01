@@ -41,7 +41,7 @@ output$ui_rndr_blocks <- renderUI({
 
 output$ui_rndr_conditions <- renderUI({
   textAreaInput(
-    "rndr_conditions", "Condition labels:", rows = 3,
+    "rndr_conditions", "Condition labels:", rows = 2,
     placeholder = "Type condition labels separated by comma's and press return",
     value = state_init("rndr_conditions", "A, B")
   )
@@ -75,6 +75,11 @@ output$ui_randomizer <- renderUI({
       uiOutput("ui_rndr_blocks"),
       uiOutput("ui_rndr_conditions"),
       uiOutput("ui_rndr_probs"),
+      textInput(
+        "rndr_label", "Condition variable name:",
+        placeholder = "Provide a variable name",
+        value = state_init("rndr_label", ".conditions")
+      ),
       numericInput("rndr_seed", label = "Rnd. seed:", min = 0, value = state_init("rndr_seed", init = 1234))
     ),
     wellPanel(
@@ -125,7 +130,7 @@ output$randomizer <- renderUI({
     rndi$envir <- r_data
     asNum <- function(x) ifelse(length(x) > 1, as.numeric(x[1]) / as.numeric(x[2]), as.numeric(x))
     rndi$probs <- unlist(strsplit(rndi$probs, "(\\s*,\\s*|\\s*;\\s*|\\s+)")) %>%
-      strsplit("/") %>% 
+      strsplit("/") %>%
       sapply(asNum)
     do.call(randomizer, rndi)
   })

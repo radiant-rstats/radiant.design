@@ -7,12 +7,14 @@
 #' @param conditions Conditions to assign to
 #' @param blocks A vector to use for blocking or a data.frame from which to construct a blocking vector
 #' @param probs A vector of assignment probabilities for each treatment conditions. By default each condition is assigned with equal probability
+#' @param label Name to use for the generated condition variable
 #' @param seed Random seed to use as the starting point
 #' @param data_filter Expression entered in, e.g., Data > View to filter the dataset in Radiant. The expression should be a string (e.g., "price > 10000")
+#' @param na.rm Remove rows with missing values (FALSE or TRUE)
 #' @param envir Environment to extract data from
 #'
 #' @return A list of variables defined in randomizer as an object of class randomizer
-#' 
+#'
 #' @importFrom randomizr complete_ra block_ra
 #' @importFrom dplyr select_at bind_cols
 #'
@@ -23,9 +25,11 @@
 #' @export
 randomizer <- function(
   dataset, vars,
-  conditions = c("A", "B"), 
+  conditions = c("A", "B"),
   blocks = NULL, probs = NULL,
+  label = ".conditions",
   seed = 1234, data_filter = "",
+  na.rm = FALSE,
   envir = parent.frame()
 ) {
 
@@ -35,7 +39,7 @@ randomizer <- function(
     vars <- c(vars, blocks)
   }
 
-  dataset <- get_data(dataset, vars, filt = data_filter, envir = envir)
+  dataset <- get_data(dataset, vars, filt = data_filter, na.rm = na.rm, envir = envir)
 
   ## use seed if provided
   seed <- gsub("[^0-9]", "", seed)
@@ -51,15 +55,19 @@ randomizer <- function(
 
   if (length(blocks) > 0) {
     blocks_vct <- do.call(paste, c(select_at(dataset, .vars = blocks), sep = "-"))
-    .conditions <- data.frame(.conditions = randomizr::block_ra(blocks = blocks_vct, conditions = conditions, prob_each = probs))
+    cond <- randomizr::block_ra(blocks = blocks_vct, conditions = conditions, prob_each = probs) %>%
+      as.data.frame() %>%
+      set_colnames(label)
   } else {
-    .conditions <- data.frame(.conditions = randomizr::complete_ra(N = nrow(dataset), conditions = conditions, prob_each = probs))
+    cond <- randomizr::complete_ra(N = nrow(dataset), conditions = conditions, prob_each = probs) %>%
+      as.data.frame() %>%
+      set_colnames(label)
   }
 
-  dataset <- bind_cols(.conditions, dataset)
+  dataset <- bind_cols(cond, dataset)
 
   # removing unneeded arguments
-  rm(envir)
+  rm(cond, envir)
 
   as.list(environment()) %>% add_class("randomizer")
 }
@@ -74,7 +82,7 @@ randomizer <- function(
 #'
 #' @importFrom stats addmargins
 #' @importFrom dplyr distinct
-#' 
+#'
 #' @examples
 #' randomizer(rndnames, "Names", conditions = c("test", "control")) %>% summary()
 #'
@@ -108,9 +116,9 @@ summary.randomizer <- function(object, dec = 3, ...) {
 
   cat("Assigment frequencies:\n")
   if (is_empty(object$blocks_vct)) {
-    tab <- table(object$dataset$.conditions)
+    tab <- table(object$dataset[[object$label]])
   } else {
-    tab <- table(object$blocks_vct, object$dataset$.conditions)
+    tab <- table(object$blocks_vct, object$dataset[[object$label]])
   }
   tab %>% addmargins() %>% print()
 
