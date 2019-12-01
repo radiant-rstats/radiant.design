@@ -169,8 +169,8 @@
     </div>
 
     <pre class="usage"><span class='fu'>randomizer</span>(<span class='no'>dataset</span>, <span class='no'>vars</span>, <span class='kw'>conditions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"A"</span>, <span class='st'>"B"</span>), <span class='kw'>blocks</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>probs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1234</span>, <span class='kw'>data_filter</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>envir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>())</pre>
+  <span class='kw'>probs</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>".conditions"</span>, <span class='kw'>seed</span> <span class='kw'>=</span> <span class='fl'>1234</span>,
+  <span class='kw'>data_filter</span> <span class='kw'>=</span> <span class='st'>""</span>, <span class='kw'>na.rm</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>envir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sys.parent.html'>parent.frame</a></span>())</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -196,12 +196,20 @@
       <td><p>A vector of assignment probabilities for each treatment conditions. By default each condition is assigned with equal probability</p></td>
     </tr>
     <tr>
+      <th>label</th>
+      <td><p>Name to use for the generated condition variable</p></td>
+    </tr>
+    <tr>
       <th>seed</th>
       <td><p>Random seed to use as the starting point</p></td>
     </tr>
     <tr>
       <th>data_filter</th>
       <td><p>Expression entered in, e.g., Data &gt; View to filter the dataset in Radiant. The expression should be a string (e.g., "price &gt; 10000")</p></td>
+    </tr>
+    <tr>
+      <th>na.rm</th>
+      <td><p>Remove rows with missing values (FALSE or TRUE)</p></td>
     </tr>
     <tr>
       <th>envir</th>
@@ -220,7 +228,7 @@
     <div class='dont-index'><p><code>summary.sampling</code> to summarize results</p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>randomizer</span>(<span class='no'>rndnames</span>, <span class='st'>"Names"</span>, <span class='kw'>conditions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"test"</span>, <span class='st'>"control"</span>)) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>()</div><div class='output co'>#&gt; List of 8
+    <pre class="examples"><div class='input'><span class='fu'>randomizer</span>(<span class='no'>rndnames</span>, <span class='st'>"Names"</span>, <span class='kw'>conditions</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"test"</span>, <span class='st'>"control"</span>)) <span class='kw'>%&gt;%</span> <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>()</div><div class='output co'>#&gt; List of 10
 #&gt;  $ df_name    : chr "rndnames"
 #&gt;  $ dataset    :'data.frame':	100 obs. of  2 variables:
 #&gt;   ..$ .conditions: Factor w/ 2 levels "test","control": 1 2 1 1 1 1 1 1 2 2 ...
@@ -229,8 +237,10 @@
 #&gt;  $ conditions : chr [1:2] "test" "control"
 #&gt;  $ blocks     : NULL
 #&gt;  $ probs      : num [1:2] 0.5 0.5
+#&gt;  $ label      : chr ".conditions"
 #&gt;  $ seed       : chr "1234"
 #&gt;  $ data_filter: chr ""
+#&gt;  $ na.rm      : logi FALSE
 #&gt;  - attr(*, "class")= chr [1:2] "randomizer" "list"</div><div class='input'>
 </div></pre>
   </div>
