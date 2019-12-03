@@ -17,6 +17,7 @@
 #'
 #' @importFrom randomizr complete_ra block_ra
 #' @importFrom dplyr select_at bind_cols
+#' @importFrom magrittr set_colnames
 #'
 #' @examples
 #' randomizer(rndnames, "Names", conditions = c("test", "control")) %>% str()

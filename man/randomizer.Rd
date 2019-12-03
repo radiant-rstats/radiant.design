@@ -5,8 +5,8 @@
 \title{Randomize cases into experimental conditions}
 \usage{
 randomizer(dataset, vars, conditions = c("A", "B"), blocks = NULL,
-  probs = NULL, seed = 1234, data_filter = "",
-  envir = parent.frame())
+  probs = NULL, label = ".conditions", seed = 1234,
+  data_filter = "", na.rm = FALSE, envir = parent.frame())
 }
 \arguments{
 \item{dataset}{Dataset to sample from}
@@ -19,9 +19,13 @@ randomizer(dataset, vars, conditions = c("A", "B"), blocks = NULL,
 
 \item{probs}{A vector of assignment probabilities for each treatment conditions. By default each condition is assigned with equal probability}
 
+\item{label}{Name to use for the generated condition variable}
+
 \item{seed}{Random seed to use as the starting point}
 
 \item{data_filter}{Expression entered in, e.g., Data > View to filter the dataset in Radiant. The expression should be a string (e.g., "price > 10000")}
+
+\item{na.rm}{Remove rows with missing values (FALSE or TRUE)}
 
 \item{envir}{Environment to extract data from}
 }
