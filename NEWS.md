@@ -1,6 +1,7 @@
-# radiant.design 1.2.1.0
+# radiant.design 1.3.0.0
 
-* Added not that the design factors used as input to calculate a correlation using polycor::hetcor are assumed to be ordinal
+* Allow for missing values in `randomizer` and `sampling` functions
+* Added note that the design factors used as input to calculate a correlation using polycor::hetcor are assumed to be ordinal
 
 # radiant.design 1.2.0.0
 
