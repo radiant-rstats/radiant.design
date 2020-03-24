@@ -1,6 +1,6 @@
 ## Resubmission
 
-This is a resubmission. In this version I have fixed several bugs and added several new features (see NEWS.md for details).
+This is a resubmission. In this version I have fixed several bugs and added several new features (see NEWS.md for details). This version is dependent on the new version of radiant.data that was accepted yesterday.
 
 ## Test environments
 

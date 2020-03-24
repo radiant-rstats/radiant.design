@@ -57,6 +57,7 @@ reference:
     - summary.sample_size
     - sample_size_comp
     - summary.sample_size_comp
+    - plot.sample_size_comp
 - title: Data sets
   desc: Data sets bundled with radiant.design
   contents:
