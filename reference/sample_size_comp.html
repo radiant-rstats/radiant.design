@@ -75,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">radiant.design</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.4</span>
       </span>
     </div>
 
@@ -168,9 +168,19 @@
     <p>Sample size calculation for comparisons</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sample_size_comp</span>(<span class='no'>type</span>, <span class='kw'>n1</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>n2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>p1</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>p2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>delta</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>sd</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>conf_lev</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>power</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>alternative</span> <span class='kw'>=</span> <span class='st'>"two.sided"</span>)</pre>
+    <pre class="usage"><span class='fu'>sample_size_comp</span>(
+  <span class='no'>type</span>,
+  <span class='kw'>n1</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>n2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>p1</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>p2</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>delta</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sd</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>conf_lev</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>power</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ratio</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>alternative</span> <span class='kw'>=</span> <span class='st'>"two.sided"</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -254,8 +264,8 @@
 #&gt;     sort(c(sin((h - 2 * asin(sqrt(p)))/2)^2, sin((-h - 2 * asin(sqrt(p)))/2)^2), 
 #&gt;         decreasing = TRUE)
 #&gt; }
-#&gt; &lt;bytecode: 0x7dcffe0&gt;
-#&gt; &lt;environment: 0x4a785d0&gt;
+#&gt; &lt;bytecode: 0x8713700&gt;
+#&gt; &lt;environment: 0x935dff0&gt;
 #&gt; 
 #&gt; $nr_null
 #&gt; [1] 1
