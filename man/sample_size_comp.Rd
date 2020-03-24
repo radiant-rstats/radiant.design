@@ -4,9 +4,19 @@
 \alias{sample_size_comp}
 \title{Sample size calculation for comparisons}
 \usage{
-sample_size_comp(type, n1 = NULL, n2 = NULL, p1 = NULL, p2 = NULL,
-  delta = NULL, sd = NULL, conf_lev = NULL, power = NULL,
-  ratio = 1, alternative = "two.sided")
+sample_size_comp(
+  type,
+  n1 = NULL,
+  n2 = NULL,
+  p1 = NULL,
+  p2 = NULL,
+  delta = NULL,
+  sd = NULL,
+  conf_lev = NULL,
+  power = NULL,
+  ratio = 1,
+  alternative = "two.sided"
+)
 }
 \arguments{
 \item{type}{Choose "mean" or "proportion"}

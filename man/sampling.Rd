@@ -4,8 +4,15 @@
 \alias{sampling}
 \title{Simple random sampling}
 \usage{
-sampling(dataset, vars, sample_size, seed = 1234, data_filter = "",
-  na.rm = FALSE, envir = parent.frame())
+sampling(
+  dataset,
+  vars,
+  sample_size,
+  seed = 1234,
+  data_filter = "",
+  na.rm = FALSE,
+  envir = parent.frame()
+)
 }
 \arguments{
 \item{dataset}{Dataset to sample from}

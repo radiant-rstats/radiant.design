@@ -4,8 +4,7 @@
 \alias{summary.doe}
 \title{Summary method for doe function}
 \usage{
-\method{summary}{doe}(object, eff = TRUE, part = TRUE, full = TRUE,
-  est = TRUE, dec = 3, ...)
+\method{summary}{doe}(object, eff = TRUE, part = TRUE, full = TRUE, est = TRUE, dec = 3, ...)
 }
 \arguments{
 \item{object}{Return value from \code{\link{doe}}}

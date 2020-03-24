@@ -4,9 +4,18 @@
 \alias{randomizer}
 \title{Randomize cases into experimental conditions}
 \usage{
-randomizer(dataset, vars, conditions = c("A", "B"), blocks = NULL,
-  probs = NULL, label = ".conditions", seed = 1234,
-  data_filter = "", na.rm = FALSE, envir = parent.frame())
+randomizer(
+  dataset,
+  vars,
+  conditions = c("A", "B"),
+  blocks = NULL,
+  probs = NULL,
+  label = ".conditions",
+  seed = 1234,
+  data_filter = "",
+  na.rm = FALSE,
+  envir = parent.frame()
+)
 }
 \arguments{
 \item{dataset}{Dataset to sample from}
