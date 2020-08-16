@@ -1,18 +1,7 @@
-## could this ensure inst/rstudio/*.dcf are ignored during build?
-## see https://stackoverflow.com/a/42907049/1974918
-# devtools::use_build_ignore(c("inst/rstudio"))
-
 setwd(rstudioapi::getActiveProject())
 curr <- getwd()
 pkg <- basename(curr)
 
-
-## see commit for an application
-## https://github.com/hrbrmstr/hrbraddins/commit/9cbd162def065593d4850c387ce581b8f911cf03
-# fvec <- list.files(".", pattern = "(*.R$|*.r)", recursive = TRUE)
-# for (f in fvec) {
-#   tools::showNonASCIIfile(f)
-# }
 
 ## building radiant packages for mac and windows
 rv <- R.Version()
@@ -25,6 +14,8 @@ dirsrc <- "../minicran/src/contrib"
 
 if (rv == "3.3") {
   dirmac <- fs::path("../minicran/bin/macosx/mavericks/contrib", rv)
+} else if (as.numeric(substr(rv, 1, 1)) >= 4) {
+  dirmac <- fs::path("../minicran/bin/macosx/contrib", rv)
 } else {
   dirmac <- fs::path("../minicran/bin/macosx/el-capitan/contrib", rv)
 }
