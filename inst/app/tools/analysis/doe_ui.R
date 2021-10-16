@@ -10,7 +10,7 @@ doe_inputs <- reactive({
 })
 
 output$ui_doe_int <- renderUI({
-  req(!is_empty(input$doe_factors))
+  req(!radiant.data::is_empty(input$doe_factors))
   vars <- gsub("[ ]{2,}", " ", input$doe_factors) %>%
     gsub("/", "", .) %>%
     gsub("\\\\n", "\n", .) %>%
@@ -115,11 +115,11 @@ observeEvent(input$doe_add, {
   dup <- input$doe_name
   for (i in 1:input$doe_max) {
     dtmp <- input[[paste0("doe_level", i)]]
-    if (!is_empty(dtmp)) dup <- c(dup, dtmp)
+    if (!radiant.data::is_empty(dtmp)) dup <- c(dup, dtmp)
   }
   dup <- paste(dup, collapse = "; ")
 
-  if (is_empty(input$doe_factors)) {
+  if (radiant.data::is_empty(input$doe_factors)) {
     val <- dup
   } else {
     val <- paste0(input$doe_factors, "\n", dup)
@@ -182,7 +182,7 @@ output$doe <- renderUI({
 })
 
 .doe <- eventReactive(input$doe_run, {
-  req(!is_empty(input$doe_factors))
+  req(!radiant.data::is_empty(input$doe_factors))
 
   int <- ""
   if (length(input$doe_int) > 0) {
@@ -256,7 +256,7 @@ if (!getOption("radiant.shinyFiles", FALSE)) {
 observeEvent(input$doe_upload, {
   if (getOption("radiant.shinyFiles", FALSE)) {
     path <- shinyFiles::parseFilePaths(sf_volumes, input$doe_upload)
-    if (inherits(path, "try-error") || is_empty(path$datapath)) {
+    if (inherits(path, "try-error") || radiant.data::is_empty(path$datapath)) {
       return()
     } else {
       path <- path$datapath
@@ -293,7 +293,7 @@ observeEvent(input$doe_report, {
   inp_out <- list(list(eff = TRUE, part = TRUE, full = TRUE))
 
   inp <- clean_args(doe_inputs(), doe_args)
-  if (!is_empty(inp[["factors"]])) {
+  if (!radiant.data::is_empty(inp[["factors"]])) {
     inp[["factors"]] <- strsplit(inp[["factors"]], "\n")[[1]]
   }
 

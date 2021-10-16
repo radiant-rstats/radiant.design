@@ -156,7 +156,7 @@ observeEvent(input$randomizer_report, {
 
   xcmd <- "# dtab(result$dataset, dom = \"tip\", nr = 100)"
 
-  if (!is_empty(input$rndr_name)) {
+  if (!radiant.data::is_empty(input$rndr_name)) {
     dataset <- fix_names(input$rndr_name)
     if (input$rndr_name != dataset) {
       updateTextInput(session, inputId = "rndr_name", value = dataset)

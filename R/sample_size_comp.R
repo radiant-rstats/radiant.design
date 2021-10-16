@@ -37,7 +37,7 @@ sample_size_comp <- function(
   if (!is.null(n2) && is.na(n2)) n2 <- NULL
   if (!is.null(power) && is.na(power)) power <- NULL
   if (!is.null(conf_lev) && is.na(conf_lev)) conf_lev <- NULL
-  sig.level <- if (is_empty(conf_lev)) NULL else 1 - conf_lev
+  sig.level <- if (radiant.data::is_empty(conf_lev)) NULL else 1 - conf_lev
   adj <- ifelse(alternative == "two.sided", 2, 1)
 
   if (type == "mean") {
@@ -45,7 +45,7 @@ sample_size_comp <- function(
     if (!is.null(delta)) delta <- abs(delta)
     if (!is.null(sd) && is.na(sd)) sd <- NULL
 
-    if (!is_empty(sd) && sd <= 0) {
+    if (!radiant.data::is_empty(sd) && sd <= 0) {
       return("The standard deviation must be larger than 0" %>% add_class("sample_size_comp"))
     }
 
@@ -89,10 +89,10 @@ sample_size_comp <- function(
       }
     }
 
-    if (!is_empty(p1) && (p1 < 0 || p1 > 1)) {
+    if (!radiant.data::is_empty(p1) && (p1 < 0 || p1 > 1)) {
       return("Proportion 1 must be between 0 and 1" %>% add_class("sample_size_comp"))
     }
-    if (!is_empty(p2) && (p2 < 0 || p2 > 1)) {
+    if (!radiant.data::is_empty(p2) && (p2 < 0 || p2 > 1)) {
       return("Proportion 2 must be between 0 and 1" %>% add_class("sample_size_comp"))
     }
 

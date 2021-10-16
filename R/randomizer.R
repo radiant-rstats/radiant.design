@@ -36,7 +36,7 @@ randomizer <- function(
 
   df_name <- if (is_string(dataset)) dataset else deparse(substitute(dataset))
 
-  if (!is_empty(blocks)) {
+  if (!radiant.data::is_empty(blocks)) {
     vars <- c(vars, blocks)
   }
 
@@ -44,9 +44,9 @@ randomizer <- function(
 
   ## use seed if provided
   seed <- gsub("[^0-9]", "", seed)
-  if (!is_empty(seed)) set.seed(seed)
+  if (!radiant.data::is_empty(seed)) set.seed(seed)
 
-  if (is_empty(probs)) {
+  if (radiant.data::is_empty(probs)) {
     probs <- length(conditions) %>% {rep(1/., .)}
   } else if (length(probs) == 1) {
     probs <- rep(probs, length(conditions))
@@ -91,16 +91,16 @@ randomizer <- function(
 #'
 #' @export
 summary.randomizer <- function(object, dec = 3, ...) {
-  if (is_empty(object$blocks)) {
+  if (radiant.data::is_empty(object$blocks)) {
     cat("Random assignment (simple random)\n")
   } else {
     cat("Random assignment (blocking)\n")
   }
   cat("Data         :", object$df_name, "\n")
-  if (!is_empty(object$data_filter)) {
+  if (!radiant.data::is_empty(object$data_filter)) {
     cat("Filter       :", gsub("\\n", "", object$data_filter), "\n")
   }
-  if (!is_empty(object$blocks)) {
+  if (!radiant.data::is_empty(object$blocks)) {
     cat("Variables    :", setdiff(object$vars, object$blocks), "\n")
     cat("Blocks       :", object$blocks, "\n")
   } else {
@@ -108,7 +108,7 @@ summary.randomizer <- function(object, dec = 3, ...) {
   }
   cat("Conditions   :", object$conditions, "\n")
   cat("Probabilities:", round(object$probs, dec), "\n")
-  if (!is_empty(object$seed)) {
+  if (!radiant.data::is_empty(object$seed)) {
     cat("Random seed  :", object$seed, "\n")
   }
   is_unique <- object$dataset[, -1, drop = FALSE] %>%
@@ -116,7 +116,7 @@ summary.randomizer <- function(object, dec = 3, ...) {
   cat("Duplicates   :", is_unique, "\n\n")
 
   cat("Assigment frequencies:\n")
-  if (is_empty(object$blocks_vct)) {
+  if (radiant.data::is_empty(object$blocks_vct)) {
     tab <- table(object$dataset[[object$label]])
   } else {
     tab <- table(object$blocks_vct, object$dataset[[object$label]])

@@ -99,7 +99,7 @@ output$sampling <- renderUI({
   if (not_available(input$smp_vars)) {
     "For random sampling each row in the data should be distinct\n(i.e., no duplicates). Please select an appropriate dataset.\n\n" %>%
       suggest_data("rndnames")
-  } else if (is_empty(input$smp_sample_size)) {
+  } else if (radiant.data::is_empty(input$smp_sample_size)) {
     "Please select a sample size of 1 or greater"
   } else {
     summary(.sampling())
@@ -130,7 +130,7 @@ observeEvent(input$sampling_report, {
   if (isTRUE(input$smp_sframe)) {
     xcmd <- paste0(xcmd, "\n# dtab(result$dataset, dom = \"tip\", caption = \"Sampling frame\", nr = 100)")
   }
-  if (!is_empty(input$smp_name)) {
+  if (!radiant.data::is_empty(input$smp_name)) {
     dataset <- fix_names(input$smp_name)
     if (input$smp_name != dataset) {
       updateTextInput(session, inputId = "smp_name", value = dataset)
