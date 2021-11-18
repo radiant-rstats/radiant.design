@@ -1,13 +1,12 @@
 ## Resubmission
 
-This is a resubmission. In this version I have fixed the url for http://listofrandomnames.com. This version is dependent on the new version of radiant.data that was accepted yesterday.
+This is a resubmission. In this version is addressed a function clash with `rlang` (i.e., `is_empty`) and made adjustments to work with the latest version of `shiny` and `bootstrap4`
 
 ## Test environments
 
-* local OS X install, R 3.6.3
-* local Windows install, R 3.6.3
-* Ubuntu "trusty" (on travis-ci), R oldrel, release, and devel
-* win-builder
+* local Ubuntu 20.04 install, R 4.1.0
+* local Ubuntu 20.04 through WSL2, R 4.0.5
+* win-builder (devel)
 
 ## R CMD check results
 

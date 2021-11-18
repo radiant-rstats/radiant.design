@@ -1,3 +1,8 @@
+# radiant.design 1.4.1.0
+
+* Fixed `is_empty` function clash with `rlang`
+* Adjustments to work with the latest version of `shiny` and `bootstrap4`
+
 # radiant.design 1.3.4.0
 
 * Minor adjustments in anticipation of dplyr 1.0.0
