@@ -6,12 +6,14 @@ rndr_inputs <- reactive({
   ## loop needed because reactive values don't allow single bracket indexing
   rndr_args$data_filter <- if (input$show_filter) input$data_filter else ""
   rndr_args$dataset <- input$dataset
-  for (i in r_drop(names(rndr_args)))
+  for (i in r_drop(names(rndr_args))) {
     rndr_args[[i]] <- input[[paste0("rndr_", i)]]
+  }
 
   rndr_args$conditions <- unlist(strsplit(rndr_args$conditions, "(\\s*,\\s*|\\s*;\\s*)")) %>%
-        fix_names() %T>%
-        {updateTextInput(session, "rndr_conditions", value = paste0(., collapse = ", "))}
+    fix_names() %T>% {
+      updateTextInput(session, "rndr_conditions", value = paste0(., collapse = ", "))
+    }
 
   rndr_args
 })
@@ -41,7 +43,8 @@ output$ui_rndr_blocks <- renderUI({
 
 output$ui_rndr_conditions <- renderUI({
   textAreaInput(
-    "rndr_conditions", "Condition labels:", rows = 2,
+    "rndr_conditions", "Condition labels:",
+    rows = 2,
     placeholder = "Type condition labels separated by comma's and press return",
     value = state_init("rndr_conditions", "A, B")
   )
@@ -152,8 +155,7 @@ output$table_randomizer <- DT::renderDataTable({
   })
 })
 
-observeEvent(input$randomizer_report, {
-
+randomizer_report <- function() {
   xcmd <- "# dtab(result$dataset, dom = \"tip\", nr = 100)"
 
   if (!radiant.data::is_empty(input$rndr_name)) {
@@ -172,7 +174,7 @@ observeEvent(input$randomizer_report, {
     fun_name = "randomizer", outputs = "summary",
     xcmd = xcmd, figs = FALSE
   )
-})
+}
 
 dl_randomizer <- function(path) {
   resp <- .randomizer()
@@ -223,4 +225,19 @@ observeEvent(input$rndr_store, {
       easyClose = TRUE
     )
   )
+})
+
+observeEvent(input$randomizer_report, {
+  r_info[["latest_screenshot"]] <- NULL
+  randomizer_report()
+})
+
+observeEvent(input$randomizer_screenshot, {
+  r_info[["latest_screenshot"]] <- NULL
+  radiant_screenshot_modal("modal_randomizer_screenshot")
+})
+
+observeEvent(input$modal_randomizer_screenshot, {
+  randomizer_report()
+  removeModal() ## remove shiny modal after save
 })

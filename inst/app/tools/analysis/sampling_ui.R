@@ -10,8 +10,9 @@ smp_inputs <- reactive({
   ## loop needed because reactive values don't allow single bracket indexing
   smp_args$data_filter <- if (input$show_filter) input$data_filter else ""
   smp_args$dataset <- input$dataset
-  for (i in r_drop(names(smp_args)))
+  for (i in r_drop(names(smp_args))) {
     smp_args[[i]] <- input[[paste0("smp_", i)]]
+  }
   smp_args
 })
 
@@ -37,11 +38,13 @@ output$ui_sampling <- renderUI({
       uiOutput("ui_smp_vars"),
       tags$table(
         tags$td(numericInput(
-          "smp_sample_size", "Sample size:", min = 1,
+          "smp_sample_size", "Sample size:",
+          min = 1,
           value = state_init("smp_sample_size", 1)
         )),
         tags$td(numericInput(
-          "smp_seed", label = "Rnd. seed:", min = 0,
+          "smp_seed",
+          label = "Rnd. seed:", min = 0,
           value = state_init("smp_seed", init = 1234)
         ))
       ),
@@ -123,7 +126,7 @@ output$table_sampling_frame <- DT::renderDataTable({
   })
 })
 
-observeEvent(input$sampling_report, {
+sampling_report <- function() {
   req(input$smp_sample_size)
   nr <- min(100, max(input$smp_sample_size, 1))
   xcmd <- paste0("# dtab(result$seldat, dom = \"tip\", caption = \"Selected cases\", nr = ", nr, ")")
@@ -136,14 +139,14 @@ observeEvent(input$sampling_report, {
       updateTextInput(session, inputId = "smp_name", value = dataset)
     }
     xcmd <- paste0(xcmd, "\n", dataset, " <- select(result$seldat, -rnd_number)\nregister(\"", dataset, "\")")
-  } 
+  }
 
   update_report(
     inp_main = clean_args(smp_inputs(), smp_args),
-    fun_name = "sampling", outputs = "summary", 
+    fun_name = "sampling", outputs = "summary",
     xcmd = xcmd, figs = FALSE
   )
-})
+}
 
 dl_sample <- function(path) {
   resp <- .sampling()
@@ -156,8 +159,8 @@ dl_sample <- function(path) {
 }
 
 download_handler(
-  id = "dl_sample", 
-  fun = dl_sample, 
+  id = "dl_sample",
+  fun = dl_sample,
   fn = function() paste0(input$dataset, "_sample"),
   type = "csv",
   caption = "Save random sample"
@@ -169,8 +172,8 @@ observeEvent(input$smp_store, {
   if (!"seldat" %in% names(resp)) {
     cat("No valid sample available")
     return()
-  } 
- 
+  }
+
   dataset <- fix_names(input$smp_name)
   if (input$smp_name != dataset) {
     updateTextInput(session, inputId = "smp_name", value = dataset)
@@ -195,4 +198,19 @@ observeEvent(input$smp_store, {
       easyClose = TRUE
     )
   )
+})
+
+observeEvent(input$sampling_report, {
+  r_info[["latest_screenshot"]] <- NULL
+  sampling_report()
+})
+
+observeEvent(input$sampling_screenshot, {
+  r_info[["latest_screenshot"]] <- NULL
+  radiant_screenshot_modal("modal_sampling_screenshot")
+})
+
+observeEvent(input$modal_sampling_screenshot, {
+  sampling_report()
+  removeModal() ## remove shiny modal after save
 })

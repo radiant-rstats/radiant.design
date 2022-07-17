@@ -11,8 +11,9 @@ ssc_args <- as.list(formals(sample_size_comp))
 ## list of function inputs selected by user
 ssc_inputs <- reactive({
   ## loop needed because reactive values don't allow single bracket indexing
-  for (i in names(ssc_args))
+  for (i in names(ssc_args)) {
     ssc_args[[i]] <- input[[paste0("ssc_", i)]]
+  }
   ssc_args
 })
 
@@ -24,11 +25,13 @@ output$ui_sample_size_comp <- renderUI({
         selected = state_init("ssc_type", "mean"), inline = TRUE
       ),
       numericInput(
-        "ssc_n1", "Sample size (n1):", min = 1,
+        "ssc_n1", "Sample size (n1):",
+        min = 1,
         value = state_init("ssc_n1", NA), step = 1
       ),
       numericInput(
-        "ssc_n2", "Sample size (n2):", min = 1,
+        "ssc_n2", "Sample size (n2):",
+        min = 1,
         value = state_init("ssc_n2", NA), step = 1
       ),
       conditionalPanel(
@@ -38,36 +41,40 @@ output$ui_sample_size_comp <- renderUI({
           value = state_init("ssc_delta", 2), step = 1
         ),
         numericInput(
-          "ssc_sd", "Standard deviation:", min = 0,
+          "ssc_sd", "Standard deviation:",
+          min = 0,
           value = state_init("ssc_sd", 10), step = 1
         )
       ),
       conditionalPanel(
         condition = "input.ssc_type != 'mean'",
         numericInput(
-          "ssc_p1", "Proportion 1 (p1):", min = 0,
+          "ssc_p1", "Proportion 1 (p1):",
+          min = 0,
           max = 1, value = state_init("ssc_p1", .1), step = .05
         ),
         numericInput(
-          "ssc_p2", "Proportion 2 (p2):", min = 0, max = 1,
+          "ssc_p2", "Proportion 2 (p2):",
+          min = 0, max = 1,
           value = state_init("ssc_p2", .15), step = .05
         )
       ),
       numericInput(
-        "ssc_conf_lev", "Confidence level:", min = 0, max = 1,
+        "ssc_conf_lev", "Confidence level:",
+        min = 0, max = 1,
         value = state_init("ssc_conf_lev", 0.95), step = .05
       ),
       numericInput(
-        "ssc_power", "Power:", min = 0, max = 1,
+        "ssc_power", "Power:",
+        min = 0, max = 1,
         value = state_init("ssc_power", 0.8), step = .05
       ),
       selectInput(
         inputId = "ssc_alternative", label = "Alternative hypothesis:",
         choices = ssc_alternative,
         selected = state_single("ssc_alternative", ssc_alternative, "two.sided")
-
       ),
-      checkboxInput("ssc_show_plot", "Show plot" , state_init("ssc_show_plot", FALSE))
+      checkboxInput("ssc_show_plot", "Show plot", state_init("ssc_show_plot", FALSE))
     ),
     help_and_report(
       modal_title = "Sample size (compare)", fun_name = "sample_size_comp",
@@ -114,7 +121,9 @@ output$sample_size_comp <- renderUI({
 })
 
 .summary_sample_size_comp <- reactive({
-  if (is.null(input$ssc_type)) return(invisible())
+  if (is.null(input$ssc_type)) {
+    return(invisible())
+  }
   summary(.sample_size_comp())
 })
 
@@ -123,7 +132,7 @@ output$sample_size_comp <- renderUI({
   plot(.sample_size_comp())
 })
 
-observeEvent(input$sample_size_comp_report, {
+sample_size_comp_report <- function() {
   ssc <- ssc_inputs()
   if (input$ssc_type == "mean") {
     ssc$p1 <- ssc$p2 <- NULL
@@ -149,7 +158,7 @@ observeEvent(input$sample_size_comp_report, {
     fig.width = ssc_plot_width(),
     fig.height = ssc_plot_height()
   )
-})
+}
 
 download_handler(
   id = "dlp_ssc",
@@ -161,3 +170,18 @@ download_handler(
   width = ssc_plot_width,
   height = ssc_plot_height
 )
+
+observeEvent(input$sample_size_comp_report, {
+  r_info[["latest_screenshot"]] <- NULL
+  sample_size_comp_report()
+})
+
+observeEvent(input$sample_size_comp_screenshot, {
+  r_info[["latest_screenshot"]] <- NULL
+  radiant_screenshot_modal("modal_sample_size_comp_screenshot")
+})
+
+observeEvent(input$modal_sample_size_comp_screenshot, {
+  sample_size_comp_report()
+  removeModal() ## remove shiny modal after save
+})
