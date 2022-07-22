@@ -71,7 +71,7 @@ output$ui_randomizer <- renderUI({
   req(input$dataset)
   tagList(
     wellPanel(
-      actionButton("rndr_run", "Assign conditions", width = "100%", icon = icon("play"), class = "btn-success")
+      actionButton("rndr_run", "Assign conditions", width = "100%", icon = icon("play", verify_fa = FALSE), class = "btn-success")
     ),
     wellPanel(
       uiOutput("ui_rndr_vars"),
@@ -88,7 +88,7 @@ output$ui_randomizer <- renderUI({
     wellPanel(
       tags$table(
         tags$td(uiOutput("ui_rndr_name")),
-        tags$td(actionButton("rndr_store", "Store", icon = icon("plus")), class = "top")
+        tags$td(actionButton("rndr_store", "Store", icon = icon("plus", verify_fa = FALSE)), class = "top")
       )
     ),
     help_and_report(

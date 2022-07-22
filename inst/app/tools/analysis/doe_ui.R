@@ -54,7 +54,7 @@ run_refresh(doe_args, "doe", init = "factors", label = "Create design", relabel 
 output$ui_doe <- renderUI({
   tagList(
     wellPanel(
-      actionButton("doe_run", "Create design", width = "100%", icon = icon("play"), class = "btn-success")
+      actionButton("doe_run", "Create design", width = "100%", icon = icon("play", verify_fa = FALSE), class = "btn-success")
     ),
     wellPanel(
       tags$table(

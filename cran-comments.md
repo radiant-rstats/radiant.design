@@ -4,6 +4,21 @@ This is a resubmission. In this version is addressed a function clash with `rlan
 
 ## Test environments
 
+* macOS, R 4.2.1
+* win-builder (devel)
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs, or NOTEs. 
+
+# Previous cran-comments
+
+## Resubmission
+
+This is a resubmission. In this version is addressed a function clash with `rlang` (i.e., `is_empty`) and made adjustments to work with the latest version of `shiny` and `bootstrap4`
+
+## Test environments
+
 * local Ubuntu 20.04 install, R 4.1.0
 * local Ubuntu 20.04 through WSL2, R 4.0.5
 * win-builder (devel)
@@ -12,7 +27,6 @@ This is a resubmission. In this version is addressed a function clash with `rlan
 
 There were no ERRORs, WARNINGs, or NOTEs. 
 
-# Previous cran-comments
 
 ## Resubmission
 

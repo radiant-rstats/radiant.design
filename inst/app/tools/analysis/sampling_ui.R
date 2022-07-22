@@ -53,7 +53,7 @@ output$ui_sampling <- renderUI({
     wellPanel(
       tags$table(
         tags$td(uiOutput("ui_smp_name")),
-        tags$td(actionButton("smp_store", "Store", icon = icon("plus")), class = "top")
+        tags$td(actionButton("smp_store", "Store", icon = icon("plus", verify_fa = FALSE)), class = "top")
       )
     ),
     help_and_report(
