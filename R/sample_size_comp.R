@@ -27,12 +27,9 @@
 #' @importFrom pwr pwr.2p.test pwr.2p2n.test ES.h pwr.t.test pwr.t2n.test
 #'
 #' @export
-sample_size_comp <- function(
- type, n1 = NULL, n2 = NULL, p1 = NULL, p2 = NULL, delta = NULL,
- sd = NULL, conf_lev = NULL, power = NULL, ratio = 1,
- alternative = "two.sided"
-) {
-
+sample_size_comp <- function(type, n1 = NULL, n2 = NULL, p1 = NULL, p2 = NULL, delta = NULL,
+                             sd = NULL, conf_lev = NULL, power = NULL, ratio = 1,
+                             alternative = "two.sided") {
   if (!is.null(n1) && is.na(n1)) n1 <- NULL
   if (!is.null(n2) && is.na(n2)) n2 <- NULL
   if (!is.null(power) && is.na(power)) power <- NULL
@@ -58,7 +55,7 @@ sample_size_comp <- function(
       res <- try(pwr::pwr.t2n.test(n1 = as.numeric(n1), n2 = as.numeric(n2), d = delta / sd, sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
     } else if (is.null(n1) && is.null(n2)) {
       res <- try(pwr::pwr.t.test(d = delta / sd, sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
-      if (!inherits(res, "try-error"))  n1 <- n2 <- res$n
+      if (!inherits(res, "try-error")) n1 <- n2 <- res$n
     } else if (is.null(n1)) {
       res <- try(pwr::pwr.t2n.test(n2 = as.numeric(n2), d = delta / sd, sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
       if (!inherits(res, "try-error")) n1 <- res$n1
@@ -104,8 +101,8 @@ sample_size_comp <- function(
     backout.ES.h <- function(h, p) {
       sort(
         c(
-          sin((h - 2*asin(sqrt(p)))/2)^2,
-          sin((-h - 2*asin(sqrt(p)))/2)^2
+          sin((h - 2 * asin(sqrt(p))) / 2)^2,
+          sin((-h - 2 * asin(sqrt(p))) / 2)^2
         ),
         decreasing = TRUE
       )
@@ -115,13 +112,13 @@ sample_size_comp <- function(
       res <- try(pwr::pwr.2p2n.test(n1 = as.numeric(n1), n2 = as.numeric(n2), h = pwr::ES.h(p1 = p1, p2 = p2), sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
     } else if (is.null(n1) && is.null(n2)) {
       res <- try(pwr::pwr.2p.test(h = pwr::ES.h(p1 = p1, p2 = p2), sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
-      if (!inherits(res, "try-error"))  n1 <- n2 <- res$n
+      if (!inherits(res, "try-error")) n1 <- n2 <- res$n
     } else if (is.null(n1)) {
       res <- try(pwr::pwr.2p2n.test(n2 = as.numeric(n2), h = pwr::ES.h(p1 = p1, p2 = p2), sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
-      if (!inherits(res, "try-error"))  n1 <- res$n1
+      if (!inherits(res, "try-error")) n1 <- res$n1
     } else if (is.null(n2)) {
       res <- try(pwr::pwr.2p2n.test(n1 = as.numeric(n1), h = pwr::ES.h(p1 = p1, p2 = p2), sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
-      if (!inherits(res, "try-error"))  n2 <- res$n2
+      if (!inherits(res, "try-error")) n2 <- res$n2
     } else {
       res <- try(pwr::pwr.2p2n.test(n1 = as.numeric(n1), n2 = as.numeric(n2), sig.level = sig.level, power = power, alternative = alternative), silent = TRUE)
       if (!inherits(res, "try-error")) {
@@ -162,10 +159,14 @@ sample_size_comp <- function(
 #'
 #' @export
 summary.sample_size_comp <- function(object, ...) {
-  if (is.character(object)) return(object)
-  if (inherits(object$res, "try-error")) return("Provided input does not generate valid results. Update input values ...")
+  if (is.character(object)) {
+    return(object)
+  }
+  if (inherits(object$res, "try-error")) {
+    return("Provided input does not generate valid results. Update input values ...")
+  }
 
-  cat("Sample size calculation for comparison of",  ifelse(object$type == "proportion", "proportions", "means"), "\n")
+  cat("Sample size calculation for comparison of", ifelse(object$type == "proportion", "proportions", "means"), "\n")
   cat(paste0("Sample size 1    : ", format_nr(ceiling(object$n1), dec = 0), "\n"))
   cat(paste0("Sample size 2    : ", format_nr(ceiling(object$n2), dec = 0), "\n"))
   cat(paste0("Total sample size: ", format_nr(ceiling(object$n1) + ceiling(object$n2), dec = 0), "\n"))
@@ -203,6 +204,8 @@ summary.sample_size_comp <- function(object, ...) {
 #'
 #' @export
 plot.sample_size_comp <- function(x, ...) {
-  if (is.character(x) || inherits(x$res, "try-error")) return("  ")
+  if (is.character(x) || inherits(x$res, "try-error")) {
+    return("  ")
+  }
   pwr::plot.power.htest(x$res)
 }

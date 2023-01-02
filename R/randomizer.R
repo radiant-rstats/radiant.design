@@ -24,16 +24,13 @@
 #'
 #' @seealso \code{\link{summary.sampling}} to summarize results
 #' @export
-randomizer <- function(
-  dataset, vars,
-  conditions = c("A", "B"),
-  blocks = NULL, probs = NULL,
-  label = ".conditions",
-  seed = 1234, data_filter = "",
-  na.rm = FALSE,
-  envir = parent.frame()
-) {
-
+randomizer <- function(dataset, vars,
+                       conditions = c("A", "B"),
+                       blocks = NULL, probs = NULL,
+                       label = ".conditions",
+                       seed = 1234, data_filter = "",
+                       na.rm = FALSE,
+                       envir = parent.frame()) {
   df_name <- if (is_string(dataset)) dataset else deparse(substitute(dataset))
 
   if (!radiant.data::is_empty(blocks)) {
@@ -47,7 +44,8 @@ randomizer <- function(
   if (!radiant.data::is_empty(seed)) set.seed(seed)
 
   if (radiant.data::is_empty(probs)) {
-    probs <- length(conditions) %>% {rep(1/., .)}
+    probs <- length(conditions) %>%
+      (function(x) rep(1 / x, x))
   } else if (length(probs) == 1) {
     probs <- rep(probs, length(conditions))
   } else if (length(probs) != length(conditions)) {
@@ -112,7 +110,7 @@ summary.randomizer <- function(object, dec = 3, ...) {
     cat("Random seed  :", object$seed, "\n")
   }
   is_unique <- object$dataset[, -1, drop = FALSE] %>%
-    {ifelse(nrow(.) > nrow(distinct(.)), "Based on selected variables some duplicate rows exist", "Based on selected variables, no duplicate rows exist")}
+    (function(x) ifelse(nrow(x) > nrow(distinct(x)), "Based on selected variables some duplicate rows exist", "Based on selected variables, no duplicate rows exist"))
   cat("Duplicates   :", is_unique, "\n\n")
 
   cat("Assigment frequencies:\n")
@@ -121,8 +119,13 @@ summary.randomizer <- function(object, dec = 3, ...) {
   } else {
     tab <- table(object$blocks_vct, object$dataset[[object$label]])
   }
-  tab %>% addmargins() %>% print()
+  tab %>%
+    addmargins() %>%
+    print()
 
   cat("\nAssigment proportions:\n")
-  tab %>% prop.table() %>% round(dec) %>% print()
+  tab %>%
+    prop.table() %>%
+    round(dec) %>%
+    print()
 }

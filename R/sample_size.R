@@ -20,12 +20,9 @@
 #'
 #' @seealso \code{\link{summary.sample_size}} to summarize results
 #' @export
-sample_size <- function(
- type, err_mean = 2, sd_mean = 10, err_prop = .1,
- p_prop = .5, conf_lev = 0.95, incidence = 1,
- response = 1, pop_correction = "no", pop_size = 1000000
-) {
-
+sample_size <- function(type, err_mean = 2, sd_mean = 10, err_prop = .1,
+                        p_prop = .5, conf_lev = 0.95, incidence = 1,
+                        response = 1, pop_correction = "no", pop_size = 1000000) {
   if (pop_correction == "yes" && is_not(pop_size)) pop_size <- 1000000
   if (is_not(conf_lev) || conf_lev < 0 || conf_lev > 1) conf_lev <- 0.95
   zval <- -qnorm((1 - conf_lev) / 2)
@@ -35,14 +32,14 @@ sample_size <- function(
       return("Please select an acceptable error greater than 0" %>%
         add_class("sample_size"))
     }
-    n <- (zval ^ 2 * sd_mean ^ 2) / err_mean ^ 2
+    n <- (zval^2 * sd_mean^2) / err_mean^2
     rm(err_prop, p_prop)
   } else {
     if (is_not(err_prop)) {
       return("Please select an acceptable error greater than 0" %>%
         add_class("sample_size"))
     }
-    n <- (zval ^ 2 * p_prop * (1 - p_prop)) / err_prop ^ 2
+    n <- (zval^2 * p_prop * (1 - p_prop)) / err_prop^2
     rm(err_mean, sd_mean)
   }
 
@@ -72,7 +69,9 @@ sample_size <- function(
 #'
 #' @export
 summary.sample_size <- function(object, ...) {
-  if (is.character(object)) return(object)
+  if (is.character(object)) {
+    return(object)
+  }
 
   cat("Sample size calculation\n")
 

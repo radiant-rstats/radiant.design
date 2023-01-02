@@ -17,19 +17,19 @@
 #'
 #' @seealso \code{\link{summary.sampling}} to summarize results
 #' @export
-sampling <- function(
-  dataset, vars, sample_size,
-  seed = 1234, data_filter = "",
-  na.rm = FALSE,  envir = parent.frame()
-) {
-
+sampling <- function(dataset, vars, sample_size,
+                     seed = 1234, data_filter = "",
+                     na.rm = FALSE, envir = parent.frame()) {
   df_name <- if (is_string(dataset)) dataset else deparse(substitute(dataset))
   dataset <- get_data(dataset, vars, filt = data_filter, na.rm = na.rm, envir = envir)
-  if (is_not(sample_size)) return(add_class("Please select a sample size of 1 or greater", "sampling"))
+  if (is_not(sample_size)) {
+    return(add_class("Please select a sample size of 1 or greater", "sampling"))
+  }
 
   ## use seed if provided
-  seed %>% gsub("[^0-9]", "", .) %>%
-    {if (!radiant.data::is_empty(.)) set.seed(.)}
+  seed %>%
+    gsub("[^0-9]", "", .) %>%
+    (function(x) if (!radiant.data::is_empty(x)) set.seed(x))
 
   rnd_number <- data.frame(rnd_number = runif(nrow(dataset), min = 0, max = 1))
   dataset <- bind_cols(rnd_number, dataset)
@@ -75,6 +75,6 @@ summary.sampling <- function(object, dec = 3, ...) {
   }
 
   is_unique <- object$dataset[, -1, drop = FALSE] %>%
-    {ifelse(nrow(.) > nrow(distinct(.)), "Based on selected variables some duplicate rows exist", "Based on selected variables, no duplicate rows exist")}
+    (function(x) ifelse(nrow(x) > nrow(distinct(x)), "Based on selected variables some duplicate rows exist", "Based on selected variables, no duplicate rows exist"))
   cat("Duplicates :", is_unique, "\n\n")
 }
