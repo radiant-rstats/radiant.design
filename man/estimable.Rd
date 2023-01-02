@@ -15,4 +15,5 @@ A function to determine which coefficients can be estimated based on a partial f
 \examples{
 design <- doe(c("price; $10; $13; $16", "food; popcorn; gourmet; no food"), trials = 6)
 estimable(design)
+
 }

@@ -10,3 +10,4 @@ radiant.design.code-workspace
 _pkgdown.yml
 cran-comments.md
 .vscode/
+^CRAN-SUBMISSION$

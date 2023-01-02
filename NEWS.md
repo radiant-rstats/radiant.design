@@ -1,6 +1,7 @@
-# radiant.design 1.4.4.0
+# radiant.design 1.5.0
 
-* Added option to create screenshots of settings on a page. Approach is inspired by the snapper package by @yonicd
+* Improvements to screenshot feature. Navigation bar is omitted and the image is adjusted to the length of the UI.
+* Removed all references to `aes_string` which is being depricated in ggplot soon
 
 # radiant.design 1.4.1.0
 

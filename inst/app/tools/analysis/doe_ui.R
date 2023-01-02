@@ -4,8 +4,9 @@ doe_args <- as.list(formals(doe))
 ## list of function inputs selected by user
 doe_inputs <- reactive({
   ## loop needed because reactive values don't allow single bracket indexing
-  for (i in names(doe_args))
+  for (i in names(doe_args)) {
     doe_args[[i]] <- input[[paste0("doe_", i)]]
+  }
   doe_args
 })
 
@@ -23,7 +24,7 @@ output$ui_doe_int <- renderUI({
     gsub("[ ]+", "_", .) %>%
     strsplit(., "\n") %>%
     .[[1]] %>%
-    strsplit(";") %>%
+    strsplit(";\\s*") %>%
     sapply(function(x) x[1]) %>%
     unique()
 
@@ -31,7 +32,8 @@ output$ui_doe_int <- renderUI({
   choices <- iterms(vars, 2)
 
   selectInput(
-    "doe_int", label = "Interactions:", choices = choices,
+    "doe_int",
+    label = "Interactions:", choices = choices,
     selected = state_init("doe_int"),
     multiple = TRUE, size = min(3, length(choices)), selectize = FALSE
   )
@@ -60,22 +62,25 @@ output$ui_doe <- renderUI({
       tags$table(
         tags$td(
           numericInput(
-            "doe_max", label = "Max levels:", min = 2, max = 10,
+            "doe_max",
+            label = "Max levels:", min = 2, max = 10,
             value = state_init("doe_max", init = 2),
             width = "80px"
           )
         ),
         tags$td(
           numericInput(
-            "doe_trials", label = "# trials:", min = 1, step = 1,
+            "doe_trials",
+            label = "# trials:", min = 1, step = 1,
             value = state_init("doe_trials", init = NA),
             width = "65px"
           )
         ),
         tags$td(
           numericInput(
-            "doe_seed", label = "Rnd. seed:", min = 0,
-            value = state_init("doe_seed", init = 1234),  ## prev default seed 172110
+            "doe_seed",
+            label = "Rnd. seed:", min = 0,
+            value = state_init("doe_seed", init = 1234), ## prev default seed 172110
             width = "100%"
           )
         )
@@ -98,7 +103,8 @@ output$ui_doe <- renderUI({
       download_button("doe_download", "Factors", class = "btn-primary"),
       HTML("</br><label>Upload factors:</label></br>"),
       file_upload_button(
-        "doe_upload", label = "Upload factors", accept = ".txt",
+        "doe_upload",
+        label = "Upload factors", accept = ".txt",
         buttonLabel = "Factors", title = "Upload DOE factors", class = "btn-primary"
       )
     ),
@@ -137,11 +143,8 @@ observeEvent(input$doe_del, {
     updateTextInput(session = session, "doe_factors", value = .)
 })
 
-doe_maker <- function(
-  id = "factors", rows = 5, pre = "doe_",
-  placeholder = "Upload an experimental design using the 'Upload factors' button or create a new design using the inputs on the left of the screen. For help, click the ? icon on the bottom left of the screen"
-) {
-
+doe_maker <- function(id = "factors", rows = 5, pre = "doe_",
+                      placeholder = "Upload an experimental design using the 'Upload factors' button or create a new design using the inputs on the left of the screen. For help, click the ? icon on the bottom left of the screen") {
   id <- paste0(pre, id)
   tags$textarea(
     state_init(id),
@@ -200,7 +203,7 @@ output$doe <- renderUI({
 
 dl_doe_download_part <- function(path) {
   .doe() %>%
-    {if (class(.)[1] == "character") . else .$part} %>%
+    (function(x) if (class(x)[1] == "character") x else x$part) %>%
     write.csv(path, row.names = FALSE)
 }
 
@@ -215,7 +218,7 @@ download_handler(
 
 dl_doe_download_full <- function(path) {
   .doe() %>%
-    {if (class(.)[1] == "character") . else .$full} %>%
+    (function(x) if (class(x)[1] == "character") x else x$pull) %>%
     write.csv(path, row.names = FALSE)
 }
 
