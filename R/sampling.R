@@ -29,7 +29,7 @@ sampling <- function(dataset, vars, sample_size,
   ## use seed if provided
   seed %>%
     gsub("[^0-9]", "", .) %>%
-    (function(x) if (!radiant.data::is_empty(x)) set.seed(x))
+    (function(x) if (!is.empty(x)) set.seed(x))
 
   rnd_number <- data.frame(rnd_number = runif(nrow(dataset), min = 0, max = 1))
   dataset <- bind_cols(rnd_number, dataset)
@@ -61,14 +61,14 @@ sampling <- function(dataset, vars, sample_size,
 summary.sampling <- function(object, dec = 3, ...) {
   cat("Sampling (simple random)\n")
   cat("Data       :", object$df_name, "\n")
-  if (!radiant.data::is_empty(object$data_filter)) {
+  if (!is.empty(object$data_filter)) {
     cat("Filter     :", gsub("\\n", "", object$data_filter), "\n")
   }
   cat("Variables  :", object$var, "\n")
-  if (!radiant.data::is_empty(object$seed)) {
+  if (!is.empty(object$seed)) {
     cat("Random seed:", object$seed, "\n")
   }
-  if (radiant.data::is_empty(object$sample_size) || object$sample_size < 1) {
+  if (is.empty(object$sample_size) || object$sample_size < 1) {
     cat("Sample size: 1 (invalid input provided)\n")
   } else {
     cat("Sample size:", object$sample_size, "\n")

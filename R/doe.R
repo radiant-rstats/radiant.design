@@ -52,7 +52,7 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
   names(df_list) <- df_names
   model <- paste0("~ ", paste0(df_names, collapse = " + "))
   nInt <- 0
-  if (!radiant.data::is_empty(int)) {
+  if (!is.empty(int)) {
     model <- paste0(model, " + ", paste0(int, collapse = " + "))
     nInt <- length(int)
   }
@@ -72,7 +72,7 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
     max_trials <- nrow(full)
 
     ## make sure the number of trials set by the user is within an appropriate range
-    if (!radiant.data::is_empty(trials)) {
+    if (!is.empty(trials)) {
       max_trials <- min_trials <- max(min(trials, max_trials), min_trials)
     }
 
@@ -88,7 +88,7 @@ doe <- function(factors, int = "", trials = NA, seed = NA) {
     for (i in min_trials:max_trials) {
       seed %>%
         gsub("[^0-9]", "", .) %>%
-        (function(x) if (!radiant.data::is_empty(x)) set.seed(seed))
+        (function(x) if (!is.empty(x)) set.seed(seed))
       design <- try(AlgDesign::optFederov(
         model,
         data = full, nRepeats = 50,
@@ -166,7 +166,7 @@ summary.doe <- function(object, eff = TRUE, part = TRUE, full = TRUE, est = TRUE
   cat("Experimental design\n")
   cat("# trials for partial factorial:", nrow(object$part), "\n")
   cat("# trials for full factorial   :", nrow(object$full), "\n")
-  if (!radiant.data::is_empty(object$seed)) {
+  if (!is.empty(object$seed)) {
     cat("Random seed                   :", object$seed, "\n")
   }
 

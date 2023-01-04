@@ -158,7 +158,7 @@ output$table_randomizer <- DT::renderDataTable({
 randomizer_report <- function() {
   xcmd <- "# dtab(result$dataset, dom = \"tip\", nr = 100)"
 
-  if (!radiant.data::is_empty(input$rndr_name)) {
+  if (!is.empty(input$rndr_name)) {
     dataset <- fix_names(input$rndr_name)
     if (input$rndr_name != dataset) {
       updateTextInput(session, inputId = "rndr_name", value = dataset)
