@@ -1,6 +1,6 @@
 ## Resubmission
 
-This is a resubmission. See NEWS.md for updates. 
+This is a resubmission. See NEWS.md for updates. I also updated the dependency on radiant.data to 1.5.0.
 
 ## Test environments
 

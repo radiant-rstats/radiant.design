@@ -5,6 +5,8 @@ rndr_args <- as.list(formals(randomizer))
 rndr_inputs <- reactive({
   ## loop needed because reactive values don't allow single bracket indexing
   rndr_args$data_filter <- if (input$show_filter) input$data_filter else ""
+  rndr_args$arr <- if (input$show_filter) input$data_arrange else ""
+  rndr_args$rows <- if (input$show_filter) input$data_rows else ""
   rndr_args$dataset <- input$dataset
   for (i in r_drop(names(rndr_args))) {
     rndr_args[[i]] <- input[[paste0("rndr_", i)]]
