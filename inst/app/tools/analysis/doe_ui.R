@@ -218,7 +218,7 @@ download_handler(
 
 dl_doe_download_full <- function(path) {
   .doe() %>%
-    (function(x) if (class(x)[1] == "character") x else x$pull) %>%
+    (function(x) if (class(x)[1] == "character") x else x$full) %>%
     write.csv(path, row.names = FALSE)
 }
 

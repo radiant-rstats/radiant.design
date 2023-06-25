@@ -7,6 +7,8 @@
 #' @param sample_size Number of units to select
 #' @param seed Random seed to use as the starting point
 #' @param data_filter Expression entered in, e.g., Data > View to filter the dataset in Radiant. The expression should be a string (e.g., "price > 10000")
+#' @param arr Expression to arrange (sort) the data on (e.g., "color, desc(price)")
+#' @param rows Rows to select from the specified dataset
 #' @param na.rm Remove rows with missing values (FALSE or TRUE)
 #' @param envir Environment to extract data from
 #'
@@ -19,9 +21,10 @@
 #' @export
 sampling <- function(dataset, vars, sample_size,
                      seed = 1234, data_filter = "",
+                     arr = "", rows = NULL,
                      na.rm = FALSE, envir = parent.frame()) {
   df_name <- if (is_string(dataset)) dataset else deparse(substitute(dataset))
-  dataset <- get_data(dataset, vars, filt = data_filter, na.rm = na.rm, envir = envir)
+  dataset <- get_data(dataset, vars, filt = data_filter, arr = arr, rows = rows, na.rm = na.rm, envir = envir)
   if (is_not(sample_size)) {
     return(add_class("Please select a sample size of 1 or greater", "sampling"))
   }
@@ -63,6 +66,12 @@ summary.sampling <- function(object, dec = 3, ...) {
   cat("Data       :", object$df_name, "\n")
   if (!is.empty(object$data_filter)) {
     cat("Filter     :", gsub("\\n", "", object$data_filter), "\n")
+  }
+  if (!is.empty(object$arr)) {
+    cat("Arrange    :", gsub("\\n", "", object$arr), "\n")
+  }
+  if (!is.empty(object$rows)) {
+    cat("Slice      :", gsub("\\n", "", object$rows), "\n")
   }
   cat("Variables  :", object$var, "\n")
   if (!is.empty(object$seed)) {

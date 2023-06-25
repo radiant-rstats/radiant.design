@@ -1,5 +1,25 @@
 ## Resubmission
 
+This is a resubmission. In this update I address the following warning. See NEWS.md for updates. 
+
+Result: WARN
+    Found the following significant warnings:
+     Warning: replacing previous import ‘mvtnorm::standardize’ by ‘radiant.data::standardize’ when loading ‘radiant.design’
+
+## Test environments
+
+* macOS, R 4.2.3
+* win-builder (devel)
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs, or NOTEs. 
+
+
+# Previous cran-comments
+
+## Resubmission
+
 This is a resubmission. See NEWS.md for updates. I also updated the dependency on radiant.data to 1.5.0.
 
 ## Test environments
@@ -11,7 +31,6 @@ This is a resubmission. See NEWS.md for updates. I also updated the dependency o
 
 There were no ERRORs, WARNINGs, or NOTEs. 
 
-# Previous cran-comments
 
 ## Resubmission
 

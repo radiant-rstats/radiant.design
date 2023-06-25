@@ -5,7 +5,7 @@ globalVariables(c(".", "rnd_number"))
 #'
 #' @name radiant.design
 #' @docType package
-#' @import radiant.data shiny mvtnorm
+#' @import radiant.data shiny
 #' @importFrom dplyr %>% arrange arrange_at desc
 #' @importFrom magrittr %<>%
 #' @importFrom stats as.formula cor na.omit power.prop.test power.t.test qnorm runif coef lm

@@ -9,6 +9,8 @@ smp_args <- as.list(formals(sampling))
 smp_inputs <- reactive({
   ## loop needed because reactive values don't allow single bracket indexing
   smp_args$data_filter <- if (input$show_filter) input$data_filter else ""
+  smp_args$arr <- if (input$show_filter) input$data_arrange else ""
+  smp_args$rows <- if (input$show_filter) input$data_rows else ""
   smp_args$dataset <- input$dataset
   for (i in r_drop(names(smp_args))) {
     smp_args[[i]] <- input[[paste0("smp_", i)]]
@@ -183,7 +185,7 @@ observeEvent(input$smp_store, {
   register(dataset)
   updateSelectInput(session, "dataset", selected = input$dataset)
 
-  ## See https://shiny.rstudio.com/reference/shiny/latest/modalDialog.html
+  ## See https://shiny.posit.co/reference/shiny/latest/modalDialog.html
   showModal(
     modalDialog(
       title = "Data Stored",

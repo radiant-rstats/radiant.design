@@ -1,4 +1,4 @@
-import_fs("radiant.design", libs = "mvtnorm", incl = "pmvnorm")
+# import_fs("radiant.design", libs = "mvtnorm", incl = "pmvnorm")
 
 ## urls for menu
 r_url_list <- getOption("radiant.url.list")

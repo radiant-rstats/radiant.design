@@ -1,3 +1,8 @@
+# radiant.design 1.6.0
+
+* Add option to slice and sort data before sampling (requires radiant.data 1.5.0)
+* Update dependency on mvtnorm to address issue with conflicting 'standardize' function 
+
 # radiant.design 1.5.0
 
 * Improvements to screenshot feature. Navigation bar is omitted and the image is adjusted to the length of the UI.
