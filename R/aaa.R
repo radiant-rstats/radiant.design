@@ -4,7 +4,6 @@ globalVariables(c(".", "rnd_number"))
 #' radiant.design
 #'
 #' @name radiant.design
-#' @docType package
 #' @import radiant.data shiny
 #' @importFrom dplyr %>% arrange arrange_at desc
 #' @importFrom magrittr %<>%

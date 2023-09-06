@@ -1,5 +1,21 @@
 ## Resubmission
 
+This is a resubmission. In this update I address a documentation issue connected to roxygen2
+
+
+## Test environments
+
+* macOS (ARM) and R 4.3.1
+* win-builder (devel)
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs, or NOTEs. 
+
+# Previous cran-comments
+
+## Resubmission
+
 This is a resubmission. In this update I address the following warning. See NEWS.md for updates. 
 
 Result: WARN
@@ -8,15 +24,13 @@ Result: WARN
 
 ## Test environments
 
-* macOS, R 4.2.3
+* macOS (ARM), R 4.2.3 and R 4.3.1
 * win-builder (devel)
 
 ## R CMD check results
 
 There were no ERRORs, WARNINGs, or NOTEs. 
 
-
-# Previous cran-comments
 
 ## Resubmission
 

@@ -1,3 +1,7 @@
+# radiant.design 1.6.1
+
+* Addressed package documentation issue due changes in roxygen2
+
 # radiant.design 1.6.0
 
 * Add option to slice and sort data before sampling (requires radiant.data 1.5.0)
