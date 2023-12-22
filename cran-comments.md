@@ -1,7 +1,21 @@
 ## Resubmission
 
-This is a resubmission. In this update I address a documentation issue connected to roxygen2
+This is a resubmission. In this version I require shiny version 1.8.0 which fixed a bug that caused issues in the radiant apps. See NEWS.md for details.
 
+## Test environments
+
+* macOS (ARM) and R 4.3.2
+* win-builder (devel)
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs, or NOTEs. 
+
+# Previous cran-comments
+
+## Resubmission
+
+This is a resubmission. In this update I address a documentation issue connected to roxygen2
 
 ## Test environments
 
@@ -12,7 +26,6 @@ This is a resubmission. In this update I address a documentation issue connected
 
 There were no ERRORs, WARNINGs, or NOTEs. 
 
-# Previous cran-comments
 
 ## Resubmission
 

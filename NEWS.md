@@ -1,3 +1,7 @@
+# radiant.design 1.6.2
+
+* Require shiny 1.8.0. This fixes a bug in the shiny 1.7 versions that caused issues with all radiant packages.
+
 # radiant.design 1.6.1
 
 * Addressed package documentation issue due changes in roxygen2
