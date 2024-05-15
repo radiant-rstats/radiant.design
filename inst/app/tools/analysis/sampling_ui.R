@@ -34,7 +34,7 @@ output$ui_smp_name <- renderUI({
 })
 
 output$ui_sampling <- renderUI({
-  # req(input$dataset)
+  req(input$dataset)
   tagList(
     wellPanel(
       uiOutput("ui_smp_vars"),

@@ -1,5 +1,21 @@
 ## Resubmission
 
+This is a resubmission. In this version I require shiny version 1.8.1 or newer and have addressed a breaking change introduced in that version of shiny. See NEWS.md for details.
+
+## Test environments
+
+* macOS (ARM) and R 4.3.2
+* macOS (ARM) and R 4.4.0
+* win-builder (devel)
+
+## R CMD check results
+
+There were no ERRORs, WARNINGs, or NOTEs.
+
+# Previous cran-comments
+
+## Resubmission
+
 This is a resubmission. In this version I require shiny version 1.8.0 which fixed a bug that caused issues in the radiant apps. See NEWS.md for details.
 
 ## Test environments
@@ -10,8 +26,6 @@ This is a resubmission. In this version I require shiny version 1.8.0 which fixe
 ## R CMD check results
 
 There were no ERRORs, WARNINGs, or NOTEs. 
-
-# Previous cran-comments
 
 ## Resubmission
 

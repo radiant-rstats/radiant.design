@@ -70,7 +70,7 @@ output$ui_rndr_name <- renderUI({
 run_refresh(rndr_args, "rndr", init = "vars", label = "Assign conditions", relabel = "Re-assign conditions")
 
 output$ui_randomizer <- renderUI({
-  # req(input$dataset)
+  req(input$dataset)
   tagList(
     wellPanel(
       actionButton("rndr_run", "Assign conditions", width = "100%", icon = icon("play", verify_fa = FALSE), class = "btn-success")
